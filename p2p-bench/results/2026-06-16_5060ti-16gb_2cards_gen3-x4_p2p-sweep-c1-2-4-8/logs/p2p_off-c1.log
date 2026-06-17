@@ -1,0 +1,585 @@
+(APIServer pid=1495261) INFO 06-16 21:41:35 [api_utils.py:339] 
+(APIServer pid=1495261) INFO 06-16 21:41:35 [api_utils.py:339]        █     █     █▄   ▄█
+(APIServer pid=1495261) INFO 06-16 21:41:35 [api_utils.py:339]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.23.0
+(APIServer pid=1495261) INFO 06-16 21:41:35 [api_utils.py:339]   █▄█▀ █     █     █     █  model   /data/models/qwen3.6-27b-text-nvfp4-mtp
+(APIServer pid=1495261) INFO 06-16 21:41:35 [api_utils.py:339]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=1495261) INFO 06-16 21:41:35 [api_utils.py:339] 
+(APIServer pid=1495261) INFO 06-16 21:41:35 [api_utils.py:273] non-default args: {'model_tag': '/data/models/qwen3.6-27b-text-nvfp4-mtp', 'enable_auto_tool_choice': True, 'tool_call_parser': 'qwen3_coder', 'port': 8103, 'model': '/data/models/qwen3.6-27b-text-nvfp4-mtp', 'max_model_len': 65535, 'quantization': 'modelopt', 'served_model_name': ['p2p_off-c1'], 'attention_backend': 'TRITON_ATTN', 'reasoning_parser': 'qwen3', 'tensor_parallel_size': 2, 'disable_custom_all_reduce': True, 'gpu_memory_utilization': 0.86, 'kv_cache_dtype': 'fp8', 'language_model_only': True, 'max_num_batched_tokens': 16384, 'max_num_seqs': 1, 'speculative_config': {'method': 'mtp', 'num_speculative_tokens': 3}}
+(APIServer pid=1495261) INFO 06-16 21:41:35 [model.py:611] Resolved architecture: Qwen3_5ForConditionalGeneration
+(APIServer pid=1495261) INFO 06-16 21:41:35 [model.py:1745] Using max model len 65535
+(APIServer pid=1495261) INFO 06-16 21:41:35 [cache.py:269] Using fp8 data type to store kv cache. It reduces the GPU memory footprint and boosts the performance. Meanwhile, it may cause accuracy drop without a proper scaling factor
+(APIServer pid=1495261) INFO 06-16 21:41:35 [model.py:611] Resolved architecture: Qwen3_5MTP
+(APIServer pid=1495261) INFO 06-16 21:41:35 [model.py:1745] Using max model len 262144
+(APIServer pid=1495261) WARNING 06-16 21:41:35 [speculative.py:722] Enabling num_speculative_tokens > 1 will run multiple times of forward on same MTP layer,which may result in lower acceptance rate
+(APIServer pid=1495261) INFO 06-16 21:41:35 [speculative.py:885] Overriding draft model max model len from 262144 to 65535
+(APIServer pid=1495261) INFO 06-16 21:41:35 [scheduler.py:239] Chunked prefill is enabled with max_num_batched_tokens=16384.
+(APIServer pid=1495261) WARNING 06-16 21:41:35 [modelopt.py:1022] Detected ModelOpt NVFP4 checkpoint (quant_algo=NVFP4). Please note that the format is experimental and could change in future.
+(APIServer pid=1495261) INFO 06-16 21:41:35 [vllm.py:999] Asynchronous scheduling is enabled.
+(APIServer pid=1495261) INFO 06-16 21:41:35 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+(APIServer pid=1495261) INFO 06-16 21:41:37 [compilation.py:321] Enabled custom fusions: act_quant
+(APIServer pid=1495261) [transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+(APIServer pid=1495261) INFO 06-16 21:41:38 [registry.py:134] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+(EngineCore pid=1495635) INFO 06-16 21:41:44 [core.py:113] Initializing a V1 LLM engine (v0.23.0) with config: model='/data/models/qwen3.6-27b-text-nvfp4-mtp', speculative_config=SpeculativeConfig(method='mtp', model='/data/models/qwen3.6-27b-text-nvfp4-mtp', num_spec_tokens=3), tokenizer='/data/models/qwen3.6-27b-text-nvfp4-mtp', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=65535, download_dir=None, load_format=auto, tensor_parallel_size=2, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=True, quantization=modelopt_fp4, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=fp8, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='qwen3', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=p2p_off-c1, enable_prefix_caching=False, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::qwen_gdn_attention_core', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [16384], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'size_asserts': False, 'alignment_asserts': False, 'scalar_asserts': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False}, 'max_cudagraph_capture_size': 8, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native']), enable_flashinfer_autotune=True, moe_backend='auto', linear_backend='auto')
+(EngineCore pid=1495635) WARNING 06-16 21:41:44 [multiproc_executor.py:1054] Reducing Torch parallelism from 12 threads to 1 to avoid unnecessary CPU contention. Set OMP_NUM_THREADS in the external environment to tune this value as needed.
+(EngineCore pid=1495635) INFO 06-16 21:41:44 [multiproc_executor.py:140] DP group leader: node_rank=0, node_rank_within_dp=0, master_addr=127.0.0.1, mq_connect_ip=<redacted-ip> (local), world_size=2, local_world_size=2
+[transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+[transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+INFO 06-16 21:41:52 [registry.py:134] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+(Worker pid=1495819) INFO 06-16 21:41:52 [parallel_state.py:1568] world_size=2 rank=0 local_rank=0 distributed_init_method=tcp://127.0.0.1:38703 backend=nccl
+INFO 06-16 21:41:52 [registry.py:134] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+(Worker pid=1495820) INFO 06-16 21:41:52 [parallel_state.py:1568] world_size=2 rank=1 local_rank=1 distributed_init_method=tcp://127.0.0.1:38703 backend=nccl
+(Worker pid=1495819) INFO 06-16 21:41:52 [pynccl.py:113] vLLM is using nccl==2.28.9
+(Worker pid=1495819) WARNING 06-16 21:41:53 [symm_mem.py:66] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
+(Worker pid=1495819) INFO 06-16 21:41:53 [cuda_communicator.py:237] Using ['PYNCCL'] all-reduce backends (in dispatch order) for group 'tp:0' out of potential backends: ['NCCL_SYMM_MEM', 'QUICK_REDUCE', 'FLASHINFER', 'CUSTOM', 'SYMM_MEM', 'PYNCCL'].
+(Worker pid=1495820) WARNING 06-16 21:41:53 [symm_mem.py:66] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
+(Worker pid=1495819) INFO 06-16 21:41:53 [parallel_state.py:1903] rank 0 in world size 2 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+(Worker pid=1495820) WARNING 06-16 21:41:53 [__init__.py:204] min_p and logit_bias parameters won't work with speculative decoding.
+(Worker pid=1495819) INFO 06-16 21:41:53 [topk_topp_sampler.py:55] Using FlashInfer for top-p & top-k sampling.
+(Worker pid=1495819) WARNING 06-16 21:41:53 [__init__.py:204] min_p and logit_bias parameters won't work with speculative decoding.
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:53 [gpu_model_runner.py:5092] Starting to load model /data/models/qwen3.6-27b-text-nvfp4-mtp...
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:54 [cuda.py:433] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:54 [mm_encoder_attention.py:372] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:54 [__init__.py:962] Using FlashInferCutlassNvFp4LinearKernel for NVFP4 GEMM
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:54 [qwen_gdn_linear_attn.py:228] Using Triton/FLA GDN prefill kernel (requested=auto, head_k_dim=128).
+(Worker_TP1 pid=1495820) INFO 06-16 21:41:54 [cuda.py:318] Using AttentionBackendEnum.TRITON_ATTN backend.
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:54 [cuda.py:318] Using AttentionBackendEnum.TRITON_ATTN backend.
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:54 [weight_utils.py:922] Filesystem type for checkpoints: XFS. Checkpoint size: 18.29 GiB. Available RAM: 52.98 GiB.
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:54 [weight_utils.py:945] Auto-prefetch is disabled because the filesystem (XFS) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+(Worker_TP0 pid=1495819) Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+(Worker_TP0 pid=1495819) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:03<00:00,  3.60s/it]
+(Worker_TP0 pid=1495819) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:03<00:00,  3.60s/it]
+(Worker_TP0 pid=1495819) 
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:58 [default_loader.py:397] Loading weights took 3.77 seconds
+(Worker_TP0 pid=1495819) WARNING 06-16 21:41:58 [kv_cache.py:134] Checkpoint does not provide a q scaling factor. Setting it to k_scale. This only matters for FP8 Attention backends (flash-attn or flashinfer).
+(Worker_TP0 pid=1495819) WARNING 06-16 21:41:58 [kv_cache.py:148] Using KV cache scaling factor 1.0 for fp8_e4m3. If this is unintended, verify that k/v_scale scaling factors are properly set in the checkpoint.
+(Worker_TP0 pid=1495819) WARNING 06-16 21:41:58 [kv_cache.py:187] Using uncalibrated q_scale 1.0 and/or prob_scale 1.0 with fp8 attention. This may cause accuracy issues. Please make sure q/prob scaling factors are available in the fp8 checkpoint.
+(Worker_TP1 pid=1495820) INFO 06-16 21:41:58 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:58 [gpu_model_runner.py:5116] Loading drafter model...
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:58 [vllm.py:999] Asynchronous scheduling is enabled.
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:58 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:58 [compilation.py:321] Enabled custom fusions: act_quant
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:58 [cuda.py:378] Using FLASHINFER attention backend out of potential backends: ['FLASHINFER', 'TRITON_ATTN'].
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:58 [weight_utils.py:922] Filesystem type for checkpoints: XFS. Checkpoint size: 18.29 GiB. Available RAM: 52.85 GiB.
+(Worker_TP0 pid=1495819) Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+(Worker_TP0 pid=1495819) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  1.06it/s]
+(Worker_TP0 pid=1495819) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  1.06it/s]
+(Worker_TP0 pid=1495819) 
+(Worker_TP1 pid=1495820) INFO 06-16 21:41:59 [llm_base_proposer.py:1347] Detected MTP model. Sharing target model embedding weights with the draft model.
+(Worker_TP1 pid=1495820) INFO 06-16 21:41:59 [llm_base_proposer.py:1403] Detected MTP model. Sharing target model lm_head weights with the draft model.
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:59 [default_loader.py:397] Loading weights took 1.00 seconds
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:59 [llm_base_proposer.py:1347] Detected MTP model. Sharing target model embedding weights with the draft model.
+(Worker_TP0 pid=1495819) INFO 06-16 21:41:59 [llm_base_proposer.py:1403] Detected MTP model. Sharing target model lm_head weights with the draft model.
+(Worker_TP1 pid=1495820) INFO 06-16 21:42:00 [interface.py:670] Setting attention block size to 1600 tokens to ensure that attention page size is >= mamba page size.
+(Worker_TP1 pid=1495820) INFO 06-16 21:42:00 [interface.py:694] Padding mamba page size by 0.25% to ensure that mamba page size and attention page size are exactly equal.
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:00 [gpu_model_runner.py:5187] Model loading took 9.43 GiB memory and 5.621949 seconds
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:00 [interface.py:670] Setting attention block size to 1600 tokens to ensure that attention page size is >= mamba page size.
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:00 [interface.py:694] Padding mamba page size by 0.25% to ensure that mamba page size and attention page size are exactly equal.
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:04 [backends.py:1089] Using cache directory: /root/.cache/vllm/torch_compile_cache/5f421ae54a/rank_0_0/backbone for vLLM's torch.compile
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:04 [backends.py:1148] Dynamo bytecode transform time: 4.36 s
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:08 [backends.py:292] Directly load the compiled graph(s) for compile range (1, 16384) from the cache, took 2.555 s
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:08 [decorators.py:311] Directly load AOT compilation from path /root/.cache/vllm/torch_compile_cache/torch_aot_compile/4fbaa376aceb6f17868c98eeea4c7252ddfc5c5046a426f8cb4602eecedb9905/rank_0_0/model
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:08 [monitor.py:53] torch.compile took 8.26 s in total
+(Worker_TP1 pid=1495820) INFO 06-16 21:42:08 [decorators.py:311] Directly load AOT compilation from path /root/.cache/vllm/torch_compile_cache/torch_aot_compile/4fbaa376aceb6f17868c98eeea4c7252ddfc5c5046a426f8cb4602eecedb9905/rank_1_0/model
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:44 [monitor.py:81] Initial profiling/warmup run took 35.66 s
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:44 [backends.py:1089] Using cache directory: /root/.cache/vllm/torch_compile_cache/5f421ae54a/rank_0_0/eagle_head for vLLM's torch.compile
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:44 [backends.py:1148] Dynamo bytecode transform time: 0.11 s
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:44 [backends.py:292] Directly load the compiled graph(s) for compile range (1, 16384) from the cache, took 0.115 s
+(Worker_TP1 pid=1495820) INFO 06-16 21:42:44 [decorators.py:311] Directly load AOT compilation from path /root/.cache/vllm/torch_compile_cache/torch_aot_compile/88451c342467703a876bec21066a4c5d9b45d1edab848bfa5cec7db0a6ab43bd/rank_1_0/model
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:44 [decorators.py:311] Directly load AOT compilation from path /root/.cache/vllm/torch_compile_cache/torch_aot_compile/88451c342467703a876bec21066a4c5d9b45d1edab848bfa5cec7db0a6ab43bd/rank_0_0/model
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:44 [monitor.py:53] torch.compile took 0.43 s in total
+proxmox:1495819:1495819 [0] NCCL INFO ENV/Plugin: Could not find: libnccl-env.so
+proxmox:1495819:1495819 [0] NCCL INFO Bootstrap: Using <iface>:<redacted-ip><0>
+proxmox:1495819:1495819 [0] NCCL INFO cudaDriverVersion 13020
+proxmox:1495819:1495819 [0] NCCL INFO NCCL version 2.28.9+cuda13.0
+proxmox:1495819:1495819 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so
+proxmox:1495819:1495819 [0] NCCL INFO Failed to open libmlx5.so[.1]
+proxmox:1495819:1495819 [0] NCCL INFO NET/IB : No device found.
+proxmox:1495819:1495819 [0] NCCL INFO NET/IB : Using [RO]; OOB <iface>:<redacted-ip><0>
+proxmox:1495819:1495819 [0] NCCL INFO Failed to initialize NET plugin IB
+proxmox:1495819:1495819 [0] NCCL INFO NET/Socket : Using [0]<iface>:<redacted-ip><0> [redacted: additional host bridge interfaces]
+proxmox:1495819:1495819 [0] NCCL INFO Initialized NET plugin Socket
+proxmox:1495819:1495819 [0] NCCL INFO Assigned NET plugin Socket to comm
+proxmox:1495819:1495819 [0] NCCL INFO Using network Socket
+proxmox:1495819:1495819 [0] NCCL INFO ncclCommInitRank comm 0x38b52f50 rank 0 nranks 2 cudaDev 0 nvmlDev 1 busId 9000 commId 0xbcee012846c54cbc - Init START
+proxmox:1495819:1495819 [0] NCCL INFO RAS client listening socket at <redacted-ip><28028>
+proxmox:1495819:1495819 [0] NCCL INFO Bootstrap timings total 0.000591 (create 0.000029, send 0.000142, recv 0.000159, ring 0.000035, delay 0.000000)
+proxmox:1495819:1495819 [0] NCCL INFO NCCL_CUMEM_ENABLE set by environment to 1.
+proxmox:1495819:1495819 [0] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+proxmox:1495819:1495819 [0] NCCL INFO ncclTopoGetCpuAffinity: Affinity for GPU 1 is empty, ignoring. (GPU affinity =  ; CPU affinity = 0-23).
+proxmox:1495819:1495819 [0] NCCL INFO NVLS multicast support is not available on dev 0 (NVLS_NCHANNELS 0)
+proxmox:1495819:1495819 [0] NCCL INFO comm 0x38b52f50 rank 0 nRanks 2 nNodes 1 localRanks 2 localRank 0 MNNVL 0
+proxmox:1495819:1495819 [0] NCCL INFO Channel 00/02 : 0 1
+proxmox:1495819:1495819 [0] NCCL INFO Channel 01/02 : 0 1
+proxmox:1495819:1495819 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1
+proxmox:1495819:1495819 [0] NCCL INFO P2P Chunksize set to 131072
+proxmox:1495819:1495819 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so
+proxmox:1495819:1495819 [0] NCCL INFO Check P2P Type isAllDirectP2p 0 directMode 0 isAllCudaP2p 1
+proxmox:1495819:1496070 [0] NCCL INFO [Proxy Service] Device 0 CPU core 8
+proxmox:1495819:1496072 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 14
+proxmox:1495819:1495819 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so
+proxmox:1495819:1495819 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+proxmox:1495819:1495819 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+proxmox:1495819:1495819 [0] NCCL INFO CC Off, workFifoBytes 1048576
+proxmox:1495819:1495819 [0] NCCL INFO ncclCommInitRank comm 0x38b52f50 rank 0 nranks 2 cudaDev 0 nvmlDev 1 busId 9000 commId 0xbcee012846c54cbc - Init COMPLETE
+proxmox:1495819:1495819 [0] NCCL INFO Init timings - ncclCommInitRank: rank 0 nranks 2 total 0.22 (kernels 0.21, alloc 0.00, bootstrap 0.00, allgathers 0.00, topo 0.01, graphs 0.00, connections 0.00, rest 0.00)
+proxmox:1495819:1495819 [0] NCCL INFO Channel 00 : 0[1] -> 1[2] via SHM/direct/direct
+proxmox:1495819:1495819 [0] NCCL INFO Channel 01 : 0[1] -> 1[2] via SHM/direct/direct
+proxmox:1495819:1495819 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+proxmox:1495819:1495819 [0] NCCL INFO Comm config Blocking set to 1
+proxmox:1495819:1495819 [0] NCCL INFO Initialized NET plugin Socket
+proxmox:1495819:1495819 [0] NCCL INFO Assigned NET plugin Socket to comm
+proxmox:1495819:1495819 [0] NCCL INFO Using network Socket
+proxmox:1495819:1495819 [0] NCCL INFO ncclCommInitRankConfig comm 0x776f6820 rank 0 nranks 2 cudaDev 0 nvmlDev 1 busId 9000 commId 0x42e2e3d735bb45ab - Init START
+proxmox:1495819:1495819 [0] NCCL INFO Bootstrap timings total 0.000468 (create 0.000019, send 0.000proxmox:1495820:1495820 [1] NCCL INFO ENV/Plugin: Could not find: libnccl-env.so
+proxmox:1495820:1495820 [1] NCCL INFO cudaDriverVersion 13020
+proxmox:1495820:1495820 [1] NCCL INFO Bootstrap: Using <iface>:<redacted-ip><0>
+proxmox:1495820:1495820 [1] NCCL INFO NCCL version 2.28.9+cuda13.0
+proxmox:1495820:1495820 [1] NCCL INFO NET/Plugin: Could not find: libnccl-net.so
+proxmox:1495820:1495820 [1] NCCL INFO Failed to open libmlx5.so[.1]
+proxmox:1495820:1495820 [1] NCCL INFO NET/IB : No device found.
+proxmox:1495820:1495820 [1] NCCL INFO NET/IB : Using [RO]; OOB <iface>:<redacted-ip><0>
+proxmox:1495820:1495820 [1] NCCL INFO Failed to initialize NET plugin IB
+proxmox:1495820:1495820 [1] NCCL INFO NET/Socket : Using [0]<iface>:<redacted-ip><0> [redacted: additional host bridge interfaces]
+proxmox:1495820:1495820 [1] NCCL INFO Initialized NET plugin Socket
+proxmox:1495820:1495820 [1] NCCL INFO Assigned NET plugin Socket to comm
+proxmox:1495820:1495820 [1] NCCL INFO Using network Socket
+proxmox:1495820:1495820 [1] NCCL INFO ncclCommInitRank comm 0x1882d0d0 rank 1 nranks 2 cudaDev 1 nvmlDev 2 busId a000 commId 0xbcee012846c54cbc - Init START
+proxmox:1495820:1495820 [1] NCCL INFO RAS client listening socket at <redacted-ip><28028>
+proxmox:1495820:1495820 [1] NCCL INFO Bootstrap timings total 0.081326 (create 0.000031, send 0.000134, recv 0.080853, ring 0.000020, delay 0.000000)
+proxmox:1495820:1495820 [1] NCCL INFO NCCL_CUMEM_ENABLE set by environment to 1.
+proxmox:1495820:1495820 [1] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+proxmox:1495820:1495820 [1] NCCL INFO ncclTopoGetCpuAffinity: Affinity for GPU 2 is empty, ignoring. (GPU affinity =  ; CPU affinity = 0-23).
+proxmox:1495820:1495820 [1] NCCL INFO NVLS multicast support is not available on dev 1 (NVLS_NCHANNELS 0)
+proxmox:1495820:1495820 [1] NCCL INFO comm 0x1882d0d0 rank 1 nRanks 2 nNodes 1 localRanks 2 localRank 1 MNNVL 0
+proxmox:1495820:1495820 [1] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] -1/-1/-1->1->0
+proxmox:1495820:1495820 [1] NCCL INFO P2P Chunksize set to 131072
+proxmox:1495820:1495820 [1] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so
+proxmox:1495820:1495820 [1] NCCL INFO Check P2P Type isAllDirectP2p 0 directMode 0 isAllCudaP2p 1
+proxmox:1495820:1496071 [0] NCCL INFO [Proxy Service UDS] Device 1 CPU core 14
+proxmox:1495820:1496069 [0] NCCL INFO [Proxy Service] Device 1 CPU core 8
+proxmox:1495820:1495820 [1] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so
+proxmox:1495820:1495820 [1] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+proxmox:1495820:1495820 [1] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+proxmox:1495820:1495820 [1] NCCL INFO ncclCommInitRank comm 0x1882d0d0 rank 1 nranks 2 cudaDev 1 nvmlDev 2 busId a000 commId 0xbcee012846c54cbc - Init COMPLETE
+proxmox:1495820:1495820 [1] NCCL INFO Init timings - ncclCommInitRank: rank 1 nranks 2 total 0.30 (kernels 0.21, alloc 0.00, bootstrap 0.08, allgathers 0.00, topo 0.01, graphs 0.00, connections 0.00, rest 0.00)
+proxmox:1495820:1495820 [1] NCCL INFO Channel 00 : 1[2] -> 0[1] via SHM/direct/direct
+proxmox:1495820:1495820 [1] NCCL INFO Channel 01 : 1[2] -> 0[1] via SHM/direct/direct
+proxmox:1495820:1495820 [1] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+proxmox:1495820:1495820 [1] NCCL INFO Comm config Blocking set to 1
+proxmox:1495820:1495820 [1] NCCL INFO Initialized NET plugin Socket
+proxmox:1495820:1495820 [1] NCCL INFO Assigned NET plugin Socket to comm
+proxmox:1495820:1495820 [1] NCCL INFO Using network Socket
+proxmox:1495820:1495820 [1] NCCL INFO ncclCommInitRankConfig comm 0x56d59540 rank 1 nranks 2 cudaDev 1 nvmlDev 2 busId a000 commId 0x42e2e3d735bb45ab - Init START
+proxmox:1495820:1495820 [1] NCCL INFO Bootstrap timings total 0.000468 (create 0.000022, send 0.000099, recv 0.000130, ring 0.000020, delay 0.000000)
+proxmox:1495820:1495820 [1] NCCL INFO ncclTopoGetCpuAffinity: Affinity for GPU 2 is empty, ignoring. (GPU affinity =  ; CPU affinity (Worker_TP0 pid=1495819) INFO 06-16 21:42:45 [monitor.py:81] Initial profiling/warmup run took 0.76 s
+(Worker_TP0 pid=1495819) WARNING 06-16 21:42:47 [kv_cache_utils.py:1174] Add 3 padding layers, may waste at most 6.25% KV cache memory
+(Worker_TP0 pid=1495819) WARNING 06-16 21:42:47 [compilation.py:1416] CUDAGraphMode.FULL_AND_PIECEWISE is not supported with spec-decode for attention backend FlashInferBackend (support: AttentionCGSupport.UNIFORM_SINGLE_TOKEN_DECODE); setting cudagraph_mode=PIECEWISE
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:47 [gpu_model_runner.py:6412] Profiling CUDA graph memory: PIECEWISE=4 (largest=8)
+(Worker_TP1 pid=1495820) WARNING 06-16 21:42:47 [kv_cache_utils.py:1174] Add 3 padding layers, may waste at most 6.25% KV cache memory
+(Worker_TP1 pid=1495820) WARNING 06-16 21:42:47 [compilation.py:1416] CUDAGraphMode.FULL_AND_PIECEWISE is not supported with spec-decode for attention backend FlashInferBackend (support: AttentionCGSupport.UNIFORM_SINGLE_TOKEN_DECODE); setting cudagraph_mode=PIECEWISE
+(Worker_TP1 pid=1495820) INFO 06-16 21:42:47 [gpu_model_runner.py:6412] Profiling CUDA graph memory: PIECEWISE=4 (largest=8)
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:48 [gpu_model_runner.py:6517] Estimated CUDA graph memory: 0.10 GiB total
+(Worker_TP1 pid=1495820) INFO 06-16 21:42:48 [gpu_model_runner.py:6517] Estimated CUDA graph memory: 0.10 GiB total
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:49 [gpu_worker.py:480] Available KV cache memory: 2.06 GiB
+(Worker_TP0 pid=1495819) INFO 06-16 21:42:49 [gpu_worker.py:495] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.8600 is equivalent to --gpu-memory-utilization=0.8534 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.8666. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+(Worker_TP1 pid=1495820) INFO 06-16 21:42:49 [gpu_worker.py:495] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.8600 is equivalent to --gpu-memory-utilization=0.8534 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.8666. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+(EngineCore pid=1495635) WARNING 06-16 21:42:49 [kv_cache_utils.py:1174] Add 3 padding layers, may waste at most 6.25% KV cache memory
+(EngineCore pid=1495635) INFO 06-16 21:42:49 [kv_cache_utils.py:1744] GPU KV cache size: 97,684 tokens
+(EngineCore pid=1495635) INFO 06-16 21:42:49 [kv_cache_utils.py:1745] Maximum concurrency for 65,535 tokens per request: 1.49x
+(Worker_TP1 pid=1495820) 2026-06-16 21:42:49,276 - INFO - autotuner.py:622 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
+(Worker_TP0 pid=1495819) 2026-06-16 21:42:49,276 - INFO - autotuner.py:622 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
+(Worker_TP0 pid=1495819) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s](Worker_TP1 pid=1495820) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:   5%|▍         | 1/22 [00:00<00:02,  7.28profile/s][AutoTuner]: Tuning fp4_gemm:   5%|▍         | 1/22 [00:00<00:03,  5.34profile/s][AutoTuner]: Tuning fp4_gemm:  27%|██▋       | 6/22 [00:00<00:00, 26.03profile/s][AutoTuner]: Tuning fp4_gemm:  27%|██▋       | 6/22 [00:00<00:00, 22.60profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:00, 23.17profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:00, 21.73profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:00<00:00, 12.18profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:00<00:00, 11.87profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:01<00:00,  7.96profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:01<00:00,  7.89profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:02<00:00,  5.61profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:02<00:00,  5.55profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:02<00:00,  4.60profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:02<00:00,  4.54profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:03<00:00,  3.66profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:03<00:00,  3.50profile/s][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:03<00:00,  2.99profile/s][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:03<00:00,  2.82profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:04<00:00,  1.96profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:04<00:00,  1.89profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:07<00:00,  1.12s/profile][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:07<00:00,  2.86profile/s]
+(Worker_TP0 pid=1495819) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:  41%|████      | 9/22 [00:00<00:00, 82.26profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:07<00:00,  1.15s/profile][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:07<00:00,  2.78profile/s]
+(Worker_TP1 pid=1495820) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:00<00:00, 79.53profile/s][AutoTuner]: Tuning fp4_gemm:  41%|████      | 9/22 [00:00<00:00, 82.69profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:00<00:00, 63.60profile/s]
+(Worker_TP0 pid=1495819) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:00<00:00, 80.10profile/s][AutoTuner]: Tuning fp4_gemm:  32%|███▏      | 7/22 [00:00<00:00, 64.31profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:00<00:00, 63.92profile/s]
+(Worker_TP1 pid=1495820) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:  32%|███▏      | 7/22 [00:00<00:00, 64.95profile/s][AutoTuner]: Tuning fp4_gemm:  64%|██████▎   | 14/22 [00:00<00:00, 24.48profile/s][AutoTuner]: Tuning fp4_gemm:  64%|██████▎   | 14/22 [00:00<00:00, 24.58profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:01<00:00, 12.99profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:01<00:00, 12.99profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:01<00:00,  7.69profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:01<00:00,  7.63profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:02<00:00,  7.76profile/s]
+[AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:02<00:00,  7.65profile/s]
+(Worker_TP0 pid=1495819) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s](Worker_TP1 pid=1495820) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:   9%|▉         | 2/22 [00:00<00:01, 16.02profile/s][AutoTuner]: Tuning fp4_gemm:   9%|▉         | 2/22 [00:00<00:01, 16.05profile/s][AutoTuner]: Tuning fp4_gemm:  18%|█▊        | 4/22 [00:00<00:01, 15.69profile/s][AutoTuner]: Tuning fp4_gemm:  18%|█▊        | 4/22 [00:00<00:01, 15.65profile/s][AutoTuner]: Tuning fp4_gemm:  27%|██▋       | 6/22 [00:00<00:01, 15.65profile/s][AutoTuner]: Tuning fp4_gemm:  27%|██▋       | 6/22 [00:00<00:01, 15.61profile/s][AutoTuner]: Tuning fp4_gemm:  36%|███▋      | 8/22 [00:00<00:00, 15.35profile/s][AutoTuner]: Tuning fp4_gemm:  36%|███▋      | 8/22 [00:00<00:00, 15.32profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:01, 11.37profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:01, 11.32profile/s][AutoTuner]: Tuning fp4_gemm:  55%|█████▍    | 12/22 [00:01<00:01,  5.78profile/s][AutoTuner]: Tuning fp4_gemm:  55%|█████▍    | 12/22 [00:01<00:01,  5.74profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:01<00:02,  4.42profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:01<00:02,  4.38profile/s][AutoTuner]: Tuning fp4_gemm:  64%|██████▎   | 14/22 [00:02<00:02,  3.46profile/s][AutoTuner]: Tuning fp4_gemm:  64%|██████▎   | 14/22 [00:02<00:02,  3.42profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:03<00:02,  2.54profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:03<00:02,  2.51profile/s][AutoTuner]: Tuning fp4_gemm:  73%|███████▎  | 16/22 [00:03<00:02,  2.00profile/s][AutoTuner]: Tuning fp4_gemm:  73%|███████▎  | 16/22 [00:03<00:03,  1.99profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:04<00:02,  1.73profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:04<00:02,  1.71profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:05<00:02,  1.36profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:05<00:02,  1.35profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:07<00:02,  1.15profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:07<00:02,  1.14profile/s][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:08<00:02,  1.09s/profile][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:08<00:02,  1.10s/profile][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:12<00:01,  1.77s/profile]2026-06-16 21:43:12,703 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) [AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:12<00:00,  1.72profile/s]
+(Worker_TP0 pid=1495819) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:  14%|█▎        | 3/22 [00:00<00:00, 27.38profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:12<00:01,  1.79s/profile]2026-06-16 21:43:12,830 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) [AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:12<00:00,  1.71profile/s]
+(Worker_TP1 pid=1495820) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:  32%|███▏      | 7/22 [00:00<00:00, 30.07profile/s][AutoTuner]: Tuning fp4_gemm:  14%|█▎        | 3/22 [00:00<00:00, 27.69profile/s][AutoTuner]: Tuning fp4_gemm:  32%|███▏      | 7/22 [00:00<00:00, 30.36profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:00, 23.06profile/s][AutoTuner]: Tuning fp4_gemm:  50%|█████     | 11/22 [00:00<00:00, 18.96profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:00<00:00, 11.68profile/s][AutoTuner]: Tuning fp4_gemm:  64%|██████▎   | 14/22 [00:01<00:00,  9.81profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:01<00:00,  7.81profile/s][AutoTuner]: Tuning fp4_gemm:  73%|███████▎  | 16/22 [00:01<00:00,  6.78profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:02<00:00,  5.40profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:02<00:00,  4.39profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:02<00:00,  4.59profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:03<00:00,  3.54profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:03<00:00,  3.75profile/s][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:03<00:00,  2.87profile/s][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:03<00:00,  3.05profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:05<00:00,  1.58profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:05<00:00,  1.71profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:08<00:00,  1.32s/profile][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:08<00:00,  2.57profile/s]
+[AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:08<00:00,  1.24s/profile][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:08<00:00,  2.53profile/s]
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:21,717 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:21,717 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:21,933 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:21,936 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s](Worker_TP0 pid=1495819) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:   5%|▍         | 1/22 [00:00<00:02,  7.90profile/s][AutoTuner]: Tuning fp4_gemm:   5%|▍         | 1/22 [00:00<00:02,  7.75profile/s][AutoTuner]: Tuning fp4_gemm:  27%|██▋       | 6/22 [00:00<00:00, 27.46profile/s][AutoTuner]: Tuning fp4_gemm:  27%|██▋       | 6/22 [00:00<00:00, 27.50profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:00, 24.47profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:00, 24.42profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:00<00:00, 13.65profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:00<00:00, 13.53profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:01<00:00,  9.32profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:01<00:00,  9.20profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:01<00:00,  6.50profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:01<00:00,  6.40profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:02<00:00,  4.50profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:02<00:00,  4.43profile/s][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:03<00:00,  3.75profile/s][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:03<00:00,  3.69profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:04<00:00,  2.50profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:04<00:00,  2.46profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:06<00:00,  1.17profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:06<00:00,  3.32profile/s]
+[AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:06<00:00,  1.15profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:06<00:00,  3.27profile/s]
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:28,770 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:28,770 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:28,996 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:28,996 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:29,213 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:29,213 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:29,225 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:29,226 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:29,648 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:29,648 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:29,866 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:29,866 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:29,878 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:29,878 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:30,298 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:30,298 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:30,308 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:30,308 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:30,726 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:30,726 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:30,738 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:30,738 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:31,158 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:31,158 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:31,168 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:31,168 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:31,588 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:31,588 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:31,807 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:31,807 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:32,024 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:32,024 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:32,034 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:32,035 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:32,046 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:32,046 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:32,059 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:32,059 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:32,880 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:32,880 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:32,891 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:32,891 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:32,902 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:32,902 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:32,913 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:32,913 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:33,747 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:33,748 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:33,758 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:33,758 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:33,769 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:33,769 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:33,782 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:33,782 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:34,611 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:34,612 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:34,622 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:34,622 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:34,634 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:34,634 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:34,646 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:34,646 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:35,473 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:35,473 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:35,483 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:35,483 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:35,494 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:35,494 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:35,505 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:35,506 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:35,516 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:35,517 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,545 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,547 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,558 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,559 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,569 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,571 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,580 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,582 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,590 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,591 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,601 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,602 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,613 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,613 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,624 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,625 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,634 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,634 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,645 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,645 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,656 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,657 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,668 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,668 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,678 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,678 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,689 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,689 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,700 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,701 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,711 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,712 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,721 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,721 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,732 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,733 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,743 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,744 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,755 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,755 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,764 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,764 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,775 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,776 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,786 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,787 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,798 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,798 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,807 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,808 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=1495819) 2026-06-16 21:43:36,812 - INFO - autotuner.py:641 - flashinfer.jit: [Autotuner]: Autotuning process ends
+(Worker_TP1 pid=1495820) 2026-06-16 21:43:36,813 - INFO - autotuner.py:641 - flashinfer.jit: [Autotuner]: Autotuning process ends
+(Worker_TP0 pid=1495819) Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   0%|          | 0/4 [00:00<?, ?it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  25%|██▌       | 1/4 [00:00<00:00,  6.87it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  50%|█████     | 2/4 [00:00<00:00,  6.83it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  75%|███████▌  | 3/4 [00:00<00:00,  6.65it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 4/4 [00:00<00:00,  6.59it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 4/4 [00:00<00:00,  6.65it/s]
+(Worker_TP0 pid=1495819) INFO 06-16 21:43:44 [gpu_model_runner.py:6585] Graph capturing finished in 7 secs, took 0.08 GiB
+(Worker_TP0 pid=1495819) INFO 06-16 21:43:44 [gpu_worker.py:639] CUDA graph pool memory: 0.08 GiB (actual), 0.1 GiB (estimated), difference: 0.02 GiB (20.9%).
+(Worker_TP1 pid=1495820) INFO 06-16 21:43:44 [gpu_worker.py:639] CUDA graph pool memory: 0.08 GiB (actual), 0.1 GiB (estimated), difference: 0.02 GiB (20.9%).
+(Worker_TP0 pid=1495819) INFO 06-16 21:43:44 [jit_monitor.py:54] Kernel JIT monitor activated — Triton JIT compilations during inference will be logged as warnings.
+(Worker_TP1 pid=1495820) INFO 06-16 21:43:44 [jit_monitor.py:54] Kernel JIT monitor activated — Triton JIT compilations during inference will be logged as warnings.
+(EngineCore pid=1495635) INFO 06-16 21:43:44 [core.py:306] init engine (profile, create kv cache, warmup model) took 104.45 s (compilation: 8.70 s)
+(EngineCore pid=1495635) [transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+(EngineCore pid=1495635) INFO 06-16 21:43:46 [registry.py:134] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+(EngineCore pid=1495635) INFO 06-16 21:43:47 [vllm.py:999] Asynchronous scheduling is enabled.
+(EngineCore pid=1495635) INFO 06-16 21:43:47 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+(EngineCore pid=1495635) INFO 06-16 21:43:47 [compilation.py:321] Enabled custom fusions: act_quant
+(APIServer pid=1495261) INFO 06-16 21:43:47 [api_server.py:579] Supported tasks: ['generate']
+(APIServer pid=1495261) INFO 06-16 21:43:47 [parser_manager.py:37] "auto" tool choice has been enabled.
+(APIServer pid=1495261) WARNING 06-16 21:43:47 [model.py:1502] Default vLLM sampling parameters have been overridden by the model's `generation_config.json`: `{'temperature': 1.0, 'top_k': 20, 'top_p': 0.95}`. If this is not intended, please relaunch vLLM instance with `--generation-config vllm`.
+(APIServer pid=1495261) INFO 06-16 21:43:47 [hf.py:548] Detected the chat template content format to be 'openai'. You can set `--chat-template-content-format` to override this.
+(APIServer pid=1495261) INFO 06-16 21:43:47 [api_server.py:583] Starting vLLM server on http://0.0.0.0:8103
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:37] Available routes are:
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /openapi.json, Methods: HEAD, GET
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /docs, Methods: HEAD, GET
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /docs/oauth2-redirect, Methods: HEAD, GET
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /redoc, Methods: HEAD, GET
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /load, Methods: GET
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /version, Methods: GET
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /health, Methods: GET
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /metrics, Methods: GET
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /tokenize, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /detokenize, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /v1/models, Methods: GET
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /ping, Methods: GET
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /ping, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /invocations, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /v1/chat/completions, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /v1/chat/completions/batch, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /v1/responses, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /v1/responses/{response_id}, Methods: GET
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /v1/responses/{response_id}/cancel, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /v1/completions, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /v1/messages, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /v1/messages/count_tokens, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /generative_scoring, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /inference/v1/generate, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /v1/chat/completions/render, Methods: POST
+(APIServer pid=1495261) INFO 06-16 21:43:47 [launcher.py:46] Route: /v1/completions/render, Methods: POST
+(APIServer pid=1495261) INFO:     Started server process [1495261]
+(APIServer pid=1495261) INFO:     Waiting for application startup.
+(APIServer pid=1495261) INFO:     Application startup complete.
+(APIServer pid=1495261) INFO:     127.0.0.1:41956 - "GET /health HTTP/1.1" 200 OK
+(Worker_TP0 pid=1495819) WARNING 06-16 21:43:47 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _zero_kv_blocks_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=1495819) WARNING 06-16 21:43:47 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _compute_slot_mapping_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=1495819) WARNING 06-16 21:43:47 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _copy_page_indices_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=1495819) WARNING 06-16 21:43:47 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _causal_conv1d_update_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=1495819) WARNING 06-16 21:43:47 [jit_monitor.py:103] Triton kernel JIT compilation during inference: fused_recurrent_gated_delta_rule_packed_decode_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=1495819) WARNING 06-16 21:43:47 [jit_monitor.py:103] Triton kernel JIT compilation during inference: kernel_unified_attention. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=1495819) WARNING 06-16 21:43:47 [jit_monitor.py:103] Triton kernel JIT compilation during inference: reduce_segments. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=1495819) WARNING 06-16 21:43:47 [jit_monitor.py:103] Triton kernel JIT compilation during inference: eagle_prepare_next_token_padded_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=1495819) WARNING 06-16 21:43:47 [jit_monitor.py:103] Triton kernel JIT compilation during inference: eagle_step_slot_mapping_metadata_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(Worker_TP0 pid=1495819) WARNING 06-16 21:43:55 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _causal_conv1d_fwd_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=1495819) WARNING 06-16 21:43:57 [jit_monitor.py:103] Triton kernel JIT compilation during inference: fused_sigmoid_gating_delta_rule_update_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=1495819) WARNING 06-16 21:43:57 [jit_monitor.py:103] Triton kernel JIT compilation during inference: expand_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=1495819) WARNING 06-16 21:43:57 [jit_monitor.py:103] Triton kernel JIT compilation during inference: eagle_prepare_inputs_padded_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=1495261) INFO 06-16 21:43:57 [loggers.py:271] Engine 000: Avg prompt throughput: 98.5 tokens/s, Avg generation throughput: 1.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:43:57 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 1.10, Accepted throughput: 0.10 tokens/s, Drafted throughput: 2.88 tokens/s, Accepted: 1 tokens, Drafted: 30 tokens, Per-position acceptance rate: 0.100, 0.000, 0.000, Avg Draft acceptance rate: 3.3%
+(APIServer pid=1495261) INFO 06-16 21:44:07 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 42.9 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:44:07 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.03, Accepted throughput: 21.80 tokens/s, Drafted throughput: 63.30 tokens/s, Accepted: 218 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.540, 0.336, 0.156, Avg Draft acceptance rate: 34.4%
+(APIServer pid=1495261) INFO 06-16 21:44:17 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 42.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:44:17 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.01, Accepted throughput: 21.30 tokens/s, Drafted throughput: 63.00 tokens/s, Accepted: 213 tokens, Drafted: 630 tokens, Per-position acceptance rate: 0.524, 0.319, 0.171, Avg Draft acceptance rate: 33.8%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:44:27 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 65.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:44:27 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.44, Accepted throughput: 46.40 tokens/s, Drafted throughput: 57.00 tokens/s, Accepted: 464 tokens, Drafted: 570 tokens, Per-position acceptance rate: 0.853, 0.805, 0.784, Avg Draft acceptance rate: 81.4%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:44:37 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 63.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:44:37 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.31, Accepted throughput: 44.10 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 441 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.832, 0.759, 0.717, Avg Draft acceptance rate: 77.0%
+(APIServer pid=1495261) INFO 06-16 21:44:47 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 67.5 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:44:47 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.20, Accepted throughput: 46.40 tokens/s, Drafted throughput: 63.30 tokens/s, Accepted: 464 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.863, 0.720, 0.616, Avg Draft acceptance rate: 73.3%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:44:57 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 50.7 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:44:57 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.66, Accepted throughput: 31.60 tokens/s, Drafted throughput: 57.00 tokens/s, Accepted: 316 tokens, Drafted: 570 tokens, Per-position acceptance rate: 0.695, 0.526, 0.442, Avg Draft acceptance rate: 55.4%
+(APIServer pid=1495261) INFO 06-16 21:45:07 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 57.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:45:07 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.72, Accepted throughput: 36.19 tokens/s, Drafted throughput: 63.29 tokens/s, Accepted: 362 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.777, 0.578, 0.360, Avg Draft acceptance rate: 57.2%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:45:17 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 61.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:45:17 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.20, Accepted throughput: 42.00 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 420 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.822, 0.728, 0.649, Avg Draft acceptance rate: 73.3%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:45:27 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 71.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:45:27 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.76, Accepted throughput: 52.20 tokens/s, Drafted throughput: 56.70 tokens/s, Accepted: 522 tokens, Drafted: 567 tokens, Per-position acceptance rate: 0.931, 0.921, 0.910, Avg Draft acceptance rate: 92.1%
+(APIServer pid=1495261) INFO 06-16 21:45:37 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 84.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:45:37 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 4.00, Accepted throughput: 63.00 tokens/s, Drafted throughput: 63.00 tokens/s, Accepted: 630 tokens, Drafted: 630 tokens, Per-position acceptance rate: 1.000, 1.000, 1.000, Avg Draft acceptance rate: 100.0%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:45:47 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 73.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:45:47 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.82, Accepted throughput: 53.90 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 539 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.948, 0.937, 0.937, Avg Draft acceptance rate: 94.1%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:45:57 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 62.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:45:57 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.26, Accepted throughput: 43.10 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 431 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.801, 0.743, 0.712, Avg Draft acceptance rate: 75.2%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:46:07 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 77.3 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:46:07 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 4.00, Accepted throughput: 58.20 tokens/s, Drafted throughput: 58.20 tokens/s, Accepted: 582 tokens, Drafted: 582 tokens, Per-position acceptance rate: 1.000, 1.000, 1.000, Avg Draft acceptance rate: 100.0%
+(APIServer pid=1495261) INFO 06-16 21:46:17 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 79.9 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:46:17 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.87, Accepted throughput: 59.20 tokens/s, Drafted throughput: 61.80 tokens/s, Accepted: 592 tokens, Drafted: 618 tokens, Per-position acceptance rate: 0.971, 0.956, 0.947, Avg Draft acceptance rate: 95.8%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:46:27 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 70.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:46:27 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.69, Accepted throughput: 51.20 tokens/s, Drafted throughput: 57.00 tokens/s, Accepted: 512 tokens, Drafted: 570 tokens, Per-position acceptance rate: 0.900, 0.900, 0.895, Avg Draft acceptance rate: 89.8%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:46:37 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 68.9 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:46:37 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.62, Accepted throughput: 50.00 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 500 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.927, 0.859, 0.832, Avg Draft acceptance rate: 87.3%
+(APIServer pid=1495261) INFO 06-16 21:46:47 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 57.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:46:47 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.71, Accepted throughput: 36.10 tokens/s, Drafted throughput: 63.29 tokens/s, Accepted: 361 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.758, 0.550, 0.403, Avg Draft acceptance rate: 57.0%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:46:57 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 54.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:46:57 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.84, Accepted throughput: 35.00 tokens/s, Drafted throughput: 57.00 tokens/s, Accepted: 350 tokens, Drafted: 570 tokens, Per-position acceptance rate: 0.811, 0.632, 0.400, Avg Draft acceptance rate: 61.4%
+(APIServer pid=1495261) INFO 06-16 21:47:07 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 61.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:47:07 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.92, Accepted throughput: 40.30 tokens/s, Drafted throughput: 63.00 tokens/s, Accepted: 403 tokens, Drafted: 630 tokens, Per-position acceptance rate: 0.819, 0.643, 0.457, Avg Draft acceptance rate: 64.0%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:47:17 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 49.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:47:17 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.59, Accepted throughput: 30.30 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 303 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.686, 0.529, 0.372, Avg Draft acceptance rate: 52.9%
+(APIServer pid=1495261) INFO 06-16 21:47:27 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 59.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:47:27 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.84, Accepted throughput: 38.40 tokens/s, Drafted throughput: 62.69 tokens/s, Accepted: 384 tokens, Drafted: 627 tokens, Per-position acceptance rate: 0.785, 0.598, 0.455, Avg Draft acceptance rate: 61.2%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:47:37 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 56.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:47:37 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.95, Accepted throughput: 37.00 tokens/s, Drafted throughput: 57.00 tokens/s, Accepted: 370 tokens, Drafted: 570 tokens, Per-position acceptance rate: 0.716, 0.642, 0.589, Avg Draft acceptance rate: 64.9%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:47:47 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 68.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:47:47 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.58, Accepted throughput: 49.10 tokens/s, Drafted throughput: 57.00 tokens/s, Accepted: 491 tokens, Drafted: 570 tokens, Per-position acceptance rate: 0.932, 0.853, 0.800, Avg Draft acceptance rate: 86.1%
+(APIServer pid=1495261) INFO 06-16 21:47:57 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 70.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:47:57 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.33, Accepted throughput: 49.20 tokens/s, Drafted throughput: 63.30 tokens/s, Accepted: 492 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.896, 0.791, 0.645, Avg Draft acceptance rate: 77.7%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:48:07 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 56.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:48:07 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.95, Accepted throughput: 37.20 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 372 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.827, 0.639, 0.482, Avg Draft acceptance rate: 64.9%
+(APIServer pid=1495261) INFO 06-16 21:48:17 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 60.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:48:17 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.88, Accepted throughput: 39.40 tokens/s, Drafted throughput: 63.00 tokens/s, Accepted: 394 tokens, Drafted: 630 tokens, Per-position acceptance rate: 0.795, 0.629, 0.452, Avg Draft acceptance rate: 62.5%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:48:27 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 8.2 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:48:27 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.59, Accepted throughput: 5.10 tokens/s, Drafted throughput: 9.60 tokens/s, Accepted: 51 tokens, Drafted: 96 tokens, Per-position acceptance rate: 0.719, 0.469, 0.406, Avg Draft acceptance rate: 53.1%
+(APIServer pid=1495261) INFO 06-16 21:48:37 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 68.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:48:37 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.51, Accepted throughput: 48.60 tokens/s, Drafted throughput: 58.20 tokens/s, Accepted: 486 tokens, Drafted: 582 tokens, Per-position acceptance rate: 0.861, 0.840, 0.804, Avg Draft acceptance rate: 83.5%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:48:47 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 69.9 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:48:47 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.68, Accepted throughput: 50.89 tokens/s, Drafted throughput: 56.99 tokens/s, Accepted: 509 tokens, Drafted: 570 tokens, Per-position acceptance rate: 0.900, 0.889, 0.889, Avg Draft acceptance rate: 89.3%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:48:57 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 75.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:48:57 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.95, Accepted throughput: 56.40 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 564 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.984, 0.984, 0.984, Avg Draft acceptance rate: 98.4%
+(APIServer pid=1495261) INFO 06-16 21:49:07 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 84.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:49:07 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 4.00, Accepted throughput: 62.99 tokens/s, Drafted throughput: 62.99 tokens/s, Accepted: 630 tokens, Drafted: 630 tokens, Per-position acceptance rate: 1.000, 1.000, 1.000, Avg Draft acceptance rate: 100.0%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:49:17 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 38.8 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:49:17 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.03, Accepted throughput: 19.60 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 196 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.508, 0.298, 0.220, Avg Draft acceptance rate: 34.2%
+(APIServer pid=1495261) INFO 06-16 21:49:27 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 43.7 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:49:27 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.08, Accepted throughput: 22.70 tokens/s, Drafted throughput: 63.00 tokens/s, Accepted: 227 tokens, Drafted: 630 tokens, Per-position acceptance rate: 0.595, 0.310, 0.176, Avg Draft acceptance rate: 36.0%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:49:37 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 65.5 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:49:37 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.45, Accepted throughput: 46.60 tokens/s, Drafted throughput: 57.00 tokens/s, Accepted: 466 tokens, Drafted: 570 tokens, Per-position acceptance rate: 0.874, 0.816, 0.763, Avg Draft acceptance rate: 81.8%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:49:47 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 71.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:49:47 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.73, Accepted throughput: 52.20 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 522 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.921, 0.906, 0.906, Avg Draft acceptance rate: 91.1%
+(APIServer pid=1495261) INFO 06-16 21:49:57 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 83.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:49:57 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 4.00, Accepted throughput: 62.70 tokens/s, Drafted throughput: 62.70 tokens/s, Accepted: 627 tokens, Drafted: 627 tokens, Per-position acceptance rate: 1.000, 1.000, 1.000, Avg Draft acceptance rate: 100.0%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:50:07 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 51.8 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:50:07 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.72, Accepted throughput: 32.80 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 328 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.743, 0.565, 0.408, Avg Draft acceptance rate: 57.2%
+(APIServer pid=1495261) INFO 06-16 21:50:17 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 62.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:50:17 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.96, Accepted throughput: 41.20 tokens/s, Drafted throughput: 62.99 tokens/s, Accepted: 412 tokens, Drafted: 630 tokens, Per-position acceptance rate: 0.890, 0.657, 0.414, Avg Draft acceptance rate: 65.4%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:50:27 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 74.7 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:50:27 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.91, Accepted throughput: 55.50 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 555 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.974, 0.969, 0.963, Avg Draft acceptance rate: 96.9%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:50:37 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 72.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:50:37 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.81, Accepted throughput: 53.20 tokens/s, Drafted throughput: 56.70 tokens/s, Accepted: 532 tokens, Drafted: 567 tokens, Per-position acceptance rate: 0.942, 0.937, 0.937, Avg Draft acceptance rate: 93.8%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:50:47 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 69.5 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:50:47 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.64, Accepted throughput: 50.50 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 505 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.937, 0.864, 0.843, Avg Draft acceptance rate: 88.1%
+(APIServer pid=1495261) INFO 06-16 21:50:57 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 61.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:50:57 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.90, Accepted throughput: 40.00 tokens/s, Drafted throughput: 63.00 tokens/s, Accepted: 400 tokens, Drafted: 630 tokens, Per-position acceptance rate: 0.790, 0.629, 0.486, Avg Draft acceptance rate: 63.5%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:51:07 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 62.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:51:07 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.28, Accepted throughput: 43.40 tokens/s, Drafted throughput: 57.00 tokens/s, Accepted: 434 tokens, Drafted: 570 tokens, Per-position acceptance rate: 0.842, 0.758, 0.684, Avg Draft acceptance rate: 76.1%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:51:17 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 74.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:51:17 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.91, Accepted throughput: 55.20 tokens/s, Drafted throughput: 57.00 tokens/s, Accepted: 552 tokens, Drafted: 570 tokens, Per-position acceptance rate: 0.974, 0.968, 0.963, Avg Draft acceptance rate: 96.8%
+(APIServer pid=1495261) INFO 06-16 21:51:27 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 64.9 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:51:27 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.08, Accepted throughput: 43.80 tokens/s, Drafted throughput: 63.29 tokens/s, Accepted: 438 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.839, 0.706, 0.531, Avg Draft acceptance rate: 69.2%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:51:37 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 53.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:51:37 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.80, Accepted throughput: 34.30 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 343 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.759, 0.586, 0.450, Avg Draft acceptance rate: 59.9%
+(APIServer pid=1495261) INFO 06-16 21:51:47 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 54.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:51:47 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.57, Accepted throughput: 33.10 tokens/s, Drafted throughput: 63.30 tokens/s, Accepted: 331 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.635, 0.498, 0.436, Avg Draft acceptance rate: 52.3%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:51:57 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 41.9 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:51:57 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.21, Accepted throughput: 23.00 tokens/s, Drafted throughput: 57.00 tokens/s, Accepted: 230 tokens, Drafted: 570 tokens, Per-position acceptance rate: 0.516, 0.374, 0.321, Avg Draft acceptance rate: 40.4%
+(APIServer pid=1495261) INFO 06-16 21:52:07 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 31.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:52:07 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 1.48, Accepted throughput: 10.20 tokens/s, Drafted throughput: 63.30 tokens/s, Accepted: 102 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.341, 0.114, 0.028, Avg Draft acceptance rate: 16.1%
+(APIServer pid=1495261) INFO 06-16 21:52:17 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 30.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:52:17 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 1.44, Accepted throughput: 9.20 tokens/s, Drafted throughput: 63.30 tokens/s, Accepted: 92 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.322, 0.104, 0.009, Avg Draft acceptance rate: 14.5%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:52:27 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 29.4 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:52:27 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 1.43, Accepted throughput: 8.80 tokens/s, Drafted throughput: 62.10 tokens/s, Accepted: 88 tokens, Drafted: 621 tokens, Per-position acceptance rate: 0.314, 0.087, 0.024, Avg Draft acceptance rate: 14.2%
+(APIServer pid=1495261) INFO 06-16 21:52:37 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 23.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:52:37 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 1.21, Accepted throughput: 4.10 tokens/s, Drafted throughput: 58.20 tokens/s, Accepted: 41 tokens, Drafted: 582 tokens, Per-position acceptance rate: 0.165, 0.036, 0.010, Avg Draft acceptance rate: 7.0%
+(APIServer pid=1495261) INFO 06-16 21:52:47 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 23.9 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:52:47 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 1.13, Accepted throughput: 2.80 tokens/s, Drafted throughput: 63.30 tokens/s, Accepted: 28 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.118, 0.014, 0.000, Avg Draft acceptance rate: 4.4%
+(APIServer pid=1495261) INFO 06-16 21:52:57 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 25.2 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:52:57 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 1.20, Accepted throughput: 4.20 tokens/s, Drafted throughput: 62.99 tokens/s, Accepted: 42 tokens, Drafted: 630 tokens, Per-position acceptance rate: 0.171, 0.029, 0.000, Avg Draft acceptance rate: 6.7%
+(APIServer pid=1495261) INFO 06-16 21:53:07 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 24.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:53:07 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 1.16, Accepted throughput: 3.30 tokens/s, Drafted throughput: 62.99 tokens/s, Accepted: 33 tokens, Drafted: 630 tokens, Per-position acceptance rate: 0.119, 0.029, 0.010, Avg Draft acceptance rate: 5.2%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:53:17 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 58.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:53:17 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.02, Accepted throughput: 38.70 tokens/s, Drafted throughput: 57.60 tokens/s, Accepted: 387 tokens, Drafted: 576 tokens, Per-position acceptance rate: 0.745, 0.651, 0.620, Avg Draft acceptance rate: 67.2%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:53:27 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 64.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:53:27 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.40, Accepted throughput: 45.40 tokens/s, Drafted throughput: 56.70 tokens/s, Accepted: 454 tokens, Drafted: 567 tokens, Per-position acceptance rate: 0.894, 0.799, 0.709, Avg Draft acceptance rate: 80.1%
+(APIServer pid=1495261) INFO 06-16 21:53:37 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 77.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:53:37 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.65, Accepted throughput: 56.00 tokens/s, Drafted throughput: 63.30 tokens/s, Accepted: 560 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.953, 0.891, 0.810, Avg Draft acceptance rate: 88.5%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:53:47 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 66.7 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:53:47 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.50, Accepted throughput: 47.80 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 478 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.895, 0.843, 0.764, Avg Draft acceptance rate: 83.4%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:53:57 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 66.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:53:57 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.48, Accepted throughput: 47.20 tokens/s, Drafted throughput: 57.00 tokens/s, Accepted: 472 tokens, Drafted: 570 tokens, Per-position acceptance rate: 0.932, 0.805, 0.747, Avg Draft acceptance rate: 82.8%
+(APIServer pid=1495261) INFO 06-16 21:54:07 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 61.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:54:07 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.92, Accepted throughput: 40.50 tokens/s, Drafted throughput: 63.30 tokens/s, Accepted: 405 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.820, 0.630, 0.469, Avg Draft acceptance rate: 64.0%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:54:17 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 56.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:54:17 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.94, Accepted throughput: 37.10 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 371 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.801, 0.681, 0.461, Avg Draft acceptance rate: 64.7%
+(APIServer pid=1495261) INFO 06-16 21:54:27 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 56.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:54:27 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.68, Accepted throughput: 35.10 tokens/s, Drafted throughput: 62.70 tokens/s, Accepted: 351 tokens, Drafted: 627 tokens, Per-position acceptance rate: 0.732, 0.541, 0.407, Avg Draft acceptance rate: 56.0%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:54:37 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 27.8 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:54:37 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 1.46, Accepted throughput: 8.70 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 87 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.246, 0.126, 0.084, Avg Draft acceptance rate: 15.2%
+(APIServer pid=1495261) INFO 06-16 21:54:47 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 23.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:54:47 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 1.11, Accepted throughput: 2.30 tokens/s, Drafted throughput: 63.30 tokens/s, Accepted: 23 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.100, 0.005, 0.005, Avg Draft acceptance rate: 3.6%
+(APIServer pid=1495261) INFO 06-16 21:54:57 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 24.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:54:57 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 1.16, Accepted throughput: 3.30 tokens/s, Drafted throughput: 63.29 tokens/s, Accepted: 33 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.118, 0.024, 0.014, Avg Draft acceptance rate: 5.2%
+(APIServer pid=1495261) INFO 06-16 21:55:07 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 37.7 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:55:07 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 1.80, Accepted throughput: 16.80 tokens/s, Drafted throughput: 62.69 tokens/s, Accepted: 168 tokens, Drafted: 627 tokens, Per-position acceptance rate: 0.483, 0.206, 0.115, Avg Draft acceptance rate: 26.8%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:55:17 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 54.9 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:55:17 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.87, Accepted throughput: 35.90 tokens/s, Drafted throughput: 57.60 tokens/s, Accepted: 359 tokens, Drafted: 576 tokens, Per-position acceptance rate: 0.792, 0.646, 0.432, Avg Draft acceptance rate: 62.3%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:55:27 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 55.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:55:27 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.94, Accepted throughput: 36.70 tokens/s, Drafted throughput: 56.70 tokens/s, Accepted: 367 tokens, Drafted: 567 tokens, Per-position acceptance rate: 0.815, 0.667, 0.460, Avg Draft acceptance rate: 64.7%
+(APIServer pid=1495261) INFO 06-16 21:55:37 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 65.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:55:37 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.09, Accepted throughput: 44.20 tokens/s, Drafted throughput: 63.30 tokens/s, Accepted: 442 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.867, 0.735, 0.493, Avg Draft acceptance rate: 69.8%
+(APIServer pid=1495261) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK
+(APIServer pid=1495261) INFO 06-16 21:55:47 [loggers.py:271] Engine 000: Avg prompt throughput: 102.4 tokens/s, Avg generation throughput: 56.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:55:47 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.94, Accepted throughput: 37.10 tokens/s, Drafted throughput: 57.30 tokens/s, Accepted: 371 tokens, Drafted: 573 tokens, Per-position acceptance rate: 0.812, 0.639, 0.492, Avg Draft acceptance rate: 64.7%
+(APIServer pid=1495261) INFO 06-16 21:55:57 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 64.5 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 17.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:55:57 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 3.06, Accepted throughput: 43.40 tokens/s, Drafted throughput: 63.30 tokens/s, Accepted: 434 tokens, Drafted: 633 tokens, Per-position acceptance rate: 0.882, 0.678, 0.498, Avg Draft acceptance rate: 68.6%
+(APIServer pid=1495261) INFO 06-16 21:56:07 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 10.7 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1495261) INFO 06-16 21:56:07 [metrics.py:101] SpecDecoding metrics: Mean acceptance length: 2.53, Accepted throughput: 6.60 tokens/s, Drafted throughput: 12.90 tokens/s, Accepted: 66 tokens, Drafted: 129 tokens, Per-position acceptance rate: 0.721, 0.535, 0.279, Avg Draft acceptance rate: 51.2%
+(APIServer pid=1495261) INFO 06-16 21:56:17 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%

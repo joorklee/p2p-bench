@@ -1,0 +1,3 @@
+# Harness deps. vLLM + torch are provided by your inference venv (see README).
+PyYAML>=6.0
+matplotlib>=3.7

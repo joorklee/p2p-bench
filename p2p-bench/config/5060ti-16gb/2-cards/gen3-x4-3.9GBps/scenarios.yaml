@@ -1,0 +1,120 @@
+# =============================================================================
+# P2P benchmark scenario matrix
+#
+# RIG / RUN PROVENANCE
+#   GPU model .......... NVIDIA RTX 5060 Ti 16 GB  (x2, no NVLink)
+#   Cards .............. 2
+#   Link (effective) ... PCIe Gen3 x4  (~3.9 GB/s/dir; reported by telemetry/nvidia-smi)
+#   Result set ......... results/2026-06-16_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/
+#   Published report ... https://joorklee.github.io/p2p-bench/   (docs/ in this repo)
+#
+#   This is the EXACT scenarios.yaml used to produce the published 5060 Ti results.
+#   It is preserved here under config/<gpu>/<n-cards>/<link-bandwidth>/ so the
+#   config that produced a given result set is always recoverable. See
+#   config/README.md for the directory-naming convention.
+#
+# DESIGN PRINCIPLE: exactly ONE variable (NCCL_P2P_DISABLE) changes between the
+# two primary arms. Everything else is held constant so the measured delta is
+# attributable to P2P and not to a co-varying knob.
+#
+# See ../../../../README.md "Why the matrix looks like this" for the rationale.
+# =============================================================================
+
+model:
+  # Path passed to `vllm serve`. Also used as the served-model-name root.
+  path: /data/models/qwen3.6-27b-text-nvfp4-mtp
+  # Upstream port that each vLLM instance binds. llama-swap proxies to this.
+  port: 8103
+
+  # ---- Controlled variables: identical in EVERY scenario ----
+  constant_args:
+    quantization: modelopt
+    tensor-parallel-size: 2
+    max-model-len: 65535
+    kv-cache-dtype: fp8
+    max-num-batched-tokens: 16384
+    gpu-memory-utilization: 0.86
+    speculative-config: '{"method":"mtp","num_speculative_tokens":3}'
+    reasoning-parser: qwen3
+    tool-call-parser: qwen3_coder
+    # NOTE: confirm these parse in YOUR vllm build (`vllm serve --help`).
+    # In some builds the attention backend is the env var
+    # VLLM_ATTENTION_BACKEND=TRITON_ATTN rather than a CLI flag.
+    attention-backend: TRITON_ATTN
+
+  constant_flags:
+    - language-model-only
+    - enable-auto-tool-choice
+    # generation-config defaults to the model's; pin it for reproducibility:
+    # - "generation-config vllm"
+    # prefix caching is OFF by default for a clean throughput measurement.
+    # Turn it on ONLY if your client sends unique-prefix prompts. See README.
+    # - enable-prefix-caching
+
+  # Environment applied to EVERY scenario. The only per-arm env delta is
+  # NCCL_P2P_DISABLE (below). NCCL_CUMEM_ENABLE is pinned here so it does NOT
+  # co-vary with P2P (it did in the original config -- that was a confound).
+  constant_env:
+    CUDA_DEVICE_ORDER: PCI_BUS_ID
+    CUDA_VISIBLE_DEVICES: "1,2"
+    NCCL_CUMEM_ENABLE: "1"
+    # INFO (not TRACE) for timed runs: prints the channel/transport summary at
+    # init (proof of P2P vs SHM) without TRACE's per-op logging overhead, which
+    # would otherwise asymmetrically penalize one arm.
+    NCCL_DEBUG: "INFO"
+    VLLM_LOGGING_LEVEL: "INFO"
+
+# -----------------------------------------------------------------------------
+# Arms. Only NCCL_P2P_DISABLE differs between p2p_on and p2p_off.
+# custom_all_reduce is held DISABLED in BOTH so NCCL is the communicator in both
+# and NCCL_P2P_DISABLE actually controls the transport. (vLLM's custom
+# all-reduce uses its OWN CUDA peer check, independent of NCCL_P2P_DISABLE, so
+# leaving it enabled would let the "P2P off" arm silently keep using P2P.)
+# -----------------------------------------------------------------------------
+arms:
+  p2p_on:
+    env:
+      NCCL_P2P_DISABLE: "0"
+    extra_flags:
+      - disable-custom-all-reduce
+
+  p2p_off:
+    env:
+      NCCL_P2P_DISABLE: "1"
+    extra_flags:
+      - disable-custom-all-reduce
+
+  # OPTIONAL third arm: vLLM custom all-reduce (which needs P2P) vs the NCCL
+  # paths above. Enable with `--include-optional-arm`. Gives a 3-way decomposition:
+  #   NCCL+noP2P  vs  NCCL+P2P  vs  customAR+P2P
+  custom_ar_p2p_on:
+    optional: true
+    env:
+      NCCL_P2P_DISABLE: "0"
+    extra_flags: []   # custom all-reduce left ENABLED
+
+concurrencies: [1, 2, 4, 8]
+
+benchmark:
+  # Deterministic, fixed-length workload so token counts are identical across
+  # arms (required for apples-to-apples tok/s, especially with MTP spec decoding).
+  dataset: random
+  random_input_len: 1024
+  random_output_len: 1024
+  random_range_ratio: 0.0        # 0 => fixed lengths, no variance
+  endpoint: /v1/completions      # raw completions: no chat-template token noise
+  backend: vllm
+  num_prompts_multiplier: 16     # num_prompts = concurrency * this (steady state)
+  num_warmups: 8                 # per-run client warmups (vllm bench serve)
+  seed: 1234
+  ignore_eos: true
+  percentile_metrics: ttft,tpot,itl,e2el
+  metric_percentiles: "50,90,99"
+  reps: 3
+  interleave_reps: true          # rep order A,B,A,B,... to cancel thermal drift
+  cooldown_seconds: 20           # gap between runs to let cards settle
+  # Between scenarios, unload the previous model and wait until each target GPU
+  # reports below this many MiB used before loading the next (avoids OOM from
+  # VRAM not yet reclaimed after the previous model's process exits).
+  vram_free_threshold_mb: 1024
+  vram_free_timeout: 180

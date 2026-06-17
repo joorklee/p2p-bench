@@ -1,0 +1,6 @@
+title: Budget Dual RTX 5060 Ti — P2P On vs Off Inference Benchmark
+description: >-
+  Reproducible NVIDIA peer-to-peer (P2P) on/off inference benchmark on two
+  consumer RTX 5060 Ti 16GB cards running qwen3.6-27b-text-nvfp4-mtp under vLLM.
+theme: jekyll-theme-cayman
+markdown: kramdown

@@ -1,0 +1,30 @@
+{
+  "id": "p2p_off-c2",
+  "arm": "p2p_off",
+  "concurrency": 2,
+  "env": {
+    "CUDA_DEVICE_ORDER": "PCI_BUS_ID",
+    "CUDA_VISIBLE_DEVICES": "1,2",
+    "NCCL_CUMEM_ENABLE": "1",
+    "NCCL_DEBUG": "INFO",
+    "VLLM_LOGGING_LEVEL": "INFO",
+    "NCCL_P2P_DISABLE": "1"
+  },
+  "flags": [
+    "language-model-only",
+    "enable-auto-tool-choice",
+    "disable-custom-all-reduce"
+  ],
+  "args": {
+    "quantization": "modelopt",
+    "tensor-parallel-size": 2,
+    "max-model-len": 65535,
+    "kv-cache-dtype": "fp8",
+    "max-num-batched-tokens": 16384,
+    "gpu-memory-utilization": 0.86,
+    "speculative-config": "{\"method\":\"mtp\",\"num_speculative_tokens\":3}",
+    "reasoning-parser": "qwen3",
+    "tool-call-parser": "qwen3_coder",
+    "attention-backend": "TRITON_ATTN"
+  }
+}

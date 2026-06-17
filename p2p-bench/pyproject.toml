@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "p2pbench"
+version = "0.1.0"
+description = "Reproducible vLLM P2P-on/off benchmark harness for multi-GPU PCIe rigs"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "PyYAML>=6.0",
+    "matplotlib>=3.7",
+]
+
+[project.scripts]
+p2pbench = "p2pbench.cli:main"
+
+[tool.setuptools]
+packages = ["p2pbench"]
+
+[tool.setuptools.package-data]
+p2pbench = ["../config/scenarios.yaml"]

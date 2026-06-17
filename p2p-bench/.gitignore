@@ -1,0 +1,20 @@
+# Python build / cache artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments (root-anchored so they don't match the captured
+# results/<run>/env/ evidence directory, which MUST be committed)
+/.venv/
+/venv/
+/env/
+
+# cuda-samples binary is host/CUDA-specific; pass it via --p2p-test-bin instead
+p2pBandwidthLatencyTest
+
+# Never ignore captured benchmark evidence directories
+!results/**/env/
+!results/**/env/**

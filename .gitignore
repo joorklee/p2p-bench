@@ -1,0 +1,29 @@
+# Python build / cache artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments (root-anchored so they don't match the captured
+# results/<run>/env/ evidence directory, which MUST be committed)
+/.venv/
+/venv/
+/env/
+/p2p-bench/.venv/
+/p2p-bench/venv/
+/p2p-bench/env/
+
+# Leftover transfer/archive artifacts (do not commit raw tarballs)
+*.tar
+*.tar.gz
+*.tgz
+
+# OS / editor cruft
+.DS_Store
+*.swp
+
+# Never ignore captured benchmark evidence directories
+!p2p-bench/results/**/env/
+!p2p-bench/results/**/env/**
