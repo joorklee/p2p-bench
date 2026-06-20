@@ -20,6 +20,7 @@ from .swap import LlamaSwap
 def _bench_cmd(base_url: str, model_id: str, tokenizer: str, concurrency: int,
                num_prompts: int, cfg: dict[str, Any], result_dir: Path,
                result_name: str) -> list[str]:
+    dataset = cfg.get("dataset", "random")
     cmd = [
         "vllm", "bench", "serve",
         "--backend", cfg.get("backend", "vllm"),
@@ -30,13 +31,10 @@ def _bench_cmd(base_url: str, model_id: str, tokenizer: str, concurrency: int,
         # to fetch a tokenizer for the scenario id from HuggingFace.
         "--model", model_id,
         "--tokenizer", tokenizer,
-        "--dataset-name", cfg.get("dataset", "random"),
-        "--random-input-len", str(cfg["random_input_len"]),
-        "--random-output-len", str(cfg["random_output_len"]),
-        "--random-range-ratio", str(cfg.get("random_range_ratio", 0.0)),
+        "--dataset-name", dataset,
         "--max-concurrency", str(concurrency),
         "--num-prompts", str(num_prompts),
-        "--request-rate", "inf",
+        "--request-rate", str(cfg.get("request_rate", "inf")),
         "--seed", str(cfg.get("seed", 1234)),
         "--percentile-metrics", cfg.get("percentile_metrics", "ttft,tpot,itl,e2el"),
         "--metric-percentiles", cfg.get("metric_percentiles", "50,90,99"),
@@ -45,6 +43,26 @@ def _bench_cmd(base_url: str, model_id: str, tokenizer: str, concurrency: int,
         "--result-dir", str(result_dir),
         "--result-filename", result_name,
     ]
+    # Random dataset: emit the synthetic-length controls. Any other dataset
+    # (sharegpt, spec_bench, hf, ...): emit --dataset-path and the optional HF
+    # subset/split instead -- the random-* flags are meaningless there and vLLM
+    # rejects some of them. This is what lets the MTP-truth / acceptance runs
+    # use realistic text instead of random tokens.
+    if dataset == "random":
+        cmd += [
+            "--random-input-len", str(cfg["random_input_len"]),
+            "--random-output-len", str(cfg["random_output_len"]),
+            "--random-range-ratio", str(cfg.get("random_range_ratio", 0.0)),
+        ]
+        if cfg.get("random_prefix_len"):          # shared-prefix (warm/opencode)
+            cmd += ["--random-prefix-len", str(cfg["random_prefix_len"])]
+    else:
+        if cfg.get("dataset_path"):
+            cmd += ["--dataset-path", str(cfg["dataset_path"])]
+        for key, flag in (("hf_subset", "--hf-subset"), ("hf_split", "--hf-split"),
+                          ("hf_name", "--hf-name")):
+            if cfg.get(key):
+                cmd += [flag, str(cfg[key])]
     if cfg.get("ignore_eos", True):
         cmd.append("--ignore-eos")
     return cmd
@@ -100,6 +118,42 @@ def parse_transport_proof(log_path: str | Path) -> dict:
         "nccl_used_shm": nccl_shm,
         "nccl_version": nccl_ver,
     }
+
+
+def parse_nccl_algorithm(log_path: str | Path) -> dict:
+    """Which collective ALGORITHM/topology NCCL actually chose (Ring vs Tree vs
+    NVLS) and how many channels. On 4 cards over PCIe the algorithm and the
+    slowest link dominate, so this matters as much as 'P2P on/off'."""
+    text = Path(log_path).read_text(errors="replace") if Path(log_path).exists() else ""
+    algos = sorted(set(re.findall(r"\b(Ring|Tree|NVLS|CollnetChain|CollnetDirect|PAT)\b", text)))
+    ch = re.findall(r"(\d+)\s+coll channels", text)
+    proto = sorted(set(re.findall(r"\b(LL128|LL|Simple)\b", text)))
+    return {"algorithms": algos, "coll_channels": int(ch[-1]) if ch else None,
+            "protocols": proto}
+
+
+def parse_spec_acceptance(log_path: str | Path) -> dict:
+    """Best-effort MTP/speculative acceptance from the vLLM server log. Patterns
+    vary across vLLM versions, so try several and keep the last match. Without
+    this, MTP tok/s is not portable: the same config gives different throughput
+    at different acceptance rates."""
+    text = Path(log_path).read_text(errors="replace") if Path(log_path).exists() else ""
+    out: dict = {}
+    pats = {
+        "draft_acceptance_rate": r"(?:draft[_ ]acceptance[_ ]rate|acceptance rate)[\"':= ]+([0-9.]+)",
+        "mean_acceptance_length": r"(?:mean acceptance length|acceptance[_ ]length)[\"':= ]+([0-9.]+)",
+        "num_accepted_tokens": r"num[_ ]accepted[_ ]tokens[\"':= ]+([0-9.]+)",
+        "num_draft_tokens": r"num[_ ]draft[_ ]tokens[\"':= ]+([0-9.]+)",
+    }
+    for key, pat in pats.items():
+        m = re.findall(pat, text, re.I)
+        if m:
+            out[key] = float(m[-1])
+    if "num_accepted_tokens" in out and out.get("num_draft_tokens"):
+        out.setdefault("draft_acceptance_rate",
+                       round(out["num_accepted_tokens"] / out["num_draft_tokens"], 4))
+    out["found"] = bool(out)
+    return out
 
 
 def warmup(base_url: str, scenario: Scenario, cfg: dict[str, Any],

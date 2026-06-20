@@ -1,0 +1,4 @@
+vm.nr_hugepages = 0
+kernel.numa_balancing = 0
+vm.zone_reclaim_mode = 0
+kernel.yama.ptrace_scope = 1

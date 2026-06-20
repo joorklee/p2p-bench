@@ -61,6 +61,13 @@ def build_scenarios(
             sid = f"{arm_name}-c{c}"
             env = {**base_env, **{k: str(v) for k, v in arm.get("env", {}).items()}}
             flags = base_flags + list(arm.get("extra_flags", []))
+            # Per-arm server-arg overrides. Merged OVER constant_args so an arm
+            # can change e.g. tensor-parallel-size / pipeline-parallel-size /
+            # max-num-batched-tokens / speculative-config. An empty-string value
+            # means "omit this arg entirely" (e.g. speculative-config: "" to turn
+            # MTP off for the baseline arm).
+            merged_args = {**base_args, **arm.get("extra_args", {})}
+            args = {k: v for k, v in merged_args.items() if v != ""}
             scenarios.append(
                 Scenario(
                     id=sid,
@@ -68,7 +75,7 @@ def build_scenarios(
                     concurrency=c,
                     env=env,
                     flags=flags,
-                    args=base_args,
+                    args=args,
                     model_path=model["path"],
                     port=int(model["port"]),
                     log_path=str(logs_dir / f"{sid}.log"),

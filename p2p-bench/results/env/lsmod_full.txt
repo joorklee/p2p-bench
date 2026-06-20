@@ -1,0 +1,131 @@
+Module                  Size  Used by
+wireguard             110592  0
+curve25519_x86_64      36864  1 wireguard
+libcurve25519_generic    45056  2 curve25519_x86_64,wireguard
+ip6_udp_tunnel         16384  1 wireguard
+udp_tunnel             32768  1 wireguard
+nf_log_syslog          20480  2
+nft_log                12288  1
+nft_ct                 24576  4
+veth                   40960  0
+xt_conntrack           12288  0
+nf_conntrack_netlink    57344  0
+xfrm_user              61440  1
+xfrm_algo              16384  1 xfrm_user
+xt_addrtype            12288  2
+nf_tables             360448  52 nft_ct,nft_log
+overlay               212992  0
+iptable_raw            12288  1
+xt_CT                  12288  1
+xt_MASQUERADE          16384  3
+iptable_filter         12288  0
+iptable_nat            12288  1
+xt_nat                 12288  3
+nf_nat                 61440  3 xt_nat,iptable_nat,xt_MASQUERADE
+nf_conntrack          180224  7 xt_conntrack,nf_nat,nft_ct,xt_nat,nf_conntrack_netlink,xt_CT,xt_MASQUERADE
+nf_defrag_ipv6         24576  1 nf_conntrack
+nf_defrag_ipv4         12288  1 nf_conntrack
+xt_tcpudp              16384  2
+nvidia_uvm           1949696  0
+bonding               245760  0
+tls                   147456  1 bonding
+softdog                12288  2
+sunrpc                786432  1
+binfmt_misc            24576  1
+nfnetlink_log          24576  1
+nvidia_drm            135168  0
+nvidia_modeset       1761280  1 nvidia_drm
+amd_atl                61440  1
+intel_rapl_msr         20480  0
+intel_rapl_common      49152  1 intel_rapl_msr
+nvidia              14831616  2 nvidia_uvm,nvidia_modeset
+sch_fq_codel           24576  2
+joydev                 28672  0
+input_leds             12288  0
+edac_mce_amd           28672  0
+nouveau              2945024  0
+snd_hda_codec_nvhdmi    16384  4
+snd_hda_codec_hdmi     57344  1 snd_hda_codec_nvhdmi
+kvm_amd               229376  0
+mxm_wmi                12288  1 nouveau
+snd_hda_intel          61440  0
+gpu_sched              65536  1 nouveau
+snd_hda_codec         196608  3 snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec_nvhdmi
+drm_gpuvm              49152  1 nouveau
+snd_hda_core          131072  3 snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec
+drm_ttm_helper         16384  3 nvidia_drm,nouveau
+snd_intel_dspcfg       45056  1 snd_hda_intel
+ttm                   118784  2 drm_ttm_helper,nouveau
+snd_intel_sdw_acpi     16384  1 snd_intel_dspcfg
+drm_exec               12288  2 drm_gpuvm,nouveau
+kvm                  1376256  1 kvm_amd
+snd_hwdep              24576  1 snd_hda_codec
+snd_pcm               188416  4 snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec,snd_hda_core
+drm_display_helper    274432  1 nouveau
+irqbypass              16384  1 kvm
+snd_timer              53248  1 snd_pcm
+polyval_clmulni        12288  0
+cec                    94208  1 drm_display_helper
+ghash_clmulni_intel    12288  0
+jc42                   12288  0
+aesni_intel            94208  0
+snd                   135168  6 snd_hda_codec_hdmi,snd_hwdep,snd_hda_intel,snd_hda_codec,snd_timer,snd_pcm
+rc_core                73728  1 cec
+eeepc_wmi              12288  0
+rapl                   20480  0
+wmi_bmof               12288  0
+ccp                   151552  1 kvm_amd
+pcspkr                 12288  0
+ee1004                 16384  0
+i2c_algo_bit           16384  1 nouveau
+k10temp                16384  0
+soundcore              16384  1 snd
+mac_hid                12288  0
+zfs                  6250496  6
+spl                   151552  1 zfs
+msr                    12288  0
+vhost_net              36864  0
+vhost                  69632  1 vhost_net
+vhost_iotlb            16384  1 vhost
+tap                    28672  1 vhost_net
+efi_pstore             12288  0
+nfnetlink              20480  6 nf_conntrack_netlink,nf_tables,nfnetlink_log
+dmi_sysfs              20480  0
+ip_tables              32768  3 iptable_filter,iptable_raw,iptable_nat
+x_tables               57344  10 xt_conntrack,iptable_filter,xt_tcpudp,xt_addrtype,xt_nat,xt_CT,iptable_raw,ip_tables,iptable_nat,xt_MASQUERADE
+autofs4                57344  2
+xfs                  2658304  2
+btrfs                2027520  0
+blake2b_generic        24576  0
+xor                    24576  1 btrfs
+raid6_pq              122880  1 btrfs
+hid_generic            12288  0
+usbmouse               12288  0
+usbkbd                 12288  0
+usbhid                 69632  0
+uas                    28672  0
+hid                   258048  2 usbhid,hid_generic
+usb_storage            86016  1 uas
+dm_thin_pool           94208  2
+dm_persistent_data    114688  1 dm_thin_pool
+dm_bio_prison          24576  1 dm_thin_pool
+dm_bufio               53248  1 dm_persistent_data
+mfd_aaeon              12288  0
+asus_wmi               98304  2 eeepc_wmi,mfd_aaeon
+video                  77824  3 asus_wmi,nouveau,nvidia_modeset
+xhci_pci               24576  0
+sparse_keymap          12288  1 asus_wmi
+platform_profile       20480  1 asus_wmi
+nvme                   61440  5
+r8169                 135168  0
+ahci                   49152  1
+xhci_hcd              389120  1 xhci_pci
+nvme_core             229376  6 nvme
+i2c_piix4              32768  0
+realtek                49152  1
+libahci                53248  1 ahci
+i2c_smbus              20480  1 i2c_piix4
+nvme_keyring           20480  1 nvme_core
+nvme_auth              28672  1 nvme_core
+wmi                    28672  6 video,asus_wmi,wmi_bmof,mfd_aaeon,mxm_wmi,nouveau
+

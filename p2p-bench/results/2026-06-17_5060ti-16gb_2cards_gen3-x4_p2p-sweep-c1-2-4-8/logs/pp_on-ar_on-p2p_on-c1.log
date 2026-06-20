@@ -1,0 +1,96 @@
+(APIServer pid=3028313) INFO 06-17 20:46:38 [api_utils.py:339] 
+(APIServer pid=3028313) INFO 06-17 20:46:38 [api_utils.py:339]        █     █     █▄   ▄█
+(APIServer pid=3028313) INFO 06-17 20:46:38 [api_utils.py:339]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.23.0
+(APIServer pid=3028313) INFO 06-17 20:46:38 [api_utils.py:339]   █▄█▀ █     █     █     █  model   /data/models/qwen3.6-27b-text-nvfp4-mtp
+(APIServer pid=3028313) INFO 06-17 20:46:38 [api_utils.py:339]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=3028313) INFO 06-17 20:46:38 [api_utils.py:339] 
+(APIServer pid=3028313) INFO 06-17 20:46:38 [api_utils.py:273] non-default args: {'model_tag': '/data/models/qwen3.6-27b-text-nvfp4-mtp', 'enable_auto_tool_choice': True, 'tool_call_parser': 'qwen3_coder', 'port': 8103, 'model': '/data/models/qwen3.6-27b-text-nvfp4-mtp', 'max_model_len': 65535, 'quantization': 'modelopt', 'served_model_name': ['pp_on-ar_on-p2p_on-c1'], 'attention_backend': 'TRITON_ATTN', 'reasoning_parser': 'qwen3', 'pipeline_parallel_size': 2, 'gpu_memory_utilization': 0.86, 'kv_cache_dtype': 'fp8', 'language_model_only': True, 'max_num_batched_tokens': 16384, 'max_num_seqs': 1, 'speculative_config': {'method': 'mtp', 'num_speculative_tokens': 3}}
+(APIServer pid=3028313) INFO 06-17 20:46:38 [model.py:611] Resolved architecture: Qwen3_5ForConditionalGeneration
+(APIServer pid=3028313) INFO 06-17 20:46:38 [model.py:1745] Using max model len 65535
+(APIServer pid=3028313) INFO 06-17 20:46:38 [cache.py:269] Using fp8 data type to store kv cache. It reduces the GPU memory footprint and boosts the performance. Meanwhile, it may cause accuracy drop without a proper scaling factor
+(APIServer pid=3028313) INFO 06-17 20:46:38 [model.py:611] Resolved architecture: Qwen3_5MTP
+(APIServer pid=3028313) INFO 06-17 20:46:38 [model.py:1745] Using max model len 262144
+(APIServer pid=3028313) WARNING 06-17 20:46:38 [speculative.py:722] Enabling num_speculative_tokens > 1 will run multiple times of forward on same MTP layer,which may result in lower acceptance rate
+(APIServer pid=3028313) INFO 06-17 20:46:38 [speculative.py:885] Overriding draft model max model len from 262144 to 65535
+(APIServer pid=3028313) Traceback (most recent call last):
+(APIServer pid=3028313)   File "/root/.local/bin/vllm", line 6, in <module>
+(APIServer pid=3028313)     sys.exit(main())
+(APIServer pid=3028313)              ~~~~^^
+(APIServer pid=3028313)   File "/root/.local/share/pipx/venvs/vllm/lib/python3.13/site-packages/vllm/entrypoints/cli/main.py", line 95, in main
+(APIServer pid=3028313)     args.dispatch_function(args)
+(APIServer pid=3028313)     ~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+(APIServer pid=3028313)   File "/root/.local/share/pipx/venvs/vllm/lib/python3.13/site-packages/vllm/entrypoints/cli/serve.py", line 148, in cmd
+(APIServer pid=3028313)     uvloop.run(run_server(args))
+(APIServer pid=3028313)     ~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+(APIServer pid=3028313)   File "/root/.local/share/pipx/venvs/vllm/lib/python3.13/site-packages/uvloop/__init__.py", line 96, in run
+(APIServer pid=3028313)     return __asyncio.run(
+(APIServer pid=3028313)            ~~~~~~~~~~~~~^
+(APIServer pid=3028313)         wrapper(),
+(APIServer pid=3028313)         ^^^^^^^^^^
+(APIServer pid=3028313)     ...<2 lines>...
+(APIServer pid=3028313)         **run_kwargs
+(APIServer pid=3028313)         ^^^^^^^^^^^^
+(APIServer pid=3028313)     )
+(APIServer pid=3028313)     ^
+(APIServer pid=3028313)   File "/usr/lib/python3.13/asyncio/runners.py", line 195, in run
+(APIServer pid=3028313)     return runner.run(main)
+(APIServer pid=3028313)            ~~~~~~~~~~^^^^^^
+(APIServer pid=3028313)   File "/usr/lib/python3.13/asyncio/runners.py", line 118, in run
+(APIServer pid=3028313)     return self._loop.run_until_complete(task)
+(APIServer pid=3028313)            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+(APIServer pid=3028313)   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+(APIServer pid=3028313)   File "/root/.local/share/pipx/venvs/vllm/lib/python3.13/site-packages/uvloop/__init__.py", line 48, in wrapper
+(APIServer pid=3028313)     return await main
+(APIServer pid=3028313)            ^^^^^^^^^^
+(APIServer pid=3028313)   File "/root/.local/share/pipx/venvs/vllm/lib/python3.13/site-packages/vllm/entrypoints/openai/api_server.py", line 665, in run_server
+(APIServer pid=3028313)     await run_server_worker(listen_address, sock, args, **uvicorn_kwargs)
+(APIServer pid=3028313)   File "/root/.local/share/pipx/venvs/vllm/lib/python3.13/site-packages/vllm/entrypoints/openai/api_server.py", line 679, in run_server_worker
+(APIServer pid=3028313)     async with build_async_engine_client(
+(APIServer pid=3028313)                ~~~~~~~~~~~~~~~~~~~~~~~~~^
+(APIServer pid=3028313)         args,
+(APIServer pid=3028313)         ^^^^^
+(APIServer pid=3028313)         client_config=client_config,
+(APIServer pid=3028313)         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=3028313)     ) as engine_client:
+(APIServer pid=3028313)     ^
+(APIServer pid=3028313)   File "/usr/lib/python3.13/contextlib.py", line 214, in __aenter__
+(APIServer pid=3028313)     return await anext(self.gen)
+(APIServer pid=3028313)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=3028313)   File "/root/.local/share/pipx/venvs/vllm/lib/python3.13/site-packages/vllm/entrypoints/openai/api_server.py", line 99, in build_async_engine_client
+(APIServer pid=3028313)     async with build_async_engine_client_from_engine_args(
+(APIServer pid=3028313)                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+(APIServer pid=3028313)         engine_args,
+(APIServer pid=3028313)         ^^^^^^^^^^^^
+(APIServer pid=3028313)         usage_context=usage_context,
+(APIServer pid=3028313)         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=3028313)         client_config=client_config,
+(APIServer pid=3028313)         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=3028313)     ) as engine:
+(APIServer pid=3028313)     ^
+(APIServer pid=3028313)   File "/usr/lib/python3.13/contextlib.py", line 214, in __aenter__
+(APIServer pid=3028313)     return await anext(self.gen)
+(APIServer pid=3028313)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=3028313)   File "/root/.local/share/pipx/venvs/vllm/lib/python3.13/site-packages/vllm/entrypoints/openai/api_server.py", line 123, in build_async_engine_client_from_engine_args
+(APIServer pid=3028313)     vllm_config = engine_args.create_engine_config(usage_context=usage_context)
+(APIServer pid=3028313)   File "/root/.local/share/pipx/venvs/vllm/lib/python3.13/site-packages/vllm/engine/arg_utils.py", line 2012, in create_engine_config
+(APIServer pid=3028313)     speculative_config = self.create_speculative_config(
+(APIServer pid=3028313)         target_model_config=model_config,
+(APIServer pid=3028313)         target_parallel_config=parallel_config,
+(APIServer pid=3028313)     )
+(APIServer pid=3028313)   File "/root/.local/share/pipx/venvs/vllm/lib/python3.13/site-packages/vllm/engine/arg_utils.py", line 1700, in create_speculative_config
+(APIServer pid=3028313)     return SpeculativeConfig(**self.speculative_config)
+(APIServer pid=3028313)   File "/root/.local/share/pipx/venvs/vllm/lib/python3.13/site-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+(APIServer pid=3028313)     s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+(APIServer pid=3028313)     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=3028313)   File "/root/.local/share/pipx/venvs/vllm/lib/python3.13/site-packages/vllm/config/speculative.py", line 1014, in _verify_args
+(APIServer pid=3028313)     self.draft_model_config.verify_with_parallel_config(
+(APIServer pid=3028313)     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+(APIServer pid=3028313)         self.draft_parallel_config
+(APIServer pid=3028313)         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=3028313)     )
+(APIServer pid=3028313)     ^
+(APIServer pid=3028313)   File "/root/.local/share/pipx/venvs/vllm/lib/python3.13/site-packages/vllm/config/model.py", line 1204, in verify_with_parallel_config
+(APIServer pid=3028313)     raise NotImplementedError(
+(APIServer pid=3028313)     ...<2 lines>...
+(APIServer pid=3028313)     )
+(APIServer pid=3028313) NotImplementedError: Pipeline parallelism is not supported for this model. Supported models implement the `SupportsPP` interface.

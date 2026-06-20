@@ -1,0 +1,291 @@
+healthCheckTimeout: 1200
+logLevel: info
+models:
+  tp_on-ar_on-p2p_on-c1:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name tp_on-ar_on-p2p_on-c1 --port 8103 --max-num-seqs 1 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --tensor-parallel-size 2 --pipeline-parallel-size 1 --language-model-only --enable-auto-tool-choice 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/tp_on-ar_on-p2p_on-c1.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  tp_on-ar_on-p2p_on-c2:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name tp_on-ar_on-p2p_on-c2 --port 8103 --max-num-seqs 2 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --tensor-parallel-size 2 --pipeline-parallel-size 1 --language-model-only --enable-auto-tool-choice 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/tp_on-ar_on-p2p_on-c2.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  tp_on-ar_on-p2p_on-c4:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name tp_on-ar_on-p2p_on-c4 --port 8103 --max-num-seqs 4 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --tensor-parallel-size 2 --pipeline-parallel-size 1 --language-model-only --enable-auto-tool-choice 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/tp_on-ar_on-p2p_on-c4.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  tp_on-ar_on-p2p_on-c8:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name tp_on-ar_on-p2p_on-c8 --port 8103 --max-num-seqs 8 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --tensor-parallel-size 2 --pipeline-parallel-size 1 --language-model-only --enable-auto-tool-choice 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/tp_on-ar_on-p2p_on-c8.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  tp_on-ar_off-p2p_off-c1:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name tp_on-ar_off-p2p_off-c1 --port 8103 --max-num-seqs 1 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --tensor-parallel-size 2 --pipeline-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/tp_on-ar_off-p2p_off-c1.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=1
+    ttl: 0
+  tp_on-ar_off-p2p_off-c2:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name tp_on-ar_off-p2p_off-c2 --port 8103 --max-num-seqs 2 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --tensor-parallel-size 2 --pipeline-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/tp_on-ar_off-p2p_off-c2.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=1
+    ttl: 0
+  tp_on-ar_off-p2p_off-c4:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name tp_on-ar_off-p2p_off-c4 --port 8103 --max-num-seqs 4 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --tensor-parallel-size 2 --pipeline-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/tp_on-ar_off-p2p_off-c4.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=1
+    ttl: 0
+  tp_on-ar_off-p2p_off-c8:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name tp_on-ar_off-p2p_off-c8 --port 8103 --max-num-seqs 8 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --tensor-parallel-size 2 --pipeline-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/tp_on-ar_off-p2p_off-c8.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=1
+    ttl: 0
+  tp_on-ar_off-p2p_on-c1:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name tp_on-ar_off-p2p_on-c1 --port 8103 --max-num-seqs 1 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --tensor-parallel-size 2 --pipeline-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/tp_on-ar_off-p2p_on-c1.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  tp_on-ar_off-p2p_on-c2:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name tp_on-ar_off-p2p_on-c2 --port 8103 --max-num-seqs 2 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --tensor-parallel-size 2 --pipeline-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/tp_on-ar_off-p2p_on-c2.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  tp_on-ar_off-p2p_on-c4:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name tp_on-ar_off-p2p_on-c4 --port 8103 --max-num-seqs 4 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --tensor-parallel-size 2 --pipeline-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/tp_on-ar_off-p2p_on-c4.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  tp_on-ar_off-p2p_on-c8:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name tp_on-ar_off-p2p_on-c8 --port 8103 --max-num-seqs 8 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --tensor-parallel-size 2 --pipeline-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/tp_on-ar_off-p2p_on-c8.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  pp_on-ar_on-p2p_on-c1:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name pp_on-ar_on-p2p_on-c1 --port 8103 --max-num-seqs 1 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --pipeline-parallel-size 2 --tensor-parallel-size 1 --language-model-only --enable-auto-tool-choice 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/pp_on-ar_on-p2p_on-c1.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  pp_on-ar_on-p2p_on-c2:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name pp_on-ar_on-p2p_on-c2 --port 8103 --max-num-seqs 2 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --pipeline-parallel-size 2 --tensor-parallel-size 1 --language-model-only --enable-auto-tool-choice 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/pp_on-ar_on-p2p_on-c2.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  pp_on-ar_on-p2p_on-c4:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name pp_on-ar_on-p2p_on-c4 --port 8103 --max-num-seqs 4 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --pipeline-parallel-size 2 --tensor-parallel-size 1 --language-model-only --enable-auto-tool-choice 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/pp_on-ar_on-p2p_on-c4.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  pp_on-ar_on-p2p_on-c8:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name pp_on-ar_on-p2p_on-c8 --port 8103 --max-num-seqs 8 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --pipeline-parallel-size 2 --tensor-parallel-size 1 --language-model-only --enable-auto-tool-choice 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/pp_on-ar_on-p2p_on-c8.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  pp_on-ar_off-p2p_off-c1:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name pp_on-ar_off-p2p_off-c1 --port 8103 --max-num-seqs 1 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --pipeline-parallel-size 2 --tensor-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/pp_on-ar_off-p2p_off-c1.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=1
+    ttl: 0
+  pp_on-ar_off-p2p_off-c2:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name pp_on-ar_off-p2p_off-c2 --port 8103 --max-num-seqs 2 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --pipeline-parallel-size 2 --tensor-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/pp_on-ar_off-p2p_off-c2.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=1
+    ttl: 0
+  pp_on-ar_off-p2p_off-c4:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name pp_on-ar_off-p2p_off-c4 --port 8103 --max-num-seqs 4 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --pipeline-parallel-size 2 --tensor-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/pp_on-ar_off-p2p_off-c4.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=1
+    ttl: 0
+  pp_on-ar_off-p2p_off-c8:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name pp_on-ar_off-p2p_off-c8 --port 8103 --max-num-seqs 8 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --pipeline-parallel-size 2 --tensor-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/pp_on-ar_off-p2p_off-c8.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=1
+    ttl: 0
+  pp_on-ar_off-p2p_on-c1:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name pp_on-ar_off-p2p_on-c1 --port 8103 --max-num-seqs 1 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --pipeline-parallel-size 2 --tensor-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/pp_on-ar_off-p2p_on-c1.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  pp_on-ar_off-p2p_on-c2:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name pp_on-ar_off-p2p_on-c2 --port 8103 --max-num-seqs 2 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --pipeline-parallel-size 2 --tensor-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/pp_on-ar_off-p2p_on-c2.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  pp_on-ar_off-p2p_on-c4:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name pp_on-ar_off-p2p_on-c4 --port 8103 --max-num-seqs 4 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --pipeline-parallel-size 2 --tensor-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/pp_on-ar_off-p2p_on-c4.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0
+  pp_on-ar_off-p2p_on-c8:
+    cmd: bash -c 'vllm serve /data/models/qwen3.6-27b-text-nvfp4-mtp --served-model-name pp_on-ar_off-p2p_on-c8 --port 8103 --max-num-seqs 8 --quantization modelopt --max-model-len 65535 --kv-cache-dtype fp8 --max-num-batched-tokens 16384 --gpu-memory-utilization 0.86 --speculative-config '"'"'{"method":"mtp","num_speculative_tokens":3}'"'"' --reasoning-parser qwen3 --tool-call-parser qwen3_coder --attention-backend TRITON_ATTN --pipeline-parallel-size 2 --tensor-parallel-size 1 --language-model-only --enable-auto-tool-choice --disable-custom-all-reduce 2>&1 | tee results/2026-06-17_5060ti-16gb_2cards_gen3-x4_p2p-sweep-c1-2-4-8/logs/pp_on-ar_off-p2p_on-c8.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2
+    - VLLM_CACHE_ROOT=/data/vllm
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_DEBUG=INFO
+    - VLLM_LOGGING_LEVEL=INFO
+    - NCCL_P2P_DISABLE=0
+    ttl: 0

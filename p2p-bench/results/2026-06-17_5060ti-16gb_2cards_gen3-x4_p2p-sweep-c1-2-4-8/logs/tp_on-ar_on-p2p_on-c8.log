@@ -1,0 +1,400 @@
+(APIServer pid=2960323) INFO 06-17 20:08:23 [api_utils.py:339] 
+(APIServer pid=2960323) INFO 06-17 20:08:23 [api_utils.py:339]        █     █     █▄   ▄█
+(APIServer pid=2960323) INFO 06-17 20:08:23 [api_utils.py:339]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.23.0
+(APIServer pid=2960323) INFO 06-17 20:08:23 [api_utils.py:339]   █▄█▀ █     █     █     █  model   /data/models/qwen3.6-27b-text-nvfp4-mtp
+(APIServer pid=2960323) INFO 06-17 20:08:23 [api_utils.py:339]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=2960323) INFO 06-17 20:08:23 [api_utils.py:339] 
+(APIServer pid=2960323) INFO 06-17 20:08:23 [api_utils.py:273] non-default args: {'model_tag': '/data/models/qwen3.6-27b-text-nvfp4-mtp', 'enable_auto_tool_choice': True, 'tool_call_parser': 'qwen3_coder', 'port': 8103, 'model': '/data/models/qwen3.6-27b-text-nvfp4-mtp', 'max_model_len': 65535, 'quantization': 'modelopt', 'served_model_name': ['tp_on-ar_on-p2p_on-c8'], 'attention_backend': 'TRITON_ATTN', 'reasoning_parser': 'qwen3', 'tensor_parallel_size': 2, 'gpu_memory_utilization': 0.86, 'kv_cache_dtype': 'fp8', 'language_model_only': True, 'max_num_batched_tokens': 16384, 'max_num_seqs': 8, 'speculative_config': {'method': 'mtp', 'num_speculative_tokens': 3}}
+(APIServer pid=2960323) INFO 06-17 20:08:23 [model.py:611] Resolved architecture: Qwen3_5ForConditionalGeneration
+(APIServer pid=2960323) INFO 06-17 20:08:23 [model.py:1745] Using max model len 65535
+(APIServer pid=2960323) INFO 06-17 20:08:23 [cache.py:269] Using fp8 data type to store kv cache. It reduces the GPU memory footprint and boosts the performance. Meanwhile, it may cause accuracy drop without a proper scaling factor
+(APIServer pid=2960323) INFO 06-17 20:08:23 [model.py:611] Resolved architecture: Qwen3_5MTP
+(APIServer pid=2960323) INFO 06-17 20:08:23 [model.py:1745] Using max model len 262144
+(APIServer pid=2960323) WARNING 06-17 20:08:23 [speculative.py:722] Enabling num_speculative_tokens > 1 will run multiple times of forward on same MTP layer,which may result in lower acceptance rate
+(APIServer pid=2960323) INFO 06-17 20:08:23 [speculative.py:885] Overriding draft model max model len from 262144 to 65535
+(APIServer pid=2960323) INFO 06-17 20:08:23 [scheduler.py:239] Chunked prefill is enabled with max_num_batched_tokens=16384.
+(APIServer pid=2960323) WARNING 06-17 20:08:23 [modelopt.py:1022] Detected ModelOpt NVFP4 checkpoint (quant_algo=NVFP4). Please note that the format is experimental and could change in future.
+(APIServer pid=2960323) INFO 06-17 20:08:23 [vllm.py:999] Asynchronous scheduling is enabled.
+(APIServer pid=2960323) INFO 06-17 20:08:23 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+(APIServer pid=2960323) INFO 06-17 20:08:25 [compilation.py:321] Enabled custom fusions: act_quant
+(APIServer pid=2960323) [transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+(APIServer pid=2960323) INFO 06-17 20:08:26 [registry.py:134] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+(EngineCore pid=2960731) INFO 06-17 20:08:33 [core.py:113] Initializing a V1 LLM engine (v0.23.0) with config: model='/data/models/qwen3.6-27b-text-nvfp4-mtp', speculative_config=SpeculativeConfig(method='mtp', model='/data/models/qwen3.6-27b-text-nvfp4-mtp', num_spec_tokens=3), tokenizer='/data/models/qwen3.6-27b-text-nvfp4-mtp', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=65535, download_dir=None, load_format=auto, tensor_parallel_size=2, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=modelopt_fp4, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=fp8, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='qwen3', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=tp_on-ar_on-p2p_on-c8, enable_prefix_caching=False, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::qwen_gdn_attention_core', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [16384], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'size_asserts': False, 'alignment_asserts': False, 'scalar_asserts': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False}, 'max_cudagraph_capture_size': 64, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native']), enable_flashinfer_autotune=True, moe_backend='auto', linear_backend='auto')
+(EngineCore pid=2960731) WARNING 06-17 20:08:33 [multiproc_executor.py:1054] Reducing Torch parallelism from 12 threads to 1 to avoid unnecessary CPU contention. Set OMP_NUM_THREADS in the external environment to tune this value as needed.
+(EngineCore pid=2960731) INFO 06-17 20:08:33 [multiproc_executor.py:140] DP group leader: node_rank=0, node_rank_within_dp=0, master_addr=127.0.0.1, mq_connect_ip=192.168.0.2 (local), world_size=2, local_world_size=2
+[transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+[transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+INFO 06-17 20:08:40 [registry.py:134] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+INFO 06-17 20:08:40 [registry.py:134] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+(Worker pid=2960938) INFO 06-17 20:08:40 [parallel_state.py:1568] world_size=2 rank=0 local_rank=0 distributed_init_method=tcp://127.0.0.1:38917 backend=nccl
+(Worker pid=2960939) INFO 06-17 20:08:40 [parallel_state.py:1568] world_size=2 rank=1 local_rank=1 distributed_init_method=tcp://127.0.0.1:38917 backend=nccl
+(Worker pid=2960938) INFO 06-17 20:08:41 [pynccl.py:113] vLLM is using nccl==2.28.9
+(Worker pid=2960938) WARNING 06-17 20:08:41 [symm_mem.py:66] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
+(Worker pid=2960939) WARNING 06-17 20:08:41 [symm_mem.py:66] SymmMemCommunicator: Device capability 12.0 not supported, communicator is not available.
+(Worker pid=2960938) INFO 06-17 20:08:41 [cuda_communicator.py:237] Using ['CUSTOM', 'PYNCCL'] all-reduce backends (in dispatch order) for group 'tp:0' out of potential backends: ['NCCL_SYMM_MEM', 'QUICK_REDUCE', 'FLASHINFER', 'CUSTOM', 'SYMM_MEM', 'PYNCCL'].
+(Worker pid=2960938) INFO 06-17 20:08:41 [parallel_state.py:1903] rank 0 in world size 2 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+(Worker pid=2960939) WARNING 06-17 20:08:41 [__init__.py:204] min_p and logit_bias parameters won't work with speculative decoding.
+(Worker pid=2960938) INFO 06-17 20:08:41 [topk_topp_sampler.py:55] Using FlashInfer for top-p & top-k sampling.
+(Worker pid=2960938) WARNING 06-17 20:08:41 [__init__.py:204] min_p and logit_bias parameters won't work with speculative decoding.
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:41 [gpu_model_runner.py:5092] Starting to load model /data/models/qwen3.6-27b-text-nvfp4-mtp...
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:42 [cuda.py:433] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:42 [mm_encoder_attention.py:372] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:42 [__init__.py:962] Using FlashInferCutlassNvFp4LinearKernel for NVFP4 GEMM
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:42 [qwen_gdn_linear_attn.py:228] Using Triton/FLA GDN prefill kernel (requested=auto, head_k_dim=128).
+(Worker_TP1 pid=2960939) INFO 06-17 20:08:42 [cuda.py:318] Using AttentionBackendEnum.TRITON_ATTN backend.
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:42 [cuda.py:318] Using AttentionBackendEnum.TRITON_ATTN backend.
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:42 [weight_utils.py:922] Filesystem type for checkpoints: XFS. Checkpoint size: 18.29 GiB. Available RAM: 54.97 GiB.
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:42 [weight_utils.py:945] Auto-prefetch is disabled because the filesystem (XFS) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+(Worker_TP0 pid=2960938) Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+(Worker_TP0 pid=2960938) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:03<00:00,  3.63s/it]
+(Worker_TP0 pid=2960938) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:03<00:00,  3.63s/it]
+(Worker_TP0 pid=2960938) 
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:46 [default_loader.py:397] Loading weights took 3.91 seconds
+(Worker_TP0 pid=2960938) WARNING 06-17 20:08:46 [kv_cache.py:134] Checkpoint does not provide a q scaling factor. Setting it to k_scale. This only matters for FP8 Attention backends (flash-attn or flashinfer).
+(Worker_TP0 pid=2960938) WARNING 06-17 20:08:46 [kv_cache.py:148] Using KV cache scaling factor 1.0 for fp8_e4m3. If this is unintended, verify that k/v_scale scaling factors are properly set in the checkpoint.
+(Worker_TP0 pid=2960938) WARNING 06-17 20:08:46 [kv_cache.py:187] Using uncalibrated q_scale 1.0 and/or prob_scale 1.0 with fp8 attention. This may cause accuracy issues. Please make sure q/prob scaling factors are available in the fp8 checkpoint.
+(Worker_TP1 pid=2960939) INFO 06-17 20:08:46 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:47 [gpu_model_runner.py:5116] Loading drafter model...
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:47 [vllm.py:999] Asynchronous scheduling is enabled.
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:47 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:47 [compilation.py:321] Enabled custom fusions: act_quant
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:47 [cuda.py:378] Using FLASHINFER attention backend out of potential backends: ['FLASHINFER', 'TRITON_ATTN'].
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:47 [weight_utils.py:922] Filesystem type for checkpoints: XFS. Checkpoint size: 18.29 GiB. Available RAM: 54.80 GiB.
+(Worker_TP0 pid=2960938) Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+(Worker_TP0 pid=2960938) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  1.06it/s]
+(Worker_TP0 pid=2960938) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  1.06it/s]
+(Worker_TP0 pid=2960938) 
+(Worker_TP1 pid=2960939) INFO 06-17 20:08:48 [llm_base_proposer.py:1347] Detected MTP model. Sharing target model embedding weights with the draft model.
+(Worker_TP1 pid=2960939) INFO 06-17 20:08:48 [llm_base_proposer.py:1403] Detected MTP model. Sharing target model lm_head weights with the draft model.
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:48 [default_loader.py:397] Loading weights took 1.03 seconds
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:48 [llm_base_proposer.py:1347] Detected MTP model. Sharing target model embedding weights with the draft model.
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:48 [llm_base_proposer.py:1403] Detected MTP model. Sharing target model lm_head weights with the draft model.
+(Worker_TP1 pid=2960939) INFO 06-17 20:08:48 [interface.py:670] Setting attention block size to 1600 tokens to ensure that attention page size is >= mamba page size.
+(Worker_TP1 pid=2960939) INFO 06-17 20:08:48 [interface.py:694] Padding mamba page size by 0.25% to ensure that mamba page size and attention page size are exactly equal.
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:48 [gpu_model_runner.py:5187] Model loading took 9.43 GiB memory and 5.845817 seconds
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:48 [interface.py:670] Setting attention block size to 1600 tokens to ensure that attention page size is >= mamba page size.
+(Worker_TP0 pid=2960938) INFO 06-17 20:08:48 [interface.py:694] Padding mamba page size by 0.25% to ensure that mamba page size and attention page size are exactly equal.
+(Worker_TP0 pid=2960938) INFO 06-17 20:09:04 [backends.py:1089] Using cache directory: /data/vllm/torch_compile_cache/6f8e68672b/rank_0_0/backbone for vLLM's torch.compile
+(Worker_TP0 pid=2960938) INFO 06-17 20:09:04 [backends.py:1148] Dynamo bytecode transform time: 15.49 s
+(Worker_TP0 pid=2960938) INFO 06-17 20:09:08 [backends.py:378] Cache the graph of compile range (1, 16384) for later use
+(Worker_TP0 pid=2960938) INFO 06-17 20:09:42 [backends.py:393] Compiling a graph for compile range (1, 16384) takes 36.93 s
+(EngineCore pid=2960731) INFO 06-17 20:09:49 [shm_broadcast.py:705] No available shared memory broadcast block found in 60 seconds. This typically happens when some processes are hanging or doing some time-consuming work (e.g. compilation, weight/kv cache quantization).
+(Worker_TP0 pid=2960938) INFO 06-17 20:09:57 [decorators.py:708] saved AOT compiled function to /data/vllm/torch_compile_cache/torch_aot_compile/45159777726f275581ac7c66080f0a7a89c77a5994950c24b3c22acda09233b2/rank_0_0/model
+(Worker_TP0 pid=2960938) INFO 06-17 20:09:57 [monitor.py:53] torch.compile took 69.07 s in total
+(EngineCore pid=2960731) INFO 06-17 20:10:49 [shm_broadcast.py:705] No available shared memory broadcast block found in 60 seconds. This typically happens when some processes are hanging or doing some time-consuming work (e.g. compilation, weight/kv cache quantization).
+(Worker_TP0 pid=2960938) INFO 06-17 20:11:26 [monitor.py:81] Initial profiling/warmup run took 88.56 s
+(Worker_TP0 pid=2960938) INFO 06-17 20:11:27 [backends.py:1089] Using cache directory: /data/vllm/torch_compile_cache/6f8e68672b/rank_0_0/eagle_head for vLLM's torch.compile
+(Worker_TP0 pid=2960938) INFO 06-17 20:11:27 [backends.py:1148] Dynamo bytecode transform time: 0.57 s
+(Worker_TP1 pid=2960939) [rank1]:W0617 20:11:28.506000 2960939 torch/_inductor/utils.py:1731] Not enough SMs to use max_autotune_gemm mode
+(Worker_TP0 pid=2960938) [rank0]:W0617 20:11:28.510000 2960938 torch/_inductor/utils.py:1731] Not enough SMs to use max_autotune_gemm mode
+(Worker_TP0 pid=2960938) INFO 06-17 20:11:43 [backends.py:393] Compiling a graph for compile range (1, 16384) takes 15.88 s
+(Worker_TP0 pid=2960938) INFO 06-17 20:11:43 [decorators.py:708] saved AOT compiled function to /data/vllm/torch_compile_cache/torch_aot_compile/9231100f03d47d0cd9b6a7cbf1a48c7249ecae6bda6a19778597ea982ea1cd38/rank_0_0/model
+(Worker_TP0 pid=2960938) INFO 06-17 20:11:43 [monitor.py:53] torch.compile took 16.94 s in total
+proxmox:2960938:2960938 [0] NCCL INFO ENV/Plugin: Could not find: libnccl-env.so
+proxmox:2960938:2960938 [0] NCCL INFO Bootstrap: Using vmbr5:192.168.0.2<0>
+proxmox:2960938:2960938 [0] NCCL INFO cudaDriverVersion 13020
+proxmox:2960938:2960938 [0] NCCL INFO NCCL version 2.28.9+cuda13.0
+proxmox:2960938:2960938 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so
+proxmox:2960938:2960938 [0] NCCL INFO Failed to open libmlx5.so[.1]
+proxmox:2960938:2960938 [0] NCCL INFO NET/IB : No device found.
+proxmox:2960938:2960938 [0] NCCL INFO NET/IB : Using [RO]; OOB vmbr5:192.168.0.2<0>
+proxmox:2960938:2960938 [0] NCCL INFO Failed to initialize NET plugin IB
+proxmox:2960938:2960938 [0] NCCL INFO NET/Socket : Using [0]vmbr5:192.168.0.2<0> [1]vmbr1:172.16.1.1<0> [2]vmbr2:172.16.2.1<0> [3]vmbr3:172.16.3.1<0> [4]vmbr4:172.16.4.1<0> [5]natvnet:10.10.10.1<0>
+proxmox:2960938:2960938 [0] NCCL INFO Initialized NET plugin Socket
+proxmox:2960938:2960938 [0] NCCL INFO Assigned NET plugin Socket to comm
+proxmox:2960938:2960938 [0] NCCL INFO Using network Socket
+proxmox:2960938:2960938 [0] NCCL INFO ncclCommInitRank comm 0x37037470 rank 0 nranks 2 cudaDev 0 nvmlDev 1 busId 9000 commId 0x5ad627ecc6bab247 - Init START
+proxmox:2960938:2960938 [0] NCCL INFO RAS client listening socket at 172.16.1.1<28028>
+proxmox:2960938:2960938 [0] NCCL INFO Bootstrap timings total 0.001323 (create 0.000029, send 0.000140, recv 0.000174, ring 0.000032, delay 0.000000)
+proxmox:2960938:2960938 [0] NCCL INFO NCCL_CUMEM_ENABLE set by environment to 1.
+proxmox:2960938:2960938 [0] NCCL INFO ncclTopoGetCpuAffinity: Affinity for GPU 1 is empty, ignoring. (GPU affinity =  ; CPU affinity = 0-23).
+proxmox:2960938:2960938 [0] NCCL INFO NVLS multicast support is not available on dev 0 (NVLS_NCHANNELS 0)
+proxmox:2960938:2960938 [0] NCCL INFO comm 0x37037470 rank 0 nRanks 2 nNodes 1 localRanks 2 localRank 0 MNNVL 0
+proxmox:2960938:2960938 [0] NCCL INFO Channel 00/02 : 0 1
+proxmox:2960938:2960938 [0] NCCL INFO Channel 01/02 : 0 1
+proxmox:2960938:2960938 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1
+proxmox:2960938:2960938 [0] NCCL INFO P2P Chunksize set to 131072
+proxmox:2960938:2960938 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so
+proxmox:2960938:2960938 [0] NCCL INFO Check P2P Type isAllDirectP2p 1 directMode 0 isAllCudaP2p 1
+proxmox:2960938:2961137 [0] NCCL INFO [Proxy Service] Device 0 CPU core 7
+proxmox:2960938:2961139 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 2
+proxmox:2960938:2960938 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so
+proxmox:2960938:2960938 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+proxmox:2960938:2960938 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+proxmox:2960938:2960938 [0] NCCL INFO CC Off, workFifoBytes 1048576
+proxmox:2960938:2960938 [0] NCCL INFO ncclCommInitRank comm 0x37037470 rank 0 nranks 2 cudaDev 0 nvmlDev 1 busId 9000 commId 0x5ad627ecc6bab247 - Init COMPLETE
+proxmox:2960938:2960938 [0] NCCL INFO Init timings - ncclCommInitRank: rank 0 nranks 2 total 0.23 (kernels 0.21, alloc 0.00, bootstrap 0.00, allgathers 0.00, topo 0.01, graphs 0.00, connections 0.00, rest 0.00)
+proxmox:2960938:2960938 [0] NCCL INFO Channel 00/0 : 0[1] -> 1[2] via P2P/CUMEM
+proxmox:2960938:2960938 [0] NCCL INFO Channel 01/0 : 0[1] -> 1[2] via P2P/CUMEM
+proxmox:2960938:2960938 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+proxmox:2960938:2960938 [0] NCCL INFO Comm config Blocking set to 1
+proxmox:2960938:2960938 [0] NCCL INFO Initialized NET plugin Socket
+proxmox:2960938:2960938 [0] NCCL INFO Assigned NET plugin Socket to comm
+proxmox:2960938:2960938 [0] NCCL INFO Using network Socket
+proxmox:2960938:2960938 [0] NCCL INFO ncclCommInitRankConfig comm 0x8e876240 rank 0 nranks 2 cudaDev 0 nvmlDev 1 busId 9000 commId 0x8f2c2a55145d1823 - Init START
+proxmox:2960938:2960938 [0] NCCL INFO Bootstrap timings total 0.000540 (create 0.000018, send 0.000106, recv 0.000280, ring 0.000019, delay 0.000000)
+proxmox:2960938:2960938 [0] NCCL INFO nccproxmox:2960939:2960939 [1] NCCL INFO ENV/Plugin: Could not find: libnccl-env.so
+proxmox:2960939:2960939 [1] NCCL INFO cudaDriverVersion 13020
+proxmox:2960939:2960939 [1] NCCL INFO Bootstrap: Using vmbr5:192.168.0.2<0>
+proxmox:2960939:2960939 [1] NCCL INFO NCCL version 2.28.9+cuda13.0
+proxmox:2960939:2960939 [1] NCCL INFO NET/Plugin: Could not find: libnccl-net.so
+proxmox:2960939:2960939 [1] NCCL INFO Failed to open libmlx5.so[.1]
+proxmox:2960939:2960939 [1] NCCL INFO NET/IB : No device found.
+proxmox:2960939:2960939 [1] NCCL INFO NET/IB : Using [RO]; OOB vmbr5:192.168.0.2<0>
+proxmox:2960939:2960939 [1] NCCL INFO Failed to initialize NET plugin IB
+proxmox:2960939:2960939 [1] NCCL INFO NET/Socket : Using [0]vmbr5:192.168.0.2<0> [1]vmbr1:172.16.1.1<0> [2]vmbr2:172.16.2.1<0> [3]vmbr3:172.16.3.1<0> [4]vmbr4:172.16.4.1<0> [5]natvnet:10.10.10.1<0>
+proxmox:2960939:2960939 [1] NCCL INFO Initialized NET plugin Socket
+proxmox:2960939:2960939 [1] NCCL INFO Assigned NET plugin Socket to comm
+proxmox:2960939:2960939 [1] NCCL INFO Using network Socket
+proxmox:2960939:2960939 [1] NCCL INFO ncclCommInitRank comm 0x37a250a0 rank 1 nranks 2 cudaDev 1 nvmlDev 2 busId a000 commId 0x5ad627ecc6bab247 - Init START
+proxmox:2960939:2960939 [1] NCCL INFO RAS client listening socket at 172.16.1.1<28028>
+proxmox:2960939:2960939 [1] NCCL INFO Bootstrap timings total 0.118814 (create 0.000030, send 0.000130, recv 0.118389, ring 0.000024, delay 0.000000)
+proxmox:2960939:2960939 [1] NCCL INFO NCCL_CUMEM_ENABLE set by environment to 1.
+proxmox:2960939:2960939 [1] NCCL INFO ncclTopoGetCpuAffinity: Affinity for GPU 2 is empty, ignoring. (GPU affinity =  ; CPU affinity = 0-23).
+proxmox:2960939:2960939 [1] NCCL INFO NVLS multicast support is not available on dev 1 (NVLS_NCHANNELS 0)
+proxmox:2960939:2960939 [1] NCCL INFO comm 0x37a250a0 rank 1 nRanks 2 nNodes 1 localRanks 2 localRank 1 MNNVL 0
+proxmox:2960939:2960939 [1] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] -1/-1/-1->1->0
+proxmox:2960939:2960939 [1] NCCL INFO P2P Chunksize set to 131072
+proxmox:2960939:2960939 [1] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so
+proxmox:2960939:2960939 [1] NCCL INFO Check P2P Type isAllDirectP2p 1 directMode 0 isAllCudaP2p 1
+proxmox:2960939:2961140 [0] NCCL INFO [Proxy Service UDS] Device 1 CPU core 0
+proxmox:2960939:2961138 [0] NCCL INFO [Proxy Service] Device 1 CPU core 7
+proxmox:2960939:2960939 [1] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so
+proxmox:2960939:2960939 [1] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+proxmox:2960939:2960939 [1] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+proxmox:2960939:2960939 [1] NCCL INFO ncclCommInitRank comm 0x37a250a0 rank 1 nranks 2 cudaDev 1 nvmlDev 2 busId a000 commId 0x5ad627ecc6bab247 - Init COMPLETE
+proxmox:2960939:2960939 [1] NCCL INFO Init timings - ncclCommInitRank: rank 1 nranks 2 total 0.34 (kernels 0.21, alloc 0.00, bootstrap 0.12, allgathers 0.00, topo 0.01, graphs 0.00, connections 0.00, rest 0.00)
+proxmox:2960939:2960939 [1] NCCL INFO Channel 00/0 : 1[2] -> 0[1] via P2P/CUMEM
+proxmox:2960939:2960939 [1] NCCL INFO Channel 01/0 : 1[2] -> 0[1] via P2P/CUMEM
+proxmox:2960939:2960939 [1] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+proxmox:2960939:2960939 [1] NCCL INFO Comm config Blocking set to 1
+proxmox:2960939:2960939 [1] NCCL INFO Initialized NET plugin Socket
+proxmox:2960939:2960939 [1] NCCL INFO Assigned NET plugin Socket to comm
+proxmox:2960939:2960939 [1] NCCL INFO Using network Socket
+proxmox:2960939:2960939 [1] NCCL INFO ncclCommInitRankConfig comm 0x8c3b11d0 rank 1 nranks 2 cudaDev 1 nvmlDev 2 busId a000 commId 0x8f2c2a55145d1823 - Init START
+proxmox:2960939:2960939 [1] NCCL INFO Bootstrap timings total 0.000540 (create 0.000023, send 0.000102, recv 0.000186, ring 0.000019, delay 0.000000)
+proxmox:2960939:2960939 [1] NCCL INFO ncclTopoGetCpuAffinity: Affinity for GPU 2 is empty, ignoring. (GPU affinity =  ; CPU affinity = 0-23).
+proxmox:2960939:2960939 [1] NCCL INFO NVLS multicast support is not available on de(Worker_TP0 pid=2960938) INFO 06-17 20:11:45 [monitor.py:81] Initial profiling/warmup run took 2.03 s
+(EngineCore pid=2960731) INFO 06-17 20:11:49 [shm_broadcast.py:705] No available shared memory broadcast block found in 60 seconds. This typically happens when some processes are hanging or doing some time-consuming work (e.g. compilation, weight/kv cache quantization).
+(Worker_TP0 pid=2960938) WARNING 06-17 20:11:54 [kv_cache_utils.py:1174] Add 3 padding layers, may waste at most 6.25% KV cache memory
+(Worker_TP0 pid=2960938) WARNING 06-17 20:11:54 [compilation.py:1416] CUDAGraphMode.FULL_AND_PIECEWISE is not supported with spec-decode for attention backend FlashInferBackend (support: AttentionCGSupport.UNIFORM_SINGLE_TOKEN_DECODE); setting cudagraph_mode=PIECEWISE
+(Worker_TP0 pid=2960938) INFO 06-17 20:11:54 [gpu_model_runner.py:6412] Profiling CUDA graph memory: PIECEWISE=11 (largest=64)
+(Worker_TP1 pid=2960939) WARNING 06-17 20:11:54 [kv_cache_utils.py:1174] Add 3 padding layers, may waste at most 6.25% KV cache memory
+(Worker_TP1 pid=2960939) WARNING 06-17 20:11:54 [compilation.py:1416] CUDAGraphMode.FULL_AND_PIECEWISE is not supported with spec-decode for attention backend FlashInferBackend (support: AttentionCGSupport.UNIFORM_SINGLE_TOKEN_DECODE); setting cudagraph_mode=PIECEWISE
+(Worker_TP1 pid=2960939) INFO 06-17 20:11:54 [gpu_model_runner.py:6412] Profiling CUDA graph memory: PIECEWISE=11 (largest=64)
+(Worker_TP0 pid=2960938) INFO 06-17 20:11:56 [custom_all_reduce.py:211] Registering 264 cuda graph addresses
+(Worker_TP1 pid=2960939) INFO 06-17 20:11:56 [custom_all_reduce.py:211] Registering 264 cuda graph addresses
+(Worker_TP1 pid=2960939) INFO 06-17 20:11:57 [gpu_model_runner.py:6517] Estimated CUDA graph memory: 0.16 GiB total
+(Worker_TP0 pid=2960938) INFO 06-17 20:11:57 [gpu_model_runner.py:6517] Estimated CUDA graph memory: 0.16 GiB total
+(Worker_TP1 pid=2960939) INFO 06-17 20:11:57 [gpu_worker.py:495] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.8600 is equivalent to --gpu-memory-utilization=0.8498 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.8702. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+(Worker_TP0 pid=2960938) INFO 06-17 20:11:57 [gpu_worker.py:480] Available KV cache memory: 1.96 GiB
+(Worker_TP0 pid=2960938) INFO 06-17 20:11:57 [gpu_worker.py:495] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.8600 is equivalent to --gpu-memory-utilization=0.8498 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.8702. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+(EngineCore pid=2960731) WARNING 06-17 20:11:57 [kv_cache_utils.py:1174] Add 3 padding layers, may waste at most 6.25% KV cache memory
+(EngineCore pid=2960731) INFO 06-17 20:11:57 [kv_cache_utils.py:1744] GPU KV cache size: 92,738 tokens
+(EngineCore pid=2960731) INFO 06-17 20:11:57 [kv_cache_utils.py:1745] Maximum concurrency for 65,535 tokens per request: 1.42x
+(Worker_TP0 pid=2960938) 2026-06-17 20:11:57,984 - INFO - autotuner.py:622 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
+(Worker_TP1 pid=2960939) 2026-06-17 20:11:57,984 - INFO - autotuner.py:622 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
+(Worker_TP0 pid=2960938) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s](Worker_TP1 pid=2960939) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:   5%|▍         | 1/22 [00:00<00:02,  7.94profile/s][AutoTuner]: Tuning fp4_gemm:   5%|▍         | 1/22 [00:00<00:03,  5.74profile/s][AutoTuner]: Tuning fp4_gemm:  27%|██▋       | 6/22 [00:00<00:00, 27.02profile/s][AutoTuner]: Tuning fp4_gemm:  27%|██▋       | 6/22 [00:00<00:00, 23.40profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:00, 23.54profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:00, 22.06profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:00<00:00, 12.28profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:00<00:00, 11.90profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:01<00:00,  8.03profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:01<00:00,  7.90profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:02<00:00,  5.60profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:02<00:00,  5.54profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:02<00:00,  4.58profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:02<00:00,  4.54profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:03<00:00,  3.70profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:03<00:00,  3.56profile/s][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:03<00:00,  3.00profile/s][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:03<00:00,  2.90profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:04<00:00,  1.96profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:04<00:00,  1.91profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:07<00:00,  1.13s/profile][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:07<00:00,  2.86profile/s]
+(Worker_TP0 pid=2960938) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:  41%|████      | 9/22 [00:00<00:00, 82.28profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:07<00:00,  1.15s/profile][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:07<00:00,  2.79profile/s]
+(Worker_TP1 pid=2960939) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:00<00:00, 79.67profile/s][AutoTuner]: Tuning fp4_gemm:  41%|████      | 9/22 [00:00<00:00, 82.24profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:00<00:00, 63.68profile/s]
+(Worker_TP0 pid=2960938) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:00<00:00, 79.90profile/s][AutoTuner]: Tuning fp4_gemm:  32%|███▏      | 7/22 [00:00<00:00, 63.63profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:00<00:00, 63.84profile/s]
+(Worker_TP1 pid=2960939) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:  32%|███▏      | 7/22 [00:00<00:00, 63.93profile/s][AutoTuner]: Tuning fp4_gemm:  64%|██████▎   | 14/22 [00:00<00:00, 24.35profile/s][AutoTuner]: Tuning fp4_gemm:  64%|██████▎   | 14/22 [00:00<00:00, 24.49profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:01<00:00, 12.93profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:01<00:00, 12.96profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:01<00:00,  7.62profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:01<00:00,  7.58profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:02<00:00,  7.69profile/s]
+[AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:02<00:00,  7.64profile/s]
+(Worker_TP1 pid=2960939) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s](Worker_TP0 pid=2960938) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:   9%|▉         | 2/22 [00:00<00:01, 15.41profile/s][AutoTuner]: Tuning fp4_gemm:   9%|▉         | 2/22 [00:00<00:01, 15.37profile/s][AutoTuner]: Tuning fp4_gemm:  18%|█▊        | 4/22 [00:00<00:01, 15.47profile/s][AutoTuner]: Tuning fp4_gemm:  18%|█▊        | 4/22 [00:00<00:01, 15.43profile/s][AutoTuner]: Tuning fp4_gemm:  27%|██▋       | 6/22 [00:00<00:01, 15.51profile/s][AutoTuner]: Tuning fp4_gemm:  27%|██▋       | 6/22 [00:00<00:01, 15.48profile/s][AutoTuner]: Tuning fp4_gemm:  36%|███▋      | 8/22 [00:00<00:00, 15.24profile/s][AutoTuner]: Tuning fp4_gemm:  36%|███▋      | 8/22 [00:00<00:00, 15.22profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:01, 11.28profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:01, 11.24profile/s][AutoTuner]: Tuning fp4_gemm:  55%|█████▍    | 12/22 [00:01<00:01,  5.75profile/s][AutoTuner]: Tuning fp4_gemm:  55%|█████▍    | 12/22 [00:01<00:01,  5.71profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:01<00:02,  4.40profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:01<00:02,  4.35profile/s][AutoTuner]: Tuning fp4_gemm:  64%|██████▎   | 14/22 [00:02<00:02,  3.44profile/s][AutoTuner]: Tuning fp4_gemm:  64%|██████▎   | 14/22 [00:02<00:02,  3.40profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:03<00:02,  2.53profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:03<00:02,  2.50profile/s][AutoTuner]: Tuning fp4_gemm:  73%|███████▎  | 16/22 [00:03<00:03,  2.00profile/s][AutoTuner]: Tuning fp4_gemm:  73%|███████▎  | 16/22 [00:04<00:03,  1.98profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:04<00:02,  1.73profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:04<00:02,  1.71profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:05<00:02,  1.36profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:05<00:02,  1.34profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:07<00:02,  1.15profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:07<00:02,  1.13profile/s][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:08<00:02,  1.09s/profile][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:08<00:02,  1.11s/profile][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:12<00:01,  1.78s/profile]2026-06-17 20:12:21,402 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) [AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:12<00:00,  1.72profile/s]
+(Worker_TP0 pid=2960938) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:  14%|█▎        | 3/22 [00:00<00:00, 27.25profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:12<00:01,  1.79s/profile]2026-06-17 20:12:21,529 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) [AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:12<00:00,  1.70profile/s]
+(Worker_TP1 pid=2960939) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:  14%|█▎        | 3/22 [00:00<00:00, 27.39profile/s][AutoTuner]: Tuning fp4_gemm:  32%|███▏      | 7/22 [00:00<00:00, 29.90profile/s][AutoTuner]: Tuning fp4_gemm:  32%|███▏      | 7/22 [00:00<00:00, 30.11profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:00, 22.97profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:00, 23.06profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:00<00:00, 11.64profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:00<00:00, 11.53profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:01<00:00,  7.79profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:01<00:00,  7.69profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:02<00:00,  5.39profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:02<00:00,  5.31profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:02<00:00,  4.38profile/s][AutoTuner]: Tuning fp4_gemm:  82%|████████▏ | 18/22 [00:02<00:00,  4.31profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:03<00:00,  3.53profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:03<00:00,  3.47profile/s][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:03<00:00,  2.87profile/s][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:03<00:00,  2.82profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:05<00:00,  1.58profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:05<00:00,  1.55profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:08<00:00,  1.33s/profile][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:08<00:00,  2.55profile/s]
+[AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:08<00:00,  1.34s/profile][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:08<00:00,  2.52profile/s]
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:30,426 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:30,427 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:30,624 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:30,625 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s](Worker_TP0 pid=2960938) [AutoTuner]: Tuning fp4_gemm:   0%|          | 0/22 [00:00<?, ?profile/s][AutoTuner]: Tuning fp4_gemm:   5%|▍         | 1/22 [00:00<00:02,  8.56profile/s][AutoTuner]: Tuning fp4_gemm:   5%|▍         | 1/22 [00:00<00:02,  8.63profile/s][AutoTuner]: Tuning fp4_gemm:  27%|██▋       | 6/22 [00:00<00:00, 28.68profile/s][AutoTuner]: Tuning fp4_gemm:  27%|██▋       | 6/22 [00:00<00:00, 28.60profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:00, 24.99profile/s][AutoTuner]: Tuning fp4_gemm:  45%|████▌     | 10/22 [00:00<00:00, 24.90profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:00<00:00, 13.75profile/s][AutoTuner]: Tuning fp4_gemm:  59%|█████▉    | 13/22 [00:00<00:00, 13.62profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:01<00:00,  9.35profile/s][AutoTuner]: Tuning fp4_gemm:  68%|██████▊   | 15/22 [00:01<00:00,  9.22profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:01<00:00,  6.51profile/s][AutoTuner]: Tuning fp4_gemm:  77%|███████▋  | 17/22 [00:01<00:00,  6.41profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:02<00:00,  4.50profile/s][AutoTuner]: Tuning fp4_gemm:  86%|████████▋ | 19/22 [00:02<00:00,  4.42profile/s][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:03<00:00,  3.75profile/s][AutoTuner]: Tuning fp4_gemm:  91%|█████████ | 20/22 [00:03<00:00,  3.68profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:04<00:00,  2.50profile/s][AutoTuner]: Tuning fp4_gemm:  95%|█████████▌| 21/22 [00:04<00:00,  2.45profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:06<00:00,  1.17profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:06<00:00,  3.33profile/s]
+[AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:06<00:00,  1.15profile/s][AutoTuner]: Tuning fp4_gemm: 100%|██████████| 22/22 [00:06<00:00,  3.28profile/s]
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:37,440 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:37,441 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:37,632 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:37,632 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:37,644 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:37,645 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:37,657 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:37,658 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:38,196 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:38,197 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:38,382 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:38,383 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:38,395 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:38,403 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:38,759 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:38,759 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:38,947 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:38,948 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:38,960 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:38,961 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:38,972 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:38,973 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:39,520 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:39,521 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:39,707 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:39,711 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:39,719 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:39,724 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:39,730 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:39,736 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:39,743 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:40,279 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:40,472 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:40,476 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:40,485 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:40,489 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:40,497 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:40,500 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:40,509 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:40,512 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:41,205 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:41,212 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:41,218 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:41,225 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:41,229 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:41,237 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:41,241 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:41,249 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:41,957 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:41,964 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:41,969 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:41,977 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:41,982 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:41,989 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:42,001 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:42,537 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:42,728 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:42,728 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:42,740 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:42,740 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:43,104 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:43,105 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:43,118 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:43,303 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:43,495 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:43,497 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:43,508 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:43,510 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:43,881 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:43,882 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:43,894 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:43,894 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:44,261 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:44,262 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:44,274 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:44,275 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:44,287 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:44,298 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:44,647 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:44,660 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:45,027 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:45,028 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:45,040 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:45,041 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:45,406 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:45,407 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:45,419 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:45,419 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:45,788 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:45,789 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:45,801 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:45,802 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:46,174 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:46,175 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:46,187 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:46,188 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:46,563 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:46,564 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:46,576 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:46,577 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:46,940 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:46,941 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:46,954 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:46,954 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:47,328 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:47,329 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:47,341 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:47,342 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:47,704 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:47,705 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:47,717 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:47,717 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:48,086 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:48,087 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:48,099 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:48,100 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:48,471 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:48,472 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:48,484 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:48,485 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:48,849 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:48,850 - WARNING - autotuner.py:1315 - flashinfer.jit: [Autotuner]: OOM detected, falling back to default tactic
+(Worker_TP1 pid=2960939) 2026-06-17 20:12:48,856 - INFO - autotuner.py:641 - flashinfer.jit: [Autotuner]: Autotuning process ends
+(Worker_TP0 pid=2960938) 2026-06-17 20:12:48,858 - INFO - autotuner.py:641 - flashinfer.jit: [Autotuner]: Autotuning process ends
+(Worker_TP0 pid=2960938) Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   0%|          | 0/11 [00:00<?, ?it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   9%|▉         | 1/11 [00:00<00:01,  7.09it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  18%|█▊        | 2/11 [00:00<00:01,  7.12it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  27%|██▋       | 3/11 [00:00<00:01,  6.90it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  36%|███▋      | 4/11 [00:00<00:01,  6.75it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  45%|████▌     | 5/11 [00:00<00:00,  6.81it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  55%|█████▍    | 6/11 [00:00<00:00,  6.85it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  64%|██████▎   | 7/11 [00:01<00:00,  6.84it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  73%|███████▎  | 8/11 [00:01<00:00,  6.84it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  82%|████████▏ | 9/11 [00:01<00:00,  6.91it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  91%|█████████ | 10/11 [00:01<00:00,  6.94it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 11/11 [00:01<00:00,  6.39it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 11/11 [00:01<00:00,  6.73it/s]
+(Worker_TP1 pid=2960939) INFO 06-17 20:12:51 [custom_all_reduce.py:211] Registering 1452 cuda graph addresses
+(Worker_TP0 pid=2960938) INFO 06-17 20:12:51 [custom_all_reduce.py:211] Registering 1452 cuda graph addresses
+(Worker_TP1 pid=2960939) INFO 06-17 20:12:52 [gpu_worker.py:639] CUDA graph pool memory: 0.17 GiB (actual), 0.16 GiB (estimated), difference: 0.01 GiB (4.7%).
+(Worker_TP0 pid=2960938) INFO 06-17 20:12:52 [gpu_model_runner.py:6585] Graph capturing finished in 4 secs, took 0.17 GiB
+(Worker_TP0 pid=2960938) INFO 06-17 20:12:52 [gpu_worker.py:639] CUDA graph pool memory: 0.17 GiB (actual), 0.16 GiB (estimated), difference: 0.01 GiB (4.7%).
+(Worker_TP0 pid=2960938) INFO 06-17 20:12:52 [jit_monitor.py:54] Kernel JIT monitor activated — Triton JIT compilations during inference will be logged as warnings.
+(Worker_TP1 pid=2960939) INFO 06-17 20:12:52 [jit_monitor.py:54] Kernel JIT monitor activated — Triton JIT compilations during inference will be logged as warnings.
+(EngineCore pid=2960731) INFO 06-17 20:12:53 [core.py:306] init engine (profile, create kv cache, warmup model) took 244.49 s (compilation: 86.15 s)
+(EngineCore pid=2960731) [transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+(EngineCore pid=2960731) INFO 06-17 20:12:55 [registry.py:134] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+(EngineCore pid=2960731) INFO 06-17 20:12:55 [vllm.py:999] Asynchronous scheduling is enabled.
+(EngineCore pid=2960731) INFO 06-17 20:12:55 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+(EngineCore pid=2960731) INFO 06-17 20:12:55 [compilation.py:321] Enabled custom fusions: act_quant
+(APIServer pid=2960323) INFO 06-17 20:12:55 [api_server.py:579] Supported tasks: ['generate']
+(APIServer pid=2960323) INFO 06-17 20:12:55 [parser_manager.py:37] "auto" tool choice has been enabled.
+(APIServer pid=2960323) WARNING 06-17 20:12:55 [model.py:1502] Default vLLM sampling parameters have been overridden by the model's `generation_config.json`: `{'temperature': 1.0, 'top_k': 20, 'top_p': 0.95}`. If this is not intended, please relaunch vLLM instance with `--generation-config vllm`.
+(APIServer pid=2960323) INFO 06-17 20:12:55 [hf.py:548] Detected the chat template content format to be 'openai'. You can set `--chat-template-content-format` to override this.
+(APIServer pid=2960323) INFO 06-17 20:12:55 [api_server.py:583] Starting vLLM server on http://0.0.0.0:8103
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:37] Available routes are:
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /openapi.json, Methods: GET, HEAD
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /docs, Methods: GET, HEAD
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /docs/oauth2-redirect, Methods: GET, HEAD
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /redoc, Methods: GET, HEAD
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /load, Methods: GET
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /version, Methods: GET
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /health, Methods: GET
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /metrics, Methods: GET
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /tokenize, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /detokenize, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /v1/models, Methods: GET
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /ping, Methods: GET
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /ping, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /invocations, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /v1/chat/completions, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /v1/chat/completions/batch, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /v1/responses, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /v1/responses/{response_id}, Methods: GET
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /v1/responses/{response_id}/cancel, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /v1/completions, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /v1/messages, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /v1/messages/count_tokens, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /generative_scoring, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /inference/v1/generate, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /v1/chat/completions/render, Methods: POST
+(APIServer pid=2960323) INFO 06-17 20:12:55 [launcher.py:46] Route: /v1/completions/render, Methods: POST
+(APIServer pid=2960323) INFO:     Started server process [2960323]
+(APIServer pid=2960323) INFO:     Waiting for application startup.
+(APIServer pid=2960323) INFO:     Application startup complete.
+(APIServer pid=2960323) INFO:     127.0.0.1:49882 - "GET /health HTTP/1.1" 200 OK
+(Worker_TP0 pid=2960938) WARNING 06-17 20:12:56 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _zero_kv_blocks_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=2960938) WARNING 06-17 20:12:57 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _compute_slot_mapping_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=2960938) WARNING 06-17 20:12:57 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _copy_page_indices_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=2960938) WARNING 06-17 20:12:57 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _causal_conv1d_update_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=2960938) WARNING 06-17 20:12:58 [jit_monitor.py:103] Triton kernel JIT compilation during inference: fused_recurrent_gated_delta_rule_packed_decode_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=2960938) WARNING 06-17 20:12:59 [jit_monitor.py:103] Triton kernel JIT compilation during inference: kernel_unified_attention. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=2960938) WARNING 06-17 20:12:59 [jit_monitor.py:103] Triton kernel JIT compilation during inference: reduce_segments. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=2960938) WARNING 06-17 20:12:59 [jit_monitor.py:103] Triton kernel JIT compilation during inference: eagle_prepare_next_token_padded_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=2960938) WARNING 06-17 20:13:00 [jit_monitor.py:103] Triton kernel JIT compilation during inference: eagle_step_slot_mapping_metadata_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=2960323) INFO:     127.0.0.1:0 - "POST /v1/completions HTTP/1.1" 200 OK

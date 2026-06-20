@@ -45,6 +45,12 @@ def aggregate_scenario(scenario_dir: Path, reps: int,
                 "values": [round(v, 4) for v in vals],
             }
     if energy:
+        # The summary reads energy["tokens_per_joule"]; compute it here from the
+        # measured output throughput and mean board power (tok/s / W = tok/J).
+        mw = energy.get("mean_watts")
+        ot = agg["metrics"].get("output_throughput", {}).get("mean")
+        if mw and ot:
+            energy = {**energy, "tokens_per_joule": round(ot / mw, 4)}
         agg["energy"] = energy
     (scenario_dir / "aggregate.json").write_text(json.dumps(agg, indent=2))
     return agg
@@ -85,8 +91,75 @@ def build_summary(output_dir: Path, arms: list[str], concurrencies: list[int],
         w.writeheader()
         w.writerows(rows)
 
-    _write_markdown(output_dir / "summary.md", rows, arms, concurrencies)
-    return {"rows": rows, "table": table}
+    paired = compute_paired_p2p(table, concurrencies)
+
+    _write_markdown(output_dir / "summary.md", rows, arms, concurrencies, paired)
+    return {"rows": rows, "table": table, "paired": paired}
+
+
+def _paired_bootstrap(diffs: list[float], iters: int = 20000,
+                      ci: float = 0.95, seed: int = 0) -> tuple[float, float]:
+    import random
+    rng = random.Random(seed)
+    n = len(diffs)
+    means = []
+    for _ in range(iters):
+        means.append(sum(diffs[rng.randrange(n)] for _ in range(n)) / n)
+    means.sort()
+    lo = means[int((1 - ci) / 2 * iters)]
+    hi = means[int((1 + ci) / 2 * iters)]
+    return round(lo, 4), round(hi, 4)
+
+
+def _sign_test_p(diffs: list[float]) -> float:
+    """Two-sided exact sign test. Non-parametric, no scipy, valid at n=3+."""
+    from math import comb
+    pos = sum(1 for d in diffs if d > 0)
+    neg = sum(1 for d in diffs if d < 0)
+    n = pos + neg
+    if n == 0:
+        return 1.0
+    k = max(pos, neg)
+    tail = sum(comb(n, i) for i in range(k, n + 1)) / 2 ** n
+    return round(min(1.0, 2 * tail), 4)
+
+
+def compute_paired_p2p(table: dict, concurrencies: list[int]) -> list[dict]:
+    """For every arm pair that differs only by p2p_on/p2p_off, pair the per-rep
+    output_throughput values BY REP INDEX (the AB-AB-AB schedule makes them
+    paired observations) and report the paired mean delta, a bootstrap 95% CI,
+    and a sign-test p-value. This is far stronger than comparing two means +-std
+    and is what lets the small per-concurrency deltas clear (or fail) noise."""
+    groups: dict[str, dict[str, str]] = {}
+    for arm in table:
+        if arm.endswith("p2p_on"):
+            groups.setdefault(arm[:-6], {})["on"] = arm
+        elif arm.endswith("p2p_off"):
+            groups.setdefault(arm[:-7], {})["off"] = arm
+    out = []
+    for base, pair in groups.items():
+        if "on" not in pair or "off" not in pair:
+            continue
+        for c in concurrencies:
+            on = table[pair["on"]].get(c, {}).get("metrics", {}).get("output_throughput", {})
+            off = table[pair["off"]].get(c, {}).get("metrics", {}).get("output_throughput", {})
+            ov, fv = on.get("values"), off.get("values")
+            if not ov or not fv:
+                continue
+            m = min(len(ov), len(fv))
+            diffs = [ov[i] - fv[i] for i in range(m)]
+            pcts = [(ov[i] - fv[i]) / fv[i] * 100 for i in range(m) if fv[i]]
+            lo, hi = _paired_bootstrap(diffs) if m >= 2 else (diffs[0], diffs[0])
+            out.append({
+                "comparison": (base.rstrip("_-") or "p2p") + f"  c{c}",
+                "n_pairs": m,
+                "mean_delta_tok_s": round(sum(diffs) / m, 3),
+                "ci95_tok_s": [lo, hi],
+                "mean_delta_pct": round(sum(pcts) / len(pcts), 2) if pcts else None,
+                "sign_test_p": _sign_test_p(diffs),
+                "ci_excludes_zero": (lo > 0 or hi < 0),
+            })
+    return out
 
 
 def _pct(on: float | None, off: float | None) -> str:
@@ -96,7 +169,7 @@ def _pct(on: float | None, off: float | None) -> str:
 
 
 def _write_markdown(path: Path, rows: list[dict], arms: list[str],
-                    concurrencies: list[int]) -> None:
+                    concurrencies: list[int], paired: list[dict] | None = None) -> None:
     by = {(r["arm"], r["concurrency"]): r for r in rows}
     lines = ["# P2P benchmark summary", "",
              "Output token throughput (tok/s), mean of 3 runs.", "",
@@ -117,6 +190,17 @@ def _write_markdown(path: Path, rows: list[dict], arms: list[str],
             off = by.get(("p2p_off", c), {}).get("output_tok_s")
             row += f" {_pct(on, off)} |"
         lines.append(row)
+    if paired:
+        lines += ["", "## Paired P2P delta (AB-AB paired, bootstrap 95% CI)", "",
+                  "| Comparison | n | mean delta tok/s | 95% CI | delta % | sign-test p | CI excl. 0 |",
+                  "|---|---|---|---|---|---|---|"]
+        for p in paired:
+            ci = p["ci95_tok_s"]
+            lines.append(
+                f"| {p['comparison']} | {p['n_pairs']} | {p['mean_delta_tok_s']:+.2f} | "
+                f"[{ci[0]:+.2f}, {ci[1]:+.2f}] | "
+                f"{('%+.1f%%' % p['mean_delta_pct']) if p['mean_delta_pct'] is not None else 'n/a'} | "
+                f"{p['sign_test_p']:.3f} | {'yes' if p['ci_excludes_zero'] else 'no'} |")
     path.write_text("\n".join(lines) + "\n")
 
 
@@ -124,7 +208,8 @@ def _write_markdown(path: Path, rows: list[dict], arms: list[str],
 # Visualisations (matplotlib). Imported lazily so the rest of the tool runs
 # without a plotting backend installed.
 # ---------------------------------------------------------------------------
-def render_plots(output_dir: Path, arms: list[str], concurrencies: list[int]) -> None:
+def render_plots(output_dir: Path, arms: list[str], concurrencies: list[int],
+                 roofline: dict | None = None) -> None:
     try:
         import matplotlib
         matplotlib.use("Agg")
@@ -154,6 +239,21 @@ def render_plots(output_dir: Path, arms: list[str], concurrencies: list[int]) ->
         if any(y is not None for y in ys):
             plt.errorbar(concurrencies, [y or 0 for y in ys], yerr=errs(a),
                          marker="o", capsize=3, label=a)
+    if roofline:
+        try:
+            bw = roofline["mem_bw_GBps"]; wpg = roofline["weight_GB_per_gpu"]
+            kvg = roofline.get("kv_GB_per_token_per_gpu", 0.0)
+            bw_ceiling = bw / (wpg + kvg)            # single-stream decode tok/s
+            plt.axhline(bw_ceiling, ls="--", color="gray",
+                        label=f"BW roofline c1 ~{bw_ceiling:.0f} tok/s")
+            tp = roofline.get("tp", 1)
+            if roofline.get("peak_tflops_per_gpu") and roofline.get("flops_per_token"):
+                comp = roofline["peak_tflops_per_gpu"] * tp * 1e12 / roofline["flops_per_token"]
+                plt.axhline(comp, ls=":", color="black",
+                            label=f"compute roofline ~{comp:.0f} tok/s")
+            plt.legend()
+        except (KeyError, ZeroDivisionError, TypeError):
+            pass
     plt.xlabel("concurrency (max-num-seqs)")
     plt.ylabel("output throughput (tok/s)")
     plt.title("Throughput scaling: P2P on vs off")

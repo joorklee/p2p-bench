@@ -1,0 +1,69 @@
+# 4-CARD HEADLINE — 3-way transport decomposition (successor to the 2-card report)
+#   nccl_p2p_off    : NCCL, SHM fallback        (no P2P)
+#   nccl_p2p_on     : NCCL + P2P transport      (clean transport delta vs above)
+#   customar_p2p_on : vLLM custom all-reduce + P2P  (PRODUCTION-OPTIMAL upper bound)
+# The published 2-card report measured only the first two (custom-AR force-disabled
+# in both), which UNDERSTATES what the P2P hardware is worth. custom-AR is now
+# first-class so the report can state both the clean transport delta AND the real
+# best-case. Paired stats auto-pair the two nccl arms (…p2p_on vs …p2p_off).
+model:
+  path: /data/models/Qwen/Qwen3.6-27B-FP8
+  port: 8103
+  constant_args:
+    tensor-parallel-size: 4
+    max-model-len: 262144
+    kv-cache-dtype: bfloat16
+    gpu-memory-utilization: 0.92
+    speculative-config: '{"method":"qwen3_next_mtp","num_speculative_tokens":3}'
+    reasoning-parser: qwen3
+    tool-call-parser: qwen3_coder
+    attention-backend: flashinfer
+    compilation-config: '{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'
+  constant_flags: [trust-remote-code, language-model-only, enable-auto-tool-choice, async-scheduling]
+  constant_env:
+    CUDA_DEVICE_ORDER: PCI_BUS_ID
+    CUDA_VISIBLE_DEVICES: "0,1,2,3"
+    NCCL_CUMEM_ENABLE: "1"
+    VLLM_WORKER_MULTIPROC_METHOD: spawn
+    PYTORCH_ALLOC_CONF: expandable_segments:True
+    NCCL_DEBUG: "INFO"
+    VLLM_LOGGING_LEVEL: "INFO"
+arms:
+  nccl_p2p_off:
+    env: { NCCL_P2P_DISABLE: "1" }
+    extra_flags: [disable-custom-all-reduce]
+  nccl_p2p_on:
+    env: { NCCL_P2P_DISABLE: "0" }
+    extra_flags: [disable-custom-all-reduce]
+  customar_p2p_on:
+    env: { NCCL_P2P_DISABLE: "0" }
+    extra_flags: []        # custom all-reduce ENABLED (needs P2P)
+concurrencies: [1, 2, 3, 4]
+# Decode roofline overlay. mem_bw + weight bytes are the only inputs to the
+# (load-bearing) bandwidth line; verify weight_GB_per_gpu from telemetry
+# memory.used at load minus KV. Compute line is optional — fill verified peaks.
+roofline:
+  mem_bw_GBps: 448
+  weight_GB_per_gpu: 7.0
+  kv_GB_per_token_per_gpu: 0.000016
+  tp: 4
+  # peak_tflops_per_gpu: 190     # FP8 dense — fill from Blackwell whitepaper/measured
+  # flops_per_token: 54.0e9
+benchmark:
+  dataset: random
+  random_input_len: 4096
+  random_output_len: 2048
+  random_range_ratio: 0.0
+  endpoint: /v1/completions
+  backend: vllm
+  num_prompts_multiplier: 16
+  num_warmups: 8
+  seed: 1234
+  ignore_eos: true
+  percentile_metrics: ttft,tpot,itl,e2el
+  metric_percentiles: "50,90,99"
+  reps: 10
+  interleave_reps: true
+  cooldown_seconds: 20
+  vram_free_threshold_mb: 1024
+  vram_free_timeout: 180

@@ -16,7 +16,21 @@ from .swap import LlamaSwap
 from .telemetry import TelemetrySampler, mean_power_in_window
 
 DEFAULT_SPEC = str(Path(__file__).resolve().parent.parent / "config" / "scenarios.yaml")
-EXPECTED_INDICES = (1, 2)
+EXPECTED_INDICES = (1, 2)  # fallback only; real value derived from the spec
+
+
+def _indices_from_spec(spec_path) -> tuple[int, ...]:
+    """Parse the target GPU indices from the spec's CUDA_VISIBLE_DEVICES so the
+    harness scales from 2 to 4 (or N) cards without code edits. Falls back to
+    EXPECTED_INDICES if the key is absent or unparseable."""
+    try:
+        import yaml
+        spec = yaml.safe_load(open(spec_path))
+        vis = spec["model"]["constant_env"]["CUDA_VISIBLE_DEVICES"]
+        idx = tuple(int(x) for x in str(vis).split(",") if x.strip() != "")
+        return idx or EXPECTED_INDICES
+    except Exception:  # noqa: BLE001
+        return EXPECTED_INDICES
 
 
 def _arms(scenarios) -> list[str]:
@@ -43,8 +57,9 @@ def cmd_check_env(args) -> int:
     out = Path(args.output_dir)
     env_dir = out / "env"
     env_dir.mkdir(parents=True, exist_ok=True)
+    indices = _indices_from_spec(args.scenarios)
     summary = environment.write_environment(env_dir)
-    evidence = gpu.collect_p2p_evidence(args.p2p_test_bin, EXPECTED_INDICES)
+    evidence = gpu.collect_p2p_evidence(args.p2p_test_bin, indices)
     (env_dir / "p2p_evidence.json").write_text(json.dumps(evidence, indent=2))
     (env_dir / "host_summary.json").write_text(json.dumps(summary, indent=2))
 
@@ -66,11 +81,12 @@ def cmd_check_env(args) -> int:
 def cmd_smoke(args) -> int:
     out = Path(args.output_dir)
     scenarios = build_scenarios(args.scenarios, out / "logs", args.include_optional_arm)
+    indices = _indices_from_spec(args.scenarios)
     generate_llama_swap_config(scenarios, out / "llama-swap.config.yaml")
     with LlamaSwap(args.llama_swap_bin, out / "llama-swap.config.yaml",
                    args.llama_swap_port, out / "logs" / "llama-swap.log") as swap:
         results = bench.smoke_test(swap, scenarios, out / "logs",
-                                   indices=list(EXPECTED_INDICES))
+                                   indices=list(indices))
     (out / "smoke_results.json").write_text(json.dumps(results, indent=2))
     ok = all(r["ok"] for r in results)
     for r in results:
@@ -85,7 +101,9 @@ def cmd_run(args) -> int:
     out = Path(args.output_dir)
     out.mkdir(parents=True, exist_ok=True)
     scenarios = build_scenarios(args.scenarios, out / "logs", args.include_optional_arm)
+    indices = _indices_from_spec(args.scenarios)
     bcfg = load_benchmark_cfg(args.scenarios)
+    bcfg = _apply_bench_overrides(bcfg, getattr(args, "bench_set", []))
     reps = int(args.reps or bcfg.get("reps", 3))
     cooldown = int(bcfg.get("cooldown_seconds", 20))
     interleave = bool(bcfg.get("interleave_reps", True))
@@ -107,7 +125,7 @@ def cmd_run(args) -> int:
             print("Skipping smoke test (--skip-smoke).")
         else:
             smoke = bench.smoke_test(swap, scenarios, out / "logs",
-                                     indices=list(EXPECTED_INDICES))
+                                     indices=list(indices))
             (out / "smoke_results.json").write_text(json.dumps(smoke, indent=2))
             if not all(r["ok"] for r in smoke) and not args.force:
                 print("Smoke test failed; aborting. Use --force to run anyway.",
@@ -145,7 +163,7 @@ def cmd_run(args) -> int:
             # new load can't OOM against the outgoing model's memory.
             if current_model is not None and current_model != s.id:
                 swap.unload()
-                freed = gpu.wait_for_vram_free(list(EXPECTED_INDICES),
+                freed = gpu.wait_for_vram_free(list(indices),
                                                vram_threshold, vram_timeout)
                 if not freed:
                     print(f"  WARN VRAM still in use after {vram_timeout:.0f}s "
@@ -159,16 +177,20 @@ def cmd_run(args) -> int:
 
             # capture transport proof once (first rep)
             if rep == 1:
-                Path(s.log_path).exists() and \
+                if Path(s.log_path).exists():
                     (sdir / "transport_proof.json").write_text(
                         json.dumps(bench.parse_transport_proof(s.log_path), indent=2))
+                    (sdir / "nccl_algorithm.json").write_text(
+                        json.dumps(bench.parse_nccl_algorithm(s.log_path), indent=2))
+                    (sdir / "spec_acceptance.json").write_text(
+                        json.dumps(bench.parse_spec_acceptance(s.log_path), indent=2))
 
             if rep == 1 or interleave:
                 bench.warmup(base_url, s, bcfg, sdir)
 
             tel_csv = sdir / ("telemetry.csv" if rep == 1 else f"telemetry_run{rep}.csv")
             window_start = window_end = 0.0
-            with TelemetrySampler(tel_csv, indices=list(EXPECTED_INDICES)):
+            with TelemetrySampler(tel_csv, indices=list(indices)):
                 result, window_start, window_end = bench.run_timed(
                     base_url, s, bcfg, sdir, rep)
             if result is None:
@@ -176,7 +198,7 @@ def cmd_run(args) -> int:
 
             # energy for this rep
             avg_w = mean_power_in_window(tel_csv, window_start, window_end,
-                                         list(EXPECTED_INDICES))
+                                         list(indices))
             (sdir / f"power_run{rep}.json").write_text(json.dumps(
                 {"avg_watts": avg_w, "start": window_start, "end": window_end}, indent=2))
 
@@ -194,7 +216,7 @@ def cmd_run(args) -> int:
 
     summary = analyze.build_summary(out, arms, concurrencies, reps)
     (out / "summary.json").write_text(json.dumps(summary, indent=2))
-    analyze.render_plots(out, arms, concurrencies)
+    analyze.render_plots(out, arms, concurrencies, _roofline(args.scenarios))
     print(f"\nDone. See {out/'summary.md'}, {out/'summary.csv'}, {out/'plots'}/")
     return 0
 
@@ -217,6 +239,29 @@ def _energy_for(sdir: Path, reps: int, concurrency: int, bcfg: dict) -> dict | N
             "note": "tokens_per_joule = output_throughput / mean_watts"}
 
 
+def _apply_bench_overrides(bcfg: dict, pairs: list[str]) -> dict:
+    bcfg = dict(bcfg)
+    for item in pairs or []:
+        if "=" not in item:
+            continue
+        k, v = item.split("=", 1)
+        for cast in (int, float):
+            try:
+                v = cast(v); break
+            except ValueError:
+                pass
+        bcfg[k.strip()] = v
+    return bcfg
+
+
+def _roofline(spec_path) -> dict | None:
+    try:
+        import yaml
+        return yaml.safe_load(open(spec_path)).get("roofline")
+    except Exception:  # noqa: BLE001
+        return None
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="p2pbench",
                                 description="Reproducible P2P-on/off vLLM benchmark harness")
@@ -229,6 +274,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--include-optional-arm", action="store_true",
                    help="also run the custom-all-reduce+P2P arm")
     p.add_argument("--reps", type=int, default=None)
+    p.add_argument("--bench-set", action="append", default=[], metavar="KEY=VAL",
+                   help="override a benchmark cfg field, e.g. --bench-set random_input_len=131072 "
+                        "(repeatable; ints/floats auto-cast). Drives the context sweep.")
     p.add_argument("--force", action="store_true",
                    help="continue even if smoke test fails")
     p.add_argument("--skip-smoke", action="store_true",
@@ -251,7 +299,7 @@ def cmd_report(args) -> int:
     summary = analyze.build_summary(out, arms, concurrencies,
                                     int(args.reps or 3))
     (out / "summary.json").write_text(json.dumps(summary, indent=2))
-    analyze.render_plots(out, arms, concurrencies)
+    analyze.render_plots(out, arms, concurrencies, _roofline(args.scenarios))
     print(f"Report written to {out/'summary.md'} and {out/'plots'}/")
     return 0
 

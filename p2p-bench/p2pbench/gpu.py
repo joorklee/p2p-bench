@@ -188,13 +188,58 @@ def wait_for_vram_free(indices: tuple[int, ...] | list[int],
     return False
 
 
+def torch_p2p_matrix(n_devices: int, mb: int = 256) -> dict:
+    """All-pairs P2P probe. Inside the process, CUDA_VISIBLE_DEVICES has already
+    remapped the target cards to local indices 0..n-1, so we probe those. For 4
+    cards this yields the full 4x4 can-access + d2d-bandwidth matrix instead of a
+    single pair -- on a ring/tree all-reduce the SLOWEST pair is what bounds the
+    collective, and a single-pair probe can hide it."""
+    try:
+        import time as _t
+        import torch  # noqa: PLC0415
+        if not torch.cuda.is_available():
+            return {"ok": False, "reason": "cuda unavailable"}
+        n = min(n_devices, torch.cuda.device_count())
+        pairs = []
+        for a in range(n):
+            for b in range(n):
+                if a == b:
+                    continue
+                entry = {"src": a, "dst": b,
+                         "can_access_peer": bool(torch.cuda.can_device_access_peer(a, b))}
+                try:
+                    cnt = mb * 1024 * 1024 // 4
+                    xa = torch.empty(cnt, dtype=torch.float32, device=f"cuda:{a}")
+                    xb = torch.empty(cnt, dtype=torch.float32, device=f"cuda:{b}")
+                    for _ in range(3):
+                        xb.copy_(xa); torch.cuda.synchronize(b)
+                    iters = 20; t0 = _t.perf_counter()
+                    for _ in range(iters):
+                        xb.copy_(xa)
+                    torch.cuda.synchronize(b)
+                    entry["d2d_copy_GBps"] = round((mb / 1024.0) * iters / (_t.perf_counter() - t0), 2)
+                    del xa, xb; torch.cuda.empty_cache()
+                except Exception as exc:  # noqa: BLE001
+                    entry["error"] = str(exc)
+                pairs.append(entry)
+        bws = [p["d2d_copy_GBps"] for p in pairs if "d2d_copy_GBps" in p]
+        return {"ok": True, "n_devices": n, "pairs": pairs,
+                "min_pair_GBps": min(bws) if bws else None,
+                "max_pair_GBps": max(bws) if bws else None,
+                "all_pairs_can_access": all(p["can_access_peer"] for p in pairs)}
+    except Exception as exc:  # noqa: BLE001
+        return {"ok": False, "reason": str(exc)}
+
+
 def collect_p2p_evidence(p2p_test_bin: str | None,
                          expected_indices: tuple[int, ...]) -> dict:
+    n = len(expected_indices)
     return {
         "device_order": verify_device_order(expected_indices),
         "topo_matrix": topo_matrix(),
         "topo_p2p": topo_p2p(),
         "cuda_samples_p2p": run_cuda_samples_p2p(p2p_test_bin),
-        "torch_probe": torch_p2p_probe(),
+        "torch_probe": torch_p2p_probe(),          # legacy single-pair (kept)
+        "torch_p2p_matrix": torch_p2p_matrix(n),   # all-pairs (4-card honest)
         "versions": driver_cuda_versions(),
     }

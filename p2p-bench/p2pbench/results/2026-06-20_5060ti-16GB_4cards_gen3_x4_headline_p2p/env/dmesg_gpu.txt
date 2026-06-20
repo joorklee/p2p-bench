@@ -1,0 +1,189 @@
+[Sat Jun 20 13:18:18 2026] acpi PNP0A08:00: _OSC: platform does not support [PCIeHotplug SHPCHotplug PME LTR DPC]
+[Sat Jun 20 13:18:18 2026] acpi PNP0A08:00: _OSC: OS now controls [AER PCIeCapability]
+[Sat Jun 20 13:18:18 2026] pci 0000:00:01.1: [1022:1483] type 01 class 0x060400 PCIe Root Port
+[Sat Jun 20 13:18:18 2026] pci 0000:00:01.2: [1022:1483] type 01 class 0x060400 PCIe Root Port
+[Sat Jun 20 13:18:18 2026] pci 0000:00:03.1: [1022:1483] type 01 class 0x060400 PCIe Root Port
+[Sat Jun 20 13:18:18 2026] pci 0000:00:03.2: [1022:1483] type 01 class 0x060400 PCIe Root Port
+[Sat Jun 20 13:18:18 2026] pci 0000:00:03.3: [1022:1483] type 01 class 0x060400 PCIe Root Port
+[Sat Jun 20 13:18:18 2026] pci 0000:00:03.4: [1022:1483] type 01 class 0x060400 PCIe Root Port
+[Sat Jun 20 13:18:18 2026] pci 0000:00:07.1: [1022:1484] type 01 class 0x060400 PCIe Root Port
+[Sat Jun 20 13:18:18 2026] pci 0000:00:08.1: [1022:1484] type 01 class 0x060400 PCIe Root Port
+[Sat Jun 20 13:18:18 2026] pci 0000:01:00.0: [15b7:5009] type 00 class 0x010802 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:02:00.0: [1022:57ad] type 01 class 0x060400 PCIe Switch Upstream Port
+[Sat Jun 20 13:18:18 2026] pci 0000:02:00.0: 63.012 Gb/s available PCIe bandwidth, limited by 16.0 GT/s PCIe x4 link at 0000:00:01.2 (capable of 126.024 Gb/s with 16.0 GT/s PCIe x8 link)
+[Sat Jun 20 13:18:18 2026] pci 0000:03:05.0: [1022:57a3] type 01 class 0x060400 PCIe Switch Downstream Port
+[Sat Jun 20 13:18:18 2026] pci 0000:03:08.0: [1022:57a4] type 01 class 0x060400 PCIe Switch Downstream Port
+[Sat Jun 20 13:18:18 2026] pci 0000:03:09.0: [1022:57a4] type 01 class 0x060400 PCIe Switch Downstream Port
+[Sat Jun 20 13:18:18 2026] pci 0000:03:0a.0: [1022:57a4] type 01 class 0x060400 PCIe Switch Downstream Port
+[Sat Jun 20 13:18:18 2026] pci 0000:04:00.0: [10ec:8168] type 00 class 0x020000 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:05:00.0: [1022:1485] type 00 class 0x130000 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:05:00.0: 63.012 Gb/s available PCIe bandwidth, limited by 16.0 GT/s PCIe x4 link at 0000:00:01.2 (capable of 252.048 Gb/s with 16.0 GT/s PCIe x16 link)
+[Sat Jun 20 13:18:18 2026] pci 0000:05:00.1: [1022:149c] type 00 class 0x0c0330 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:05:00.3: [1022:149c] type 00 class 0x0c0330 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:06:00.0: [1022:7901] type 00 class 0x010601 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:06:00.0: 63.012 Gb/s available PCIe bandwidth, limited by 16.0 GT/s PCIe x4 link at 0000:00:01.2 (capable of 252.048 Gb/s with 16.0 GT/s PCIe x16 link)
+[Sat Jun 20 13:18:18 2026] pci 0000:07:00.0: [1022:7901] type 00 class 0x010601 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:07:00.0: 63.012 Gb/s available PCIe bandwidth, limited by 16.0 GT/s PCIe x4 link at 0000:00:01.2 (capable of 252.048 Gb/s with 16.0 GT/s PCIe x16 link)
+[Sat Jun 20 13:18:18 2026] pci 0000:08:00.0: [10de:2d04] type 00 class 0x030000 PCIe Legacy Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:08:00.0: 31.504 Gb/s available PCIe bandwidth, limited by 8.0 GT/s PCIe x4 link at 0000:00:03.1 (capable of 504.112 Gb/s with 32.0 GT/s PCIe x16 link)
+[Sat Jun 20 13:18:18 2026] pci 0000:08:00.1: [10de:22eb] type 00 class 0x040300 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:09:00.0: [10de:2d04] type 00 class 0x030000 PCIe Legacy Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:09:00.0: 31.504 Gb/s available PCIe bandwidth, limited by 8.0 GT/s PCIe x4 link at 0000:00:03.2 (capable of 504.112 Gb/s with 32.0 GT/s PCIe x16 link)
+[Sat Jun 20 13:18:18 2026] pci 0000:09:00.1: [10de:22eb] type 00 class 0x040300 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:0a:00.0: [10de:2d04] type 00 class 0x030000 PCIe Legacy Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:0a:00.0: 31.504 Gb/s available PCIe bandwidth, limited by 8.0 GT/s PCIe x4 link at 0000:00:03.3 (capable of 504.112 Gb/s with 32.0 GT/s PCIe x16 link)
+[Sat Jun 20 13:18:18 2026] pci 0000:0a:00.1: [10de:22eb] type 00 class 0x040300 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:0b:00.0: [10de:2d04] type 00 class 0x030000 PCIe Legacy Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:0b:00.0: 31.504 Gb/s available PCIe bandwidth, limited by 8.0 GT/s PCIe x4 link at 0000:00:03.4 (capable of 504.112 Gb/s with 32.0 GT/s PCIe x16 link)
+[Sat Jun 20 13:18:18 2026] pci 0000:0b:00.1: [10de:22eb] type 00 class 0x040300 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:0c:00.0: [1022:148a] type 00 class 0x130000 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:0d:00.0: [1022:1485] type 00 class 0x130000 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:0d:00.1: [1022:1486] type 00 class 0x108000 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pci 0000:0d:00.3: [1022:149c] type 00 class 0x0c0330 PCIe Endpoint
+[Sat Jun 20 13:18:18 2026] pcieport 0000:00:01.1: AER: enabled with IRQ 28
+[Sat Jun 20 13:18:18 2026] pcieport 0000:00:01.2: AER: enabled with IRQ 29
+[Sat Jun 20 13:18:18 2026] pcieport 0000:00:03.1: AER: enabled with IRQ 30
+[Sat Jun 20 13:18:18 2026] pcieport 0000:00:03.2: AER: enabled with IRQ 31
+[Sat Jun 20 13:18:18 2026] pcieport 0000:00:03.3: AER: enabled with IRQ 32
+[Sat Jun 20 13:18:18 2026] pcieport 0000:00:03.4: AER: enabled with IRQ 33
+[Sat Jun 20 13:18:18 2026] pcieport 0000:00:07.1: AER: enabled with IRQ 35
+[Sat Jun 20 13:18:18 2026] pcieport 0000:00:08.1: AER: enabled with IRQ 36
+[Sat Jun 20 13:18:19 2026] r8169 0000:04:00.0 eth0: RTL8168h/8111h, f0:2f:74:cb:e6:f2, XID 541, IRQ 60
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:03.4/0000:0b:00.1/sound/card3/input19
+[Sat Jun 20 13:18:22 2026] nouveau 0000:08:00.0: NVIDIA GB206 (1b6000a1)
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:03.2/0000:09:00.1/sound/card1/input15
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:03.1/0000:08:00.1/sound/card0/input11
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:03.3/0000:0a:00.1/sound/card2/input7
+[Sat Jun 20 13:18:22 2026] nouveau 0000:09:00.0: NVIDIA GB206 (1b6000a1)
+[Sat Jun 20 13:18:22 2026] nouveau 0000:0a:00.0: NVIDIA GB206 (1b6000a1)
+[Sat Jun 20 13:18:22 2026] nouveau 0000:0b:00.0: NVIDIA GB206 (1b6000a1)
+[Sat Jun 20 13:18:22 2026] nvidia: module verification failed: signature and/or required key missing - tainting kernel
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:03.4/0000:0b:00.1/sound/card3/input20
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:03.2/0000:09:00.1/sound/card1/input16
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:03.4/0000:0b:00.1/sound/card3/input21
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:03.1/0000:08:00.1/sound/card0/input12
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:03.1/0000:08:00.1/sound/card0/input13
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:03.2/0000:09:00.1/sound/card1/input17
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:03.3/0000:0a:00.1/sound/card2/input8
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:03.2/0000:09:00.1/sound/card1/input18
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:03.1/0000:08:00.1/sound/card0/input14
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:03.3/0000:0a:00.1/sound/card2/input9
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:03.4/0000:0b:00.1/sound/card3/input22
+[Sat Jun 20 13:18:22 2026] input: HDA NVidia HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:03.3/0000:0a:00.1/sound/card2/input10
+[Sat Jun 20 13:18:22 2026] nvidia-nvlink: Nvlink Core is being initialized, major device number 510
+[Sat Jun 20 13:18:22 2026] nvidia 0000:08:00.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=none:owns=none
+[Sat Jun 20 13:18:22 2026] nvidia 0000:09:00.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=none:owns=none
+[Sat Jun 20 13:18:22 2026] nvidia 0000:0a:00.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=none:owns=none
+[Sat Jun 20 13:18:22 2026] nvidia 0000:0b:00.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=none:owns=none
+[Sat Jun 20 13:18:22 2026] NVRM: loading NVIDIA UNIX Open Kernel Module for x86_64  595.71.05  Release Build  (root@proxmox)  Fri Jun 12 06:57:12 PM EDT 2026
+[Sat Jun 20 13:18:22 2026] nvidia-modeset: Loading NVIDIA UNIX Open Kernel Mode Setting Driver for x86_64  595.71.05  Release Build  (root@proxmox)  Fri Jun 12 06:57:00 PM EDT 2026
+[Sat Jun 20 13:18:22 2026] [drm] [nvidia-drm] [GPU ID 0x00000800] Loading driver
+[Sat Jun 20 13:18:24 2026] [drm] Initialized nvidia-drm 0.0.0 for 0000:08:00.0 on minor 1
+[Sat Jun 20 13:18:24 2026] nvidia 0000:08:00.0: [drm] Cannot find any crtc or sizes
+[Sat Jun 20 13:18:24 2026] [drm] [nvidia-drm] [GPU ID 0x00000900] Loading driver
+[Sat Jun 20 13:18:25 2026] [drm] Initialized nvidia-drm 0.0.0 for 0000:09:00.0 on minor 2
+[Sat Jun 20 13:18:25 2026] nvidia 0000:09:00.0: [drm] Cannot find any crtc or sizes
+[Sat Jun 20 13:18:25 2026] [drm] [nvidia-drm] [GPU ID 0x00000a00] Loading driver
+[Sat Jun 20 13:18:27 2026] [drm] Initialized nvidia-drm 0.0.0 for 0000:0a:00.0 on minor 3
+[Sat Jun 20 13:18:27 2026] nvidia 0000:0a:00.0: [drm] Cannot find any crtc or sizes
+[Sat Jun 20 13:18:27 2026] [drm] [nvidia-drm] [GPU ID 0x00000b00] Loading driver
+[Sat Jun 20 13:18:28 2026] [drm] Initialized nvidia-drm 0.0.0 for 0000:0b:00.0 on minor 4
+[Sat Jun 20 13:18:28 2026] nvidia 0000:0b:00.0: vgaarb: deactivate vga console
+[Sat Jun 20 13:18:28 2026] fbcon: nvidia-drmdrmfb (fb0) is primary device
+[Sat Jun 20 13:18:28 2026] nvidia 0000:0b:00.0: [drm] fb0: nvidia-drmdrmfb frame buffer device
+[Sat Jun 20 13:37:13 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:37:13 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:37:13 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:37:13 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:37:14 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:01 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:01 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:01 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:01 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:01 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:01 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:01 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:01 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:02 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:07 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:07 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:07 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:07 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:08 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:08 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:08 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:08 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: ((base & RM_PAGE_MASK) == 0) @ kern_bus.c:298
+[Sat Jun 20 13:38:09 2026] NVRM: nvAssertFailedNoLog: Assertion failed: remoteWMBoxLocalAddr != ~0ULL @ kern_bus_gm200.c:89

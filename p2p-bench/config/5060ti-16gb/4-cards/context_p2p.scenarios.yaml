@@ -1,0 +1,49 @@
+# 4-CARD CONTEXT x P2P — does the link become the bottleneck at long context?
+# The published "Gen3 x4 is enough" claim was established only at 1K prompts.
+# Prefill all-reduce volume scales with prompt length, so sweep input length and
+# watch whether the P2P delta GROWS. Output kept tiny (TTFT = prefill). Run via
+# run_context_sweep.sh, which calls this once per input length with --bench-set.
+model:
+  path: /data/models/Qwen/Qwen3.6-27B-FP8
+  port: 8103
+  constant_args:
+    tensor-parallel-size: 4
+    max-model-len: 262144
+    kv-cache-dtype: bfloat16
+    gpu-memory-utilization: 0.92
+    speculative-config: '{"method":"qwen3_next_mtp","num_speculative_tokens":3}'
+    reasoning-parser: qwen3
+    tool-call-parser: qwen3_coder
+    attention-backend: flashinfer
+    compilation-config: '{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'
+  constant_flags: [trust-remote-code, language-model-only, enable-auto-tool-choice, async-scheduling, disable-custom-all-reduce]
+  constant_env:
+    CUDA_DEVICE_ORDER: PCI_BUS_ID
+    CUDA_VISIBLE_DEVICES: "0,1,2,3"
+    NCCL_CUMEM_ENABLE: "1"
+    VLLM_WORKER_MULTIPROC_METHOD: spawn
+    PYTORCH_ALLOC_CONF: expandable_segments:True
+    NCCL_DEBUG: "INFO"
+    VLLM_LOGGING_LEVEL: "INFO"
+arms:
+  p2p_on:  { env: { NCCL_P2P_DISABLE: "0" } }
+  p2p_off: { env: { NCCL_P2P_DISABLE: "1" } }
+concurrencies: [1]
+benchmark:
+  dataset: random
+  random_input_len: 4096        # OVERRIDDEN per sweep step by --bench-set
+  random_output_len: 32
+  random_range_ratio: 0.0
+  endpoint: /v1/completions
+  backend: vllm
+  num_prompts_multiplier: 6
+  num_warmups: 3
+  seed: 1234
+  ignore_eos: true
+  percentile_metrics: ttft,e2el
+  metric_percentiles: "50,90,99"
+  reps: 5
+  interleave_reps: true
+  cooldown_seconds: 20
+  vram_free_threshold_mb: 1024
+  vram_free_timeout: 180

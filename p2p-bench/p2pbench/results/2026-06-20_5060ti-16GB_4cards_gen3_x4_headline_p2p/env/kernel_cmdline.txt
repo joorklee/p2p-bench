@@ -1,0 +1,6 @@
+# /proc/cmdline
+BOOT_IMAGE=/boot/vmlinuz-6.17.13-13-pve root=/dev/mapper/pve-root ro drm_kms_helper.bfdev_emulation=0 quiet iommu=pt amd_iommu=on
+
+# /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="quiet iommu=pt amd_iommu=on"
+GRUB_CMDLINE_LINUX=""

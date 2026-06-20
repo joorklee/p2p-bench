@@ -1,0 +1,52 @@
+{
+  "device_order": {
+    "ok": true,
+    "checked": [
+      {
+        "index": 1,
+        "name": "NVIDIA GeForce RTX 5060 Ti",
+        "bus_id": "00000000:09:00.0",
+        "matches": true
+      },
+      {
+        "index": 2,
+        "name": "NVIDIA GeForce RTX 5060 Ti",
+        "bus_id": "00000000:0A:00.0",
+        "matches": true
+      }
+    ],
+    "all_gpus": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 5070",
+        "bus_id": "00000000:04:00.0",
+        "uuid": "GPU-f152d996-dd21-0834-5dc8-cae68952f544"
+      },
+      {
+        "index": 1,
+        "name": "NVIDIA GeForce RTX 5060 Ti",
+        "bus_id": "00000000:09:00.0",
+        "uuid": "GPU-01e13b0b-d1be-f81d-adaa-ac77ffa1637d"
+      },
+      {
+        "index": 2,
+        "name": "NVIDIA GeForce RTX 5060 Ti",
+        "bus_id": "00000000:0A:00.0",
+        "uuid": "GPU-4e05b1db-e1f5-fbd4-6960-c29e92b9551e"
+      }
+    ]
+  },
+  "topo_matrix": "\t\u001b[4mGPU0\tGPU1\tGPU2\tCPU Affinity\tNUMA Affinity\tGPU NUMA ID\u001b[0m\nGPU0\t X \tPHB\tPHB\t0-23\t0\t\tN/A\nGPU1\tPHB\t X \tPHB\t0-23\t0\t\tN/A\nGPU2\tPHB\tPHB\t X \t0-23\t0\t\tN/A\n\nLegend:\n\n  X    = Self\n  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)\n  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node\n  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)\n  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)\n  PIX  = Connection traversing at most a single PCIe bridge\n  NV#  = Connection traversing a bonded set of # NVLinks\n",
+  "topo_p2p": " \t\u001b[4mGPU0\tGPU1\tGPU2\t\u001b[0m\n GPU0\tX\tOK\tOK\t\n GPU1\tOK\tX\tOK\t\n GPU2\tOK\tOK\tX\t\n\nLegend:\n\n  X    = Self\n  OK   = Status Ok\n  CNS  = Chipset not supported\n  GNS  = GPU not supported\n  TNS  = Topology not supported\n  NS   = Not supported\n  U    = Unknown\n",
+  "cuda_samples_p2p": "[P2P (Peer-to-Peer) GPU Bandwidth Latency Test]\nDevice: 0, NVIDIA GeForce RTX 5070, pciBusID: 4, pciDeviceID: 0, pciDomainID:0\nDevice: 1, NVIDIA GeForce RTX 5060 Ti, pciBusID: 9, pciDeviceID: 0, pciDomainID:0\nDevice: 2, NVIDIA GeForce RTX 5060 Ti, pciBusID: a, pciDeviceID: 0, pciDomainID:0\nDevice=0 CANNOT Access Peer Device=1\nDevice=0 CANNOT Access Peer Device=2\nDevice=1 CANNOT Access Peer Device=0\nDevice=1 CAN Access Peer Device=2\nDevice=2 CANNOT Access Peer Device=0\nDevice=2 CAN Access Peer Device=1\n\n***NOTE: In case a device doesn't have P2P access to other one, it falls back to normal memcopy procedure.\nSo you can see lesser Bandwidth (GB/s) and unstable Latency (us) in those cases.\n\nP2P Connectivity Matrix\n     D\\D     0     1     2\n     0\t     1     0     0\n     1\t     0     1     1\n     2\t     0     1     1\nUnidirectional P2P=Disabled Bandwidth Matrix (GB/s)\n   D\\D     0      1      2 \n     0 581.98   3.59   3.59 \n     1   3.57 387.52   3.50 \n     2   3.57   3.50 389.65 \nUnidirectional P2P=Enabled Bandwidth (P2P Writes) Matrix (GB/s)\n   D\\D     0      1      2 \n     0 583.89   3.59   3.59 \n     1   3.57 388.49   3.58 \n     2   3.57   3.58 388.88 \nBidirectional P2P=Disabled Bandwidth Matrix (GB/s)\n   D\\D     0      1      2 \n     0 582.36   4.40   4.40 \n     1   4.86 387.28   4.21 \n     2   4.86   4.25 387.66 \nBidirectional P2P=Enabled Bandwidth Matrix (GB/s)\n   D\\D     0      1      2 \n     0 581.39   4.40   4.40 \n     1   4.86 386.47   4.37 \n     2   4.86   4.37 386.94 \nP2P=Disabled Latency Matrix (us)\n   GPU     0      1      2 \n     0   1.00  18.61  18.60 \n     1  21.22   1.08  18.02 \n     2  21.12  17.98   1.07 \n\n   CPU     0      1      2 \n     0   2.82   8.59   8.59 \n     1   8.55   2.78   8.58 \n     2   8.59   8.52   2.74 \nP2P=Enabled Latency (P2P Writes) Matrix (us)\n   GPU     0      1      2 \n     0   0.99  18.52  18.45 \n     1  21.19   1.08   0.49 \n     2  21.25   0.49   1.08 \n\n   CPU     0      1      2 \n     0   2.81   8.59   8.61 \n     1   8.63   2.82   2.32 \n     2   8.65   2.38   2.80 \n\nNOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.\n",
+  "torch_probe": {
+    "ok": false,
+    "reason": "No module named 'torch'"
+  },
+  "versions": {
+    "driver_version": "595.71.05",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Mon_Mar_02_09:52:23_PM_PST_2026\nCuda compilation tools, release 13.2, V13.2.51\nBuild cuda_13.2.r13.2/compiler.37434383_0",
+    "proc_driver": "NVRM version: NVIDIA UNIX Open Kernel Module for x86_64  595.71.05  Release Build  (root@proxmox)  Fri Jun 12 06:57:12 PM EDT 2026\nGCC version:  gcc version 14.2.0 (Debian 14.2.0-19)",
+    "torch_error": "No module named 'torch'"
+  }
+}
