@@ -1,0 +1,100 @@
+[Fri Jun 26 23:21:20 2026] Command line: BOOT_IMAGE=/boot/vmlinuz-6.17.13-13-pve root=/dev/mapper/pve-root ro drm_kms_helper.bfdev_emulation=0 quiet pcie_aspm=off amd_iommu=on iommu=pt pcie_acs_override=downstream,multifunction
+[Fri Jun 26 23:21:20 2026] Warning: PCIe ACS overrides enabled; This may allow non-IOMMU protected peer-to-peer DMA
+[Fri Jun 26 23:21:20 2026] Kernel command line: BOOT_IMAGE=/boot/vmlinuz-6.17.13-13-pve root=/dev/mapper/pve-root ro drm_kms_helper.bfdev_emulation=0 quiet pcie_aspm=off amd_iommu=on iommu=pt pcie_acs_override=downstream,multifunction
+[Fri Jun 26 23:21:20 2026] PCIe ASPM is disabled
+[Fri Jun 26 23:21:21 2026] pci 0000:00:01.1: [1022:1483] type 01 class 0x060400 PCIe Root Port
+[Fri Jun 26 23:21:21 2026] pci 0000:00:01.2: [1022:1483] type 01 class 0x060400 PCIe Root Port
+[Fri Jun 26 23:21:21 2026] pci 0000:00:03.1: [1022:1483] type 01 class 0x060400 PCIe Root Port
+[Fri Jun 26 23:21:21 2026] pci 0000:00:03.2: [1022:1483] type 01 class 0x060400 PCIe Root Port
+[Fri Jun 26 23:21:21 2026] pci 0000:00:03.3: [1022:1483] type 01 class 0x060400 PCIe Root Port
+[Fri Jun 26 23:21:21 2026] pci 0000:00:03.4: [1022:1483] type 01 class 0x060400 PCIe Root Port
+[Fri Jun 26 23:21:21 2026] pci 0000:00:07.1: [1022:1484] type 01 class 0x060400 PCIe Root Port
+[Fri Jun 26 23:21:21 2026] pci 0000:00:08.1: [1022:1484] type 01 class 0x060400 PCIe Root Port
+[Fri Jun 26 23:21:21 2026] pci 0000:01:00.0: [15b7:5009] type 00 class 0x010802 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:02:00.0: [1022:57ad] type 01 class 0x060400 PCIe Switch Upstream Port
+[Fri Jun 26 23:21:21 2026] pci 0000:02:00.0: 63.012 Gb/s available PCIe bandwidth, limited by 16.0 GT/s PCIe x4 link at 0000:00:01.2 (capable of 126.024 Gb/s with 16.0 GT/s PCIe x8 link)
+[Fri Jun 26 23:21:21 2026] pci 0000:03:02.0: [1022:57a3] type 01 class 0x060400 PCIe Switch Downstream Port
+[Fri Jun 26 23:21:21 2026] pci 0000:03:05.0: [1022:57a3] type 01 class 0x060400 PCIe Switch Downstream Port
+[Fri Jun 26 23:21:21 2026] pci 0000:03:08.0: [1022:57a4] type 01 class 0x060400 PCIe Switch Downstream Port
+[Fri Jun 26 23:21:21 2026] pci 0000:03:09.0: [1022:57a4] type 01 class 0x060400 PCIe Switch Downstream Port
+[Fri Jun 26 23:21:21 2026] pci 0000:03:0a.0: [1022:57a4] type 01 class 0x060400 PCIe Switch Downstream Port
+[Fri Jun 26 23:21:21 2026] pci 0000:04:00.0: [10de:2f04] type 00 class 0x030000 PCIe Legacy Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:04:00.0: 63.012 Gb/s available PCIe bandwidth, limited by 16.0 GT/s PCIe x4 link at 0000:00:01.2 (capable of 504.112 Gb/s with 32.0 GT/s PCIe x16 link)
+[Fri Jun 26 23:21:21 2026] pci 0000:04:00.1: [10de:2f80] type 00 class 0x040300 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:05:00.0: [10ec:8168] type 00 class 0x020000 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:06:00.0: [1022:1485] type 00 class 0x130000 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:06:00.0: 63.012 Gb/s available PCIe bandwidth, limited by 16.0 GT/s PCIe x4 link at 0000:00:01.2 (capable of 252.048 Gb/s with 16.0 GT/s PCIe x16 link)
+[Fri Jun 26 23:21:21 2026] pci 0000:06:00.1: [1022:149c] type 00 class 0x0c0330 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:06:00.3: [1022:149c] type 00 class 0x0c0330 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:07:00.0: [1022:7901] type 00 class 0x010601 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:07:00.0: 63.012 Gb/s available PCIe bandwidth, limited by 16.0 GT/s PCIe x4 link at 0000:00:01.2 (capable of 252.048 Gb/s with 16.0 GT/s PCIe x16 link)
+[Fri Jun 26 23:21:21 2026] pci 0000:08:00.0: [1022:7901] type 00 class 0x010601 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:08:00.0: 63.012 Gb/s available PCIe bandwidth, limited by 16.0 GT/s PCIe x4 link at 0000:00:01.2 (capable of 252.048 Gb/s with 16.0 GT/s PCIe x16 link)
+[Fri Jun 26 23:21:21 2026] pci 0000:09:00.0: [10de:2d04] type 00 class 0x030000 PCIe Legacy Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:09:00.0: 31.504 Gb/s available PCIe bandwidth, limited by 8.0 GT/s PCIe x4 link at 0000:00:03.1 (capable of 504.112 Gb/s with 32.0 GT/s PCIe x16 link)
+[Fri Jun 26 23:21:21 2026] pci 0000:09:00.1: [10de:22eb] type 00 class 0x040300 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:0a:00.0: [10de:2d04] type 00 class 0x030000 PCIe Legacy Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:0a:00.0: 31.504 Gb/s available PCIe bandwidth, limited by 8.0 GT/s PCIe x4 link at 0000:00:03.2 (capable of 504.112 Gb/s with 32.0 GT/s PCIe x16 link)
+[Fri Jun 26 23:21:21 2026] pci 0000:0a:00.1: [10de:22eb] type 00 class 0x040300 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:0b:00.0: [10de:2d04] type 00 class 0x030000 PCIe Legacy Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:0b:00.0: 31.504 Gb/s available PCIe bandwidth, limited by 8.0 GT/s PCIe x4 link at 0000:00:03.3 (capable of 504.112 Gb/s with 32.0 GT/s PCIe x16 link)
+[Fri Jun 26 23:21:21 2026] pci 0000:0b:00.1: [10de:22eb] type 00 class 0x040300 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:0c:00.0: [10de:2d04] type 00 class 0x030000 PCIe Legacy Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:0c:00.0: 31.504 Gb/s available PCIe bandwidth, limited by 8.0 GT/s PCIe x4 link at 0000:00:03.4 (capable of 504.112 Gb/s with 32.0 GT/s PCIe x16 link)
+[Fri Jun 26 23:21:21 2026] pci 0000:0c:00.1: [10de:22eb] type 00 class 0x040300 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:0d:00.0: [1022:148a] type 00 class 0x130000 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:0e:00.0: [1022:1485] type 00 class 0x130000 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:0e:00.1: [1022:1486] type 00 class 0x108000 PCIe Endpoint
+[Fri Jun 26 23:21:21 2026] pci 0000:0e:00.3: [1022:149c] type 00 class 0x0c0330 PCIe Endpoint
+[Fri Jun 26 23:21:22 2026] r8169 0000:05:00.0 eth0: RTL8168h/8111h, f0:2f:74:cb:e6:f2, XID 541, IRQ 45
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:03.1/0000:09:00.1/sound/card1/input15
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:03.1/0000:09:00.1/sound/card1/input16
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:03.4/0000:0c:00.1/sound/card4/input23
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:03.4/0000:0c:00.1/sound/card4/input24
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:03.1/0000:09:00.1/sound/card1/input17
+[Fri Jun 26 23:21:24 2026] nouveau 0000:04:00.0: NVIDIA GB205 (1b5000a1)
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:03.3/0000:0b:00.1/sound/card3/input19
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:03.2/0000:0a:00.1/sound/card2/input11
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:03.1/0000:09:00.1/sound/card1/input18
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:03.4/0000:0c:00.1/sound/card4/input25
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:01.2/0000:02:00.0/0000:03:02.0/0000:04:00.1/sound/card0/input7
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:03.3/0000:0b:00.1/sound/card3/input20
+[Fri Jun 26 23:21:24 2026] nouveau 0000:09:00.0: NVIDIA GB206 (1b6000a1)
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:03.2/0000:0a:00.1/sound/card2/input12
+[Fri Jun 26 23:21:24 2026] nouveau 0000:0a:00.0: NVIDIA GB206 (1b6000a1)
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:01.2/0000:02:00.0/0000:03:02.0/0000:04:00.1/sound/card0/input8
+[Fri Jun 26 23:21:24 2026] nouveau 0000:0b:00.0: NVIDIA GB206 (1b6000a1)
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:03.3/0000:0b:00.1/sound/card3/input21
+[Fri Jun 26 23:21:24 2026] nouveau 0000:0c:00.0: NVIDIA GB206 (1b6000a1)
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:03.3/0000:0b:00.1/sound/card3/input22
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:03.2/0000:0a:00.1/sound/card2/input13
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:03.4/0000:0c:00.1/sound/card4/input26
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:01.2/0000:02:00.0/0000:03:02.0/0000:04:00.1/sound/card0/input9
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:01.2/0000:02:00.0/0000:03:02.0/0000:04:00.1/sound/card0/input10
+[Fri Jun 26 23:21:24 2026] input: HDA NVidia HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:03.2/0000:0a:00.1/sound/card2/input14
+[Fri Jun 26 23:21:24 2026] nvidia: module verification failed: signature and/or required key missing - tainting kernel
+[Fri Jun 26 23:21:24 2026] nvidia-nvlink: Nvlink Core is being initialized, major device number 510
+[Fri Jun 26 23:21:24 2026] nvidia 0000:04:00.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=none:owns=none
+[Fri Jun 26 23:21:24 2026] nvidia 0000:09:00.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=none:owns=none
+[Fri Jun 26 23:21:24 2026] nvidia 0000:0a:00.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=none:owns=none
+[Fri Jun 26 23:21:24 2026] nvidia 0000:0b:00.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=none:owns=none
+[Fri Jun 26 23:21:24 2026] nvidia 0000:0c:00.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=none:owns=none
+[Fri Jun 26 23:21:24 2026] NVRM: loading NVIDIA UNIX Open Kernel Module for x86_64  610.43.02  Release Build  (root@proxmox)  Fri Jun 26 11:13:40 PM EDT 2026
+[Fri Jun 26 23:21:24 2026] nvidia-modeset: Loading NVIDIA UNIX Open Kernel Mode Setting Driver for x86_64  610.43.02  Release Build  (root@proxmox)  Fri Jun 26 11:13:26 PM EDT 2026
+[Fri Jun 26 23:21:24 2026] [drm] [nvidia-drm] [GPU ID 0x00000400] Loading driver
+[Fri Jun 26 23:21:26 2026] [drm] Initialized nvidia-drm 0.0.0 for 0000:04:00.0 on minor 1
+[Fri Jun 26 23:21:26 2026] nvidia 0000:04:00.0: vgaarb: deactivate vga console
+[Fri Jun 26 23:21:26 2026] fbcon: nvidia-drmdrmfb (fb0) is primary device
+[Fri Jun 26 23:21:26 2026] nvidia 0000:04:00.0: [drm] fb0: nvidia-drmdrmfb frame buffer device
+[Fri Jun 26 23:21:26 2026] [drm] [nvidia-drm] [GPU ID 0x00000900] Loading driver
+[Fri Jun 26 23:21:28 2026] [drm] Initialized nvidia-drm 0.0.0 for 0000:09:00.0 on minor 0
+[Fri Jun 26 23:21:28 2026] nvidia 0000:09:00.0: [drm] Cannot find any crtc or sizes
+[Fri Jun 26 23:21:28 2026] [drm] [nvidia-drm] [GPU ID 0x00000a00] Loading driver
+[Fri Jun 26 23:21:29 2026] [drm] Initialized nvidia-drm 0.0.0 for 0000:0a:00.0 on minor 2
+[Fri Jun 26 23:21:29 2026] nvidia 0000:0a:00.0: [drm] Cannot find any crtc or sizes
+[Fri Jun 26 23:21:29 2026] [drm] [nvidia-drm] [GPU ID 0x00000b00] Loading driver
+[Fri Jun 26 23:21:30 2026] [drm] Initialized nvidia-drm 0.0.0 for 0000:0b:00.0 on minor 3
+[Fri Jun 26 23:21:30 2026] nvidia 0000:0b:00.0: [drm] Cannot find any crtc or sizes
+[Fri Jun 26 23:21:30 2026] [drm] [nvidia-drm] [GPU ID 0x00000c00] Loading driver
+[Fri Jun 26 23:21:32 2026] [drm] Initialized nvidia-drm 0.0.0 for 0000:0c:00.0 on minor 4
+[Fri Jun 26 23:21:32 2026] nvidia 0000:0c:00.0: [drm] Cannot find any crtc or sizes

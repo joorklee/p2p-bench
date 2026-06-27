@@ -1,0 +1,97 @@
+WARNING 06-27 02:56:09 [cuda.py:838] Detected different devices in the system: NVIDIA GeForce RTX 5070, NVIDIA GeForce RTX 5060 Ti, NVIDIA GeForce RTX 5060 Ti, NVIDIA GeForce RTX 5060 Ti, NVIDIA GeForce RTX 5060 Ti. Please make sure to set `CUDA_DEVICE_ORDER=PCI_BUS_ID` to avoid unexpected behavior.
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0x73dc38f4c900>, trust_remote_code=False, seed=1234, num_prompts=32, dataset_name='random', no_stream=False, dataset_path=None, no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, custom_ensure_client_side_data=False, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, timed_trace_chunk_hash_size=16, timed_trace_sec_multiplier=1, timed_trace_label_timestamp='timestamp', timed_trace_label_input_length='input_length', timed_trace_label_output_length='output_length', timed_trace_label_hash_ids='hash_ids', blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=4096, random_output_len=2048, random_range_ratio='0.0', random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, speed_bench_dataset_subset='qualitative', speed_bench_output_len=4096, speed_bench_category=None, label=None, backend='vllm', base_url='http://127.0.0.1:8080', host='127.0.0.1', port=8000, endpoint='/v1/completions', header=None, max_concurrency=2, model='simple_p2p_on-c2', input_len=None, output_len=None, tokenizer='/data/models/Qwen/Qwen3.6-27B-FP8', tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=inf, burstiness=1.0, disable_tqdm=False, num_warmups=8, profile=False, save_result=True, save_detailed=False, append_result=False, metadata=None, result_dir='results/run5/scenarios/simple_p2p_on-c2', result_filename='run_1.json', ignore_eos=True, self_timed=None, percentile_metrics='ttft,tpot,itl,e2el', metric_percentiles='50,90,99', goodput=None, request_id_prefix='bench-567206b3-', top_p=None, top_k=None, min_p=None, temperature=None, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, lora_assignment='random', ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, chat_template_kwargs=None, extra_body=None, skip_tokenizer_init=False, insecure=False, plot_timeline=False, timeline_itl_thresholds='25,50', plot_dataset_stats=False)
+INFO 06-27 02:56:13 [utils.py:90] Sampling input_len from [4096, 4096] and output_len from [2048, 2048]
+WARNING: vllm bench serve no longer sets temperature==0 (greedy) in requests by default. The default will be determined on the server side and can be model/API specific. For the old behavior, include --temperature=0.
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Warming up with 8 requests...
+Warmup run completed.
+Starting main benchmark run...
+Traffic request rate: inf
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: 2
+tip: install termplotlib and gnuplot to plot the metrics
+============ Serving Benchmark Result ============
+Successful requests:                     32        
+Failed requests:                         0         
+Maximum request concurrency:             2         
+Benchmark duration (s):                  759.90    
+Total input tokens:                      131072    
+Total generated tokens:                  65536     
+Request throughput (req/s):              0.04      
+Output token throughput (tok/s):         86.24     
+Peak output token throughput (tok/s):    40.00     
+Peak concurrent requests:                3.00      
+Total token throughput (tok/s):          258.73    
+---------------Time to First Token----------------
+Mean TTFT (ms):                          7254.75   
+Median TTFT (ms):                        7696.85   
+P50 TTFT (ms):                           7696.85   
+P90 TTFT (ms):                           7724.70   
+P99 TTFT (ms):                           9409.65   
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          19.59     
+Median TPOT (ms):                        19.21     
+P50 TPOT (ms):                           19.21     
+P90 TPOT (ms):                           24.80     
+P99 TPOT (ms):                           30.89     
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           60.78     
+Median ITL (ms):                         50.96     
+P50 ITL (ms):                            50.96     
+P90 ITL (ms):                            51.31     
+P99 ITL (ms):                            52.24     
+----------------End-to-end Latency----------------
+Mean E2EL (ms):                          47353.10  
+Median E2EL (ms):                        46181.24  
+P50 E2EL (ms):                           46181.24  
+P90 E2EL (ms):                           58460.73  
+P99 E2EL (ms):                           72113.06  
+==================================================
+
+
+  0%|          | 0/8 [00:00<?, ?it/s]
+ 12%|█▎        | 1/8 [00:35<04:10, 35.80s/it]
+ 25%|██▌       | 2/8 [00:40<01:45, 17.57s/it]
+ 38%|███▊      | 3/8 [01:13<02:03, 24.74s/it]
+ 50%|█████     | 4/8 [01:28<01:22, 20.56s/it]
+ 62%|██████▎   | 5/8 [01:49<01:02, 20.87s/it]
+ 75%|███████▌  | 6/8 [02:03<00:37, 18.60s/it]
+ 88%|████████▊ | 7/8 [02:25<00:19, 19.81s/it]
+100%|██████████| 8/8 [02:34<00:00, 16.17s/it]
+100%|██████████| 8/8 [02:34<00:00, 19.29s/it]
+
+  0%|          | 0/32 [00:00<?, ?it/s]
+  3%|▎         | 1/32 [00:35<18:33, 35.92s/it]
+  6%|▋         | 2/32 [01:15<18:55, 37.85s/it]
+  9%|▉         | 3/32 [01:25<12:09, 25.16s/it]
+ 12%|█▎        | 4/32 [02:00<13:39, 29.28s/it]
+ 16%|█▌        | 5/32 [02:11<10:09, 22.56s/it]
+ 19%|█▉        | 6/32 [02:42<11:03, 25.53s/it]
+ 22%|██▏       | 7/32 [02:54<08:42, 20.89s/it]
+ 25%|██▌       | 8/32 [03:31<10:30, 26.25s/it]
+ 28%|██▊       | 9/32 [03:40<07:55, 20.69s/it]
+ 31%|███▏      | 10/32 [04:20<09:45, 26.60s/it]
+ 34%|███▍      | 11/32 [04:37<08:17, 23.71s/it]
+ 38%|███▊      | 12/32 [05:10<08:54, 26.71s/it]
+ 41%|████      | 13/32 [05:18<06:40, 21.08s/it]
+ 44%|████▍     | 14/32 [05:53<07:30, 25.02s/it]
+ 47%|████▋     | 15/32 [06:09<06:21, 22.43s/it]
+ 50%|█████     | 16/32 [06:39<06:34, 24.64s/it]
+ 53%|█████▎    | 17/32 [07:08<06:28, 25.89s/it]
+ 56%|█████▋    | 18/32 [07:21<05:10, 22.19s/it]
+ 59%|█████▉    | 19/32 [07:51<05:19, 24.60s/it]
+ 62%|██████▎   | 20/32 [08:13<04:43, 23.66s/it]
+ 66%|██████▌   | 21/32 [08:33<04:08, 22.59s/it]
+ 69%|██████▉   | 22/32 [09:05<04:13, 25.31s/it]
+ 72%|███████▏  | 23/32 [09:25<03:33, 23.74s/it]
+ 75%|███████▌  | 24/32 [09:53<03:20, 25.04s/it]
+ 78%|███████▊  | 25/32 [10:07<02:31, 21.70s/it]
+ 81%|████████▏ | 26/32 [10:41<02:33, 25.53s/it]
+ 84%|████████▍ | 27/32 [10:50<01:42, 20.58s/it]
+ 88%|████████▊ | 28/32 [11:23<01:36, 24.20s/it]
+ 91%|█████████ | 29/32 [11:47<01:12, 24.32s/it]
+ 94%|█████████▍| 30/32 [12:06<00:45, 22.56s/it]
+ 97%|█████████▋| 31/32 [12:35<00:24, 24.62s/it]
+100%|██████████| 32/32 [12:39<00:00, 18.48s/it]
+100%|██████████| 32/32 [12:39<00:00, 23.75s/it]

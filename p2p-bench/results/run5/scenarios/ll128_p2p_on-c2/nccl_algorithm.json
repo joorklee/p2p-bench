@@ -1,0 +1,14 @@
+{
+  "algorithms": [
+    "NVLS",
+    "PAT",
+    "Ring",
+    "Tree"
+  ],
+  "coll_channels": 2,
+  "protocols": [
+    "LL",
+    "LL128",
+    "Simple"
+  ]
+}

@@ -1,0 +1,183 @@
+healthCheckTimeout: 1200
+logLevel: info
+models:
+  p2p_off-c1:
+    cmd: bash -c 'vllm serve /data/models/Qwen/Qwen3.6-27B-FP8 --served-model-name p2p_off-c1 --port 8103 --max-num-seqs 1 --tensor-parallel-size 4 --max-num-batched-tokens 16768 --tool-call-parser qwen3_coder --reasoning-parser qwen3 --max-model-len 200000 --kv-cache-dtype bfloat16 --max-num-seqs 4 --gpu-memory-utilization 0.9 --speculative-config '"'"'{"method":"qwen3_next_mtp","num_speculative_tokens":3}'"'"' --compilation-config '"'"'{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'"'"' --attention-backend flashinfer --enable-prefix-caching --language-model-only --async-scheduling --trust-remote-code --enable-auto-tool-choice 2>&1 | tee results/logs/p2p_off-c1.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1
+    - VLLM_WORKER_MULTIPROC_METHOD=spawn
+    - SAFETENSORS_FAST_GPU=1
+    - NCCL_DEBUG=INFO
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2,3,4
+    - TORCH_FLOAT32_MATMUL_PRECISION=high
+    - PYTORCH_ALLOC_CONF=expandable_segments:True
+    - NCCL_P2P_DISABLE=1
+    ttl: 0
+  p2p_off-c2:
+    cmd: bash -c 'vllm serve /data/models/Qwen/Qwen3.6-27B-FP8 --served-model-name p2p_off-c2 --port 8103 --max-num-seqs 2 --tensor-parallel-size 4 --max-num-batched-tokens 16768 --tool-call-parser qwen3_coder --reasoning-parser qwen3 --max-model-len 200000 --kv-cache-dtype bfloat16 --max-num-seqs 4 --gpu-memory-utilization 0.9 --speculative-config '"'"'{"method":"qwen3_next_mtp","num_speculative_tokens":3}'"'"' --compilation-config '"'"'{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'"'"' --attention-backend flashinfer --enable-prefix-caching --language-model-only --async-scheduling --trust-remote-code --enable-auto-tool-choice 2>&1 | tee results/logs/p2p_off-c2.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1
+    - VLLM_WORKER_MULTIPROC_METHOD=spawn
+    - SAFETENSORS_FAST_GPU=1
+    - NCCL_DEBUG=INFO
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2,3,4
+    - TORCH_FLOAT32_MATMUL_PRECISION=high
+    - PYTORCH_ALLOC_CONF=expandable_segments:True
+    - NCCL_P2P_DISABLE=1
+    ttl: 0
+  p2p_off-c3:
+    cmd: bash -c 'vllm serve /data/models/Qwen/Qwen3.6-27B-FP8 --served-model-name p2p_off-c3 --port 8103 --max-num-seqs 3 --tensor-parallel-size 4 --max-num-batched-tokens 16768 --tool-call-parser qwen3_coder --reasoning-parser qwen3 --max-model-len 200000 --kv-cache-dtype bfloat16 --max-num-seqs 4 --gpu-memory-utilization 0.9 --speculative-config '"'"'{"method":"qwen3_next_mtp","num_speculative_tokens":3}'"'"' --compilation-config '"'"'{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'"'"' --attention-backend flashinfer --enable-prefix-caching --language-model-only --async-scheduling --trust-remote-code --enable-auto-tool-choice 2>&1 | tee results/logs/p2p_off-c3.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1
+    - VLLM_WORKER_MULTIPROC_METHOD=spawn
+    - SAFETENSORS_FAST_GPU=1
+    - NCCL_DEBUG=INFO
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2,3,4
+    - TORCH_FLOAT32_MATMUL_PRECISION=high
+    - PYTORCH_ALLOC_CONF=expandable_segments:True
+    - NCCL_P2P_DISABLE=1
+    ttl: 0
+  p2p_off-c4:
+    cmd: bash -c 'vllm serve /data/models/Qwen/Qwen3.6-27B-FP8 --served-model-name p2p_off-c4 --port 8103 --max-num-seqs 4 --tensor-parallel-size 4 --max-num-batched-tokens 16768 --tool-call-parser qwen3_coder --reasoning-parser qwen3 --max-model-len 200000 --kv-cache-dtype bfloat16 --max-num-seqs 4 --gpu-memory-utilization 0.9 --speculative-config '"'"'{"method":"qwen3_next_mtp","num_speculative_tokens":3}'"'"' --compilation-config '"'"'{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'"'"' --attention-backend flashinfer --enable-prefix-caching --language-model-only --async-scheduling --trust-remote-code --enable-auto-tool-choice 2>&1 | tee results/logs/p2p_off-c4.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1
+    - VLLM_WORKER_MULTIPROC_METHOD=spawn
+    - SAFETENSORS_FAST_GPU=1
+    - NCCL_DEBUG=INFO
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2,3,4
+    - TORCH_FLOAT32_MATMUL_PRECISION=high
+    - PYTORCH_ALLOC_CONF=expandable_segments:True
+    - NCCL_P2P_DISABLE=1
+    ttl: 0
+  p2p_off-c5:
+    cmd: bash -c 'vllm serve /data/models/Qwen/Qwen3.6-27B-FP8 --served-model-name p2p_off-c5 --port 8103 --max-num-seqs 5 --tensor-parallel-size 4 --max-num-batched-tokens 16768 --tool-call-parser qwen3_coder --reasoning-parser qwen3 --max-model-len 200000 --kv-cache-dtype bfloat16 --max-num-seqs 4 --gpu-memory-utilization 0.9 --speculative-config '"'"'{"method":"qwen3_next_mtp","num_speculative_tokens":3}'"'"' --compilation-config '"'"'{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'"'"' --attention-backend flashinfer --enable-prefix-caching --language-model-only --async-scheduling --trust-remote-code --enable-auto-tool-choice 2>&1 | tee results/logs/p2p_off-c5.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1
+    - VLLM_WORKER_MULTIPROC_METHOD=spawn
+    - SAFETENSORS_FAST_GPU=1
+    - NCCL_DEBUG=INFO
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2,3,4
+    - TORCH_FLOAT32_MATMUL_PRECISION=high
+    - PYTORCH_ALLOC_CONF=expandable_segments:True
+    - NCCL_P2P_DISABLE=1
+    ttl: 0
+  p2p_off-c6:
+    cmd: bash -c 'vllm serve /data/models/Qwen/Qwen3.6-27B-FP8 --served-model-name p2p_off-c6 --port 8103 --max-num-seqs 6 --tensor-parallel-size 4 --max-num-batched-tokens 16768 --tool-call-parser qwen3_coder --reasoning-parser qwen3 --max-model-len 200000 --kv-cache-dtype bfloat16 --max-num-seqs 4 --gpu-memory-utilization 0.9 --speculative-config '"'"'{"method":"qwen3_next_mtp","num_speculative_tokens":3}'"'"' --compilation-config '"'"'{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'"'"' --attention-backend flashinfer --enable-prefix-caching --language-model-only --async-scheduling --trust-remote-code --enable-auto-tool-choice 2>&1 | tee results/logs/p2p_off-c6.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1
+    - VLLM_WORKER_MULTIPROC_METHOD=spawn
+    - SAFETENSORS_FAST_GPU=1
+    - NCCL_DEBUG=INFO
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2,3,4
+    - TORCH_FLOAT32_MATMUL_PRECISION=high
+    - PYTORCH_ALLOC_CONF=expandable_segments:True
+    - NCCL_P2P_DISABLE=1
+    ttl: 0
+  p2p_on-c1:
+    cmd: bash -c 'vllm serve /data/models/Qwen/Qwen3.6-27B-FP8 --served-model-name p2p_on-c1 --port 8103 --max-num-seqs 1 --tensor-parallel-size 4 --max-num-batched-tokens 16768 --tool-call-parser qwen3_coder --reasoning-parser qwen3 --max-model-len 200000 --kv-cache-dtype bfloat16 --max-num-seqs 4 --gpu-memory-utilization 0.9 --speculative-config '"'"'{"method":"qwen3_next_mtp","num_speculative_tokens":3}'"'"' --compilation-config '"'"'{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'"'"' --attention-backend flashinfer --enable-prefix-caching --language-model-only --async-scheduling --trust-remote-code --enable-auto-tool-choice 2>&1 | tee results/logs/p2p_on-c1.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1
+    - VLLM_WORKER_MULTIPROC_METHOD=spawn
+    - SAFETENSORS_FAST_GPU=1
+    - NCCL_DEBUG=INFO
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2,3,4
+    - TORCH_FLOAT32_MATMUL_PRECISION=high
+    - PYTORCH_ALLOC_CONF=expandable_segments:True
+    - NCCL_P2P_DISABLE=0
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_P2P_LEVEL=SYS
+    ttl: 0
+  p2p_on-c2:
+    cmd: bash -c 'vllm serve /data/models/Qwen/Qwen3.6-27B-FP8 --served-model-name p2p_on-c2 --port 8103 --max-num-seqs 2 --tensor-parallel-size 4 --max-num-batched-tokens 16768 --tool-call-parser qwen3_coder --reasoning-parser qwen3 --max-model-len 200000 --kv-cache-dtype bfloat16 --max-num-seqs 4 --gpu-memory-utilization 0.9 --speculative-config '"'"'{"method":"qwen3_next_mtp","num_speculative_tokens":3}'"'"' --compilation-config '"'"'{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'"'"' --attention-backend flashinfer --enable-prefix-caching --language-model-only --async-scheduling --trust-remote-code --enable-auto-tool-choice 2>&1 | tee results/logs/p2p_on-c2.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1
+    - VLLM_WORKER_MULTIPROC_METHOD=spawn
+    - SAFETENSORS_FAST_GPU=1
+    - NCCL_DEBUG=INFO
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2,3,4
+    - TORCH_FLOAT32_MATMUL_PRECISION=high
+    - PYTORCH_ALLOC_CONF=expandable_segments:True
+    - NCCL_P2P_DISABLE=0
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_P2P_LEVEL=SYS
+    ttl: 0
+  p2p_on-c3:
+    cmd: bash -c 'vllm serve /data/models/Qwen/Qwen3.6-27B-FP8 --served-model-name p2p_on-c3 --port 8103 --max-num-seqs 3 --tensor-parallel-size 4 --max-num-batched-tokens 16768 --tool-call-parser qwen3_coder --reasoning-parser qwen3 --max-model-len 200000 --kv-cache-dtype bfloat16 --max-num-seqs 4 --gpu-memory-utilization 0.9 --speculative-config '"'"'{"method":"qwen3_next_mtp","num_speculative_tokens":3}'"'"' --compilation-config '"'"'{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'"'"' --attention-backend flashinfer --enable-prefix-caching --language-model-only --async-scheduling --trust-remote-code --enable-auto-tool-choice 2>&1 | tee results/logs/p2p_on-c3.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1
+    - VLLM_WORKER_MULTIPROC_METHOD=spawn
+    - SAFETENSORS_FAST_GPU=1
+    - NCCL_DEBUG=INFO
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2,3,4
+    - TORCH_FLOAT32_MATMUL_PRECISION=high
+    - PYTORCH_ALLOC_CONF=expandable_segments:True
+    - NCCL_P2P_DISABLE=0
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_P2P_LEVEL=SYS
+    ttl: 0
+  p2p_on-c4:
+    cmd: bash -c 'vllm serve /data/models/Qwen/Qwen3.6-27B-FP8 --served-model-name p2p_on-c4 --port 8103 --max-num-seqs 4 --tensor-parallel-size 4 --max-num-batched-tokens 16768 --tool-call-parser qwen3_coder --reasoning-parser qwen3 --max-model-len 200000 --kv-cache-dtype bfloat16 --max-num-seqs 4 --gpu-memory-utilization 0.9 --speculative-config '"'"'{"method":"qwen3_next_mtp","num_speculative_tokens":3}'"'"' --compilation-config '"'"'{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'"'"' --attention-backend flashinfer --enable-prefix-caching --language-model-only --async-scheduling --trust-remote-code --enable-auto-tool-choice 2>&1 | tee results/logs/p2p_on-c4.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1
+    - VLLM_WORKER_MULTIPROC_METHOD=spawn
+    - SAFETENSORS_FAST_GPU=1
+    - NCCL_DEBUG=INFO
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2,3,4
+    - TORCH_FLOAT32_MATMUL_PRECISION=high
+    - PYTORCH_ALLOC_CONF=expandable_segments:True
+    - NCCL_P2P_DISABLE=0
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_P2P_LEVEL=SYS
+    ttl: 0
+  p2p_on-c5:
+    cmd: bash -c 'vllm serve /data/models/Qwen/Qwen3.6-27B-FP8 --served-model-name p2p_on-c5 --port 8103 --max-num-seqs 5 --tensor-parallel-size 4 --max-num-batched-tokens 16768 --tool-call-parser qwen3_coder --reasoning-parser qwen3 --max-model-len 200000 --kv-cache-dtype bfloat16 --max-num-seqs 4 --gpu-memory-utilization 0.9 --speculative-config '"'"'{"method":"qwen3_next_mtp","num_speculative_tokens":3}'"'"' --compilation-config '"'"'{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'"'"' --attention-backend flashinfer --enable-prefix-caching --language-model-only --async-scheduling --trust-remote-code --enable-auto-tool-choice 2>&1 | tee results/logs/p2p_on-c5.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1
+    - VLLM_WORKER_MULTIPROC_METHOD=spawn
+    - SAFETENSORS_FAST_GPU=1
+    - NCCL_DEBUG=INFO
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2,3,4
+    - TORCH_FLOAT32_MATMUL_PRECISION=high
+    - PYTORCH_ALLOC_CONF=expandable_segments:True
+    - NCCL_P2P_DISABLE=0
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_P2P_LEVEL=SYS
+    ttl: 0
+  p2p_on-c6:
+    cmd: bash -c 'vllm serve /data/models/Qwen/Qwen3.6-27B-FP8 --served-model-name p2p_on-c6 --port 8103 --max-num-seqs 6 --tensor-parallel-size 4 --max-num-batched-tokens 16768 --tool-call-parser qwen3_coder --reasoning-parser qwen3 --max-model-len 200000 --kv-cache-dtype bfloat16 --max-num-seqs 4 --gpu-memory-utilization 0.9 --speculative-config '"'"'{"method":"qwen3_next_mtp","num_speculative_tokens":3}'"'"' --compilation-config '"'"'{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'"'"' --attention-backend flashinfer --enable-prefix-caching --language-model-only --async-scheduling --trust-remote-code --enable-auto-tool-choice 2>&1 | tee results/logs/p2p_on-c6.log'
+    proxy: http://127.0.0.1:8103
+    env:
+    - VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1
+    - VLLM_WORKER_MULTIPROC_METHOD=spawn
+    - SAFETENSORS_FAST_GPU=1
+    - NCCL_DEBUG=INFO
+    - CUDA_DEVICE_ORDER=PCI_BUS_ID
+    - CUDA_VISIBLE_DEVICES=1,2,3,4
+    - TORCH_FLOAT32_MATMUL_PRECISION=high
+    - PYTORCH_ALLOC_CONF=expandable_segments:True
+    - NCCL_P2P_DISABLE=0
+    - NCCL_CUMEM_ENABLE=1
+    - NCCL_P2P_LEVEL=SYS
+    ttl: 0

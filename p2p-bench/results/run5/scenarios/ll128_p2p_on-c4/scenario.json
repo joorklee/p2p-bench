@@ -1,0 +1,41 @@
+{
+  "id": "ll128_p2p_on-c4",
+  "arm": "ll128_p2p_on",
+  "concurrency": 4,
+  "env": {
+    "VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS": 1,
+    "VLLM_WORKER_MULTIPROC_METHOD": "spawn",
+    "SAFETENSORS_FAST_GPU": 1,
+    "NCCL_DEBUG": "INFO",
+    "CUDA_DEVICE_ORDER": "PCI_BUS_ID",
+    "CUDA_VISIBLE_DEVICES": "1,2,3,4",
+    "TORCH_FLOAT32_MATMUL_PRECISION": "high",
+    "PYTORCH_ALLOC_CONF": "expandable_segments:True",
+    "NCCL_P2P_DISABLE": "0",
+    "NCCL_CUMEM_ENABLE": "1",
+    "NCCL_P2P_LEVEL": "PHB",
+    "NCCL_PROTO": "LL128",
+    "NCCL_MAX_NCHANNELS": "4",
+    "NCCL_IGNORE_CPU_AFFINITY": "1"
+  },
+  "flags": [
+    "enable-prefix-caching",
+    "language-model-only",
+    "async-scheduling",
+    "trust-remote-code",
+    "enable-auto-tool-choice"
+  ],
+  "args": {
+    "tensor-parallel-size": 4,
+    "max-num-batched-tokens": 8192,
+    "tool-call-parser": "qwen3_coder",
+    "reasoning-parser": "qwen3",
+    "max-model-len": 150000,
+    "kv-cache-dtype": "fp8",
+    "max-num-seqs": 4,
+    "gpu-memory-utilization": 0.88,
+    "speculative-config": "{\"method\":\"qwen3_next_mtp\",\"num_speculative_tokens\":3}",
+    "compilation-config": "{\"max_cudagraph_capture_size\":16,\"mode\":\"VLLM_COMPILE\"}",
+    "attention-backend": "flashinfer"
+  }
+}

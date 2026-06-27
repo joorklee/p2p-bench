@@ -1,0 +1,148 @@
+Module                  Size  Used by
+ib_core               495616  0
+xt_connmark            12288  4
+ip6table_mangle        12288  1
+iptable_mangle         12288  1
+wireguard             110592  0
+curve25519_x86_64      36864  1 wireguard
+libcurve25519_generic    45056  2 curve25519_x86_64,wireguard
+ip6_udp_tunnel         16384  1 wireguard
+udp_tunnel             32768  1 wireguard
+nf_log_syslog          20480  2
+nft_log                12288  1
+nft_ct                 24576  4
+veth                   40960  0
+ebtable_filter         12288  1
+ebtables               45056  1 ebtable_filter
+ip6table_raw           12288  0
+ip6t_REJECT            12288  3
+nf_reject_ipv6         24576  1 ip6t_REJECT
+ipt_REJECT             12288  4
+nf_reject_ipv4         12288  1 ipt_REJECT
+xt_mark                12288  10
+xt_set                 20480  14
+xt_physdev             12288  4
+xt_comment             12288  30
+xt_multiport           16384  8
+ip_set_hash_net        53248  12
+ip_set                 61440  2 xt_set,ip_set_hash_net
+xt_conntrack           12288  24
+nf_conntrack_netlink    57344  0
+xfrm_user              61440  1
+xfrm_algo              16384  1 xfrm_user
+xt_addrtype            12288  7
+overlay               212992  0
+iptable_raw            12288  1
+xt_CT                  12288  1
+xt_MASQUERADE          16384  6
+xt_nat                 12288  3
+xt_tcpudp              16384  78
+nf_tables             360448  52 nft_ct,nft_log
+ip6table_nat           12288  1
+ip6table_filter        12288  1
+ip6_tables             32768  4 ip6table_filter,ip6table_raw,ip6table_nat,ip6table_mangle
+iptable_nat            12288  1
+nf_nat                 61440  4 ip6table_nat,xt_nat,iptable_nat,xt_MASQUERADE
+nf_conntrack          180224  8 xt_conntrack,nf_nat,nft_ct,xt_nat,nf_conntrack_netlink,xt_connmark,xt_CT,xt_MASQUERADE
+nf_defrag_ipv6         24576  1 nf_conntrack
+nf_defrag_ipv4         12288  1 nf_conntrack
+iptable_filter         12288  1
+bonding               245760  0
+tls                   147456  1 bonding
+nvidia_uvm           1925120  0
+softdog                12288  2
+sunrpc                786432  1
+binfmt_misc            24576  1
+nfnetlink_log          24576  1
+nvidia_drm            139264  0
+nvidia_modeset       1515520  1 nvidia_drm
+nvidia              16420864  2 nvidia_uvm,nvidia_modeset
+amd_atl                61440  1
+intel_rapl_msr         20480  0
+intel_rapl_common      49152  1 intel_rapl_msr
+sch_fq_codel           24576  3
+snd_hda_codec_nvhdmi    16384  5
+edac_mce_amd           28672  0
+nouveau              2945024  0
+snd_hda_codec_hdmi     57344  1 snd_hda_codec_nvhdmi
+snd_hda_intel          61440  0
+mxm_wmi                12288  1 nouveau
+kvm_amd               229376  0
+snd_hda_codec         196608  3 snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec_nvhdmi
+gpu_sched              65536  1 nouveau
+drm_gpuvm              49152  1 nouveau
+snd_hda_core          131072  3 snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec
+drm_ttm_helper         16384  3 nvidia_drm,nouveau
+snd_intel_dspcfg       45056  1 snd_hda_intel
+ttm                   118784  2 drm_ttm_helper,nouveau
+snd_intel_sdw_acpi     16384  1 snd_intel_dspcfg
+snd_hwdep              24576  1 snd_hda_codec
+drm_exec               12288  2 drm_gpuvm,nouveau
+kvm                  1376256  1 kvm_amd
+snd_pcm               188416  4 snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec,snd_hda_core
+drm_display_helper    274432  1 nouveau
+irqbypass              16384  1 kvm
+snd_timer              53248  1 snd_pcm
+polyval_clmulni        12288  0
+cec                    94208  1 drm_display_helper
+ghash_clmulni_intel    12288  0
+joydev                 28672  0
+aesni_intel            94208  0
+snd                   135168  6 snd_hda_codec_hdmi,snd_hwdep,snd_hda_intel,snd_hda_codec,snd_timer,snd_pcm
+input_leds             12288  0
+rc_core                73728  1 cec
+jc42                   12288  0
+rapl                   20480  0
+ee1004                 16384  0
+eeepc_wmi              12288  0
+wmi_bmof               12288  0
+ccp                   151552  1 kvm_amd
+pcspkr                 12288  0
+k10temp                16384  0
+i2c_algo_bit           16384  1 nouveau
+soundcore              16384  1 snd
+mac_hid                12288  0
+zfs                  6250496  6
+spl                   151552  1 zfs
+msr                    12288  0
+vhost_net              36864  0
+vhost                  69632  1 vhost_net
+vhost_iotlb            16384  1 vhost
+tap                    28672  1 vhost_net
+efi_pstore             12288  0
+nfnetlink              20480  7 nf_conntrack_netlink,nf_tables,ip_set,nfnetlink_log
+dmi_sysfs              20480  0
+ip_tables              32768  4 iptable_filter,iptable_raw,iptable_nat,iptable_mangle
+x_tables               57344  25 ebtables,ip6table_filter,xt_conntrack,ip6table_raw,iptable_filter,ip6table_nat,xt_multiport,xt_tcpudp,xt_addrtype,xt_physdev,xt_nat,xt_comment,xt_set,ip6_tables,ipt_REJECT,xt_connmark,xt_CT,iptable_raw,ip_tables,iptable_nat,ip6table_mangle,xt_MASQUERADE,ip6t_REJECT,iptable_mangle,xt_mark
+autofs4                57344  2
+xfs                  2658304  2
+hid_generic            12288  0
+usbmouse               12288  0
+usbkbd                 12288  0
+usbhid                 69632  0
+uas                    28672  0
+hid                   258048  2 usbhid,hid_generic
+usb_storage            86016  1 uas
+btrfs                2027520  0
+blake2b_generic        24576  0
+xor                    24576  1 btrfs
+raid6_pq              122880  1 btrfs
+mfd_aaeon              12288  0
+asus_wmi               98304  2 eeepc_wmi,mfd_aaeon
+video                  77824  3 asus_wmi,nouveau,nvidia_modeset
+nvme                   61440  3
+i2c_piix4              32768  0
+xhci_pci               24576  0
+sparse_keymap          12288  1 asus_wmi
+platform_profile       20480  1 asus_wmi
+i2c_smbus              20480  1 i2c_piix4
+r8169                 135168  0
+ahci                   49152  1
+nvme_core             229376  4 nvme
+xhci_hcd              389120  1 xhci_pci
+libahci                53248  1 ahci
+realtek                49152  1
+nvme_keyring           20480  1 nvme_core
+nvme_auth              28672  1 nvme_core
+wmi                    28672  6 video,asus_wmi,wmi_bmof,mfd_aaeon,mxm_wmi,nouveau
+

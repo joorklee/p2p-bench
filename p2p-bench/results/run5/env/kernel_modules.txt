@@ -1,0 +1,87 @@
+# nvidia_peermem loaded: False
+
+# nvidia modules
+nvidia_uvm           1925120  0
+nvidia_drm            139264  0
+nvidia_modeset       1515520  1 nvidia_drm
+nvidia              16420864  2 nvidia_uvm,nvidia_modeset
+
+# modinfo nvidia
+filename:       /lib/modules/6.17.13-13-pve/kernel/drivers/video/nvidia.ko
+import_ns:      DMA_BUF
+alias:          char-major-195-*
+description:    NVIDIA core GPU kernel module
+version:        610.43.02
+supported:      external
+license:        Dual MIT/GPL
+firmware:       nvidia/610.43.02/ucodes_tu10x.bin
+firmware:       nvidia/610.43.02/ucodes_ga10x.bin
+firmware:       nvidia/610.43.02/gsp_tu10x.bin
+firmware:       nvidia/610.43.02/gsp_ga10x.bin
+softdep:        pre: ecdh_generic,ecdsa_generic
+srcversion:     8EF52F5D75B91CF7381E7E6
+alias:          pci:v000010DEd*sv*sd*bc06sc80i00*
+alias:          pci:v000010DEd*sv*sd*bc03sc02i00*
+alias:          pci:v000010DEd*sv*sd*bc03sc00i00*
+alias:          of:N*T*Cnvidia,tegra264-displayC*
+alias:          of:N*T*Cnvidia,tegra264-display
+alias:          of:N*T*Cnvidia,tegra234-displayC*
+alias:          of:N*T*Cnvidia,tegra234-display
+depends:        
+name:           nvidia
+retpoline:      Y
+vermagic:       6.17.13-13-pve SMP preempt mod_unload modversions 
+parm:           NvSwitchRegDwords:NvSwitch regkey (charp)
+parm:           NvSwitchBlacklist:NvSwitchBlacklist=uuid[,uuid...] (charp)
+parm:           NVreg_ResmanDebugLevel:int
+parm:           NVreg_RmLogonRC:int
+parm:           NVreg_ModifyDeviceFiles:int
+parm:           NVreg_DeviceFileUID:int
+parm:           NVreg_DeviceFileGID:int
+parm:           NVreg_DeviceFileMode:int
+parm:           NVreg_InitializeSystemMemoryAllocations:int
+parm:           NVreg_EnablePCIeGen3:int
+parm:           NVreg_EnableMSI:int
+parm:           NVreg_EnableStreamMemOPs:int
+parm:           NVreg_RestrictProfilingToAdminUsers:int
+parm:           NVreg_PreserveVideoMemoryAllocations:int
+parm:           NVreg_EnableS0ixPowerManagement:int
+parm:           NVreg_S0ixPowerManagementVideoMemoryThreshold:int
+parm:           NVreg_DynamicPowerManagement:int
+parm:           NVreg_DynamicPowerManagementVideoMemoryThreshold:int
+parm:           NVreg_EnableGpuFirmware:int
+parm:           NVreg_EnableGpuFirmwareLogs:int
+parm:           NVreg_OpenRmEnableUnsupportedGpus:int
+parm:           NVreg_EnableUserNUMAManagement:int
+parm:           NVreg_MemoryPoolSize:int
+parm:           NVreg_KMallocHeapMaxSize:int
+parm:           NVreg_VMallocHeapMaxSize:int
+parm:           NVreg_IgnoreMMIOCheck:int
+parm:           NVreg_NvLinkDisable:int
+parm:           NVreg_EnablePCIERelaxedOrderingMode:int
+parm:           NVreg_RegisterPCIDriver:int
+parm:           NVreg_RegisterPlatformDeviceDriver:int
+parm:           NVreg_EnableResizableBar:int
+parm:           NVreg_EnableDbgBreakpoint:int
+parm:           NVreg_TegraGpuPgMask:int
+parm:           NVreg_EnableNonblockingOpen:int
+parm:           NVreg_ExcludeAllGpus:int
+parm:           NVreg_GpuInitOnProbe:int
+parm:           NVreg_CoherentGPUMemoryMode:charp
+parm:           NVreg_RegistryDwords:charp
+parm:           NVreg_RegistryDwordsPerDevice:charp
+parm:           NVreg_RmMsg:charp
+parm:           NVreg_GpuBlacklist:charp
+parm:           NVreg_TemporaryFilePath:charp
+parm:           NVreg_ExcludedGpus:charp
+parm:           NVreg_DmaRemapPeerMmio:int
+parm:           NVreg_RmNvlinkBandwidth:charp
+parm:           NVreg_RmNvlinkBandwidthLinkCount:int
+parm:           NVreg_ImexChannelCount:int
+parm:           NVreg_CreateImexChannel0:int
+parm:           NVreg_EnableSystemMemoryPools:int
+parm:           NVreg_OsEnableCxlSupport:int
+parm:           NVreg_UseKernelSuspendNotifiers:int
+parm:           NVreg_EnableDebuggerInterface:int
+parm:           rm_firmware_active:charp
+

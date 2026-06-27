@@ -1,0 +1,6 @@
+{
+  "custom_all_reduce": "disabled",
+  "nccl_used_p2p": false,
+  "nccl_used_shm": true,
+  "nccl_version": "2.28.9"
+}

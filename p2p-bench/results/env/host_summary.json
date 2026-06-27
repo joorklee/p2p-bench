@@ -1,0 +1,4 @@
+{
+  "proc_cmdline": "BOOT_IMAGE=/boot/vmlinuz-6.17.13-13-pve root=/dev/mapper/pve-root ro drm_kms_helper.bfdev_emulation=0 quiet pcie_aspm=off amd_iommu=off",
+  "nvidia_peermem_loaded": false
+}

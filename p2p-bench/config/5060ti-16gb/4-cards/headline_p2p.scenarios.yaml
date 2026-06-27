@@ -11,34 +11,46 @@ model:
   port: 8103
   constant_args:
     tensor-parallel-size: 4
-    max-model-len: 262144
-    kv-cache-dtype: bfloat16
-    gpu-memory-utilization: 0.92
-    speculative-config: '{"method":"qwen3_next_mtp","num_speculative_tokens":3}'
-    reasoning-parser: qwen3
+    max-num-batched-tokens: 8192
     tool-call-parser: qwen3_coder
-    attention-backend: flashinfer
+    reasoning-parser: qwen3
+    max-model-len: 150000
+    kv-cache-dtype: fp8
+    max-num-seqs: 4
+    gpu-memory-utilization: 0.88
+    speculative-config: '{"method":"qwen3_next_mtp","num_speculative_tokens":3}'
     compilation-config: '{"max_cudagraph_capture_size":16,"mode":"VLLM_COMPILE"}'
-  constant_flags: [trust-remote-code, language-model-only, enable-auto-tool-choice, async-scheduling]
+    attention-backend: flashinfer
+  constant_flags: [enable-prefix-caching, language-model-only, async-scheduling, trust-remote-code, enable-auto-tool-choice]
   constant_env:
-    CUDA_DEVICE_ORDER: PCI_BUS_ID
-    CUDA_VISIBLE_DEVICES: "0,1,2,3"
-    NCCL_CUMEM_ENABLE: "1"
+    VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS: 1
     VLLM_WORKER_MULTIPROC_METHOD: spawn
-    PYTORCH_ALLOC_CONF: expandable_segments:True
-    NCCL_DEBUG: "INFO"
-    VLLM_LOGGING_LEVEL: "INFO"
+    SAFETENSORS_FAST_GPU: 1
+    NCCL_DEBUG: INFO
+    CUDA_DEVICE_ORDER: PCI_BUS_ID
+    CUDA_VISIBLE_DEVICES: 1,2,3,4
+    TORCH_FLOAT32_MATMUL_PRECISION: high
+    PYTORCH_ALLOC_CONF: "expandable_segments:True"
 arms:
-  nccl_p2p_off:
+  p2p_off:
     env: { NCCL_P2P_DISABLE: "1" }
-    extra_flags: [disable-custom-all-reduce]
-  nccl_p2p_on:
-    env: { NCCL_P2P_DISABLE: "0" }
-    extra_flags: [disable-custom-all-reduce]
-  customar_p2p_on:
-    env: { NCCL_P2P_DISABLE: "0" }
-    extra_flags: []        # custom all-reduce ENABLED (needs P2P)
-concurrencies: [1, 2, 3, 4]
+    extra_flags: []
+  ll128_p2p_on:
+    env: { NCCL_P2P_DISABLE: "0", NCCL_CUMEM_ENABLE: 1, NCCL_P2P_LEVEL: PHB, NCCL_PROTO: LL128, NCCL_MAX_NCHANNELS: 4, NCCL_IGNORE_CPU_AFFINITY: 1 }
+    extra_flags: []
+  simple_p2p_on:
+    env: { NCCL_P2P_DISABLE: "0", NCCL_CUMEM_ENABLE: 1, NCCL_P2P_LEVEL: PHB, NCCL_PROTO: Simple, NCCL_MAX_NCHANNELS: 4, NCCL_IGNORE_CPU_AFFINITY: 1 }
+    extra_flags: []
+  ll_p2p_on:
+    env: { NCCL_P2P_DISABLE: "0", NCCL_CUMEM_ENABLE: 1, NCCL_P2P_LEVEL: PHB, NCCL_PROTO: LL, NCCL_MAX_NCHANNELS: 4, NCCL_IGNORE_CPU_AFFINITY: 1 }
+    extra_flags: []
+  max_channels_p2p_on:
+    env: { NCCL_P2P_DISABLE: "0", NCCL_CUMEM_ENABLE: 1, NCCL_P2P_LEVEL: PHB, NCCL_MAX_NCHANNELS: 4 }
+    extra_flags: []
+  affinity_p2p_on:
+    env: { NCCL_P2P_DISABLE: "0", NCCL_CUMEM_ENABLE: 1, NCCL_P2P_LEVEL: PHB, NCCL_IGNORE_CPU_AFFINITY: 1 }
+    extra_flags: []
+concurrencies: [1, 2, 4]
 # Decode roofline overlay. mem_bw + weight bytes are the only inputs to the
 # (load-bearing) bandwidth line; verify weight_GB_per_gpu from telemetry
 # memory.used at load minus KV. Compute line is optional — fill verified peaks.
@@ -62,7 +74,7 @@ benchmark:
   ignore_eos: true
   percentile_metrics: ttft,tpot,itl,e2el
   metric_percentiles: "50,90,99"
-  reps: 10
+  reps: 3
   interleave_reps: true
   cooldown_seconds: 20
   vram_free_threshold_mb: 1024
